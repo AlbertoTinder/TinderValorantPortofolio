@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tinder | Professional Scrim Analytics Stack</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Teko:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        :root {
+            --red: #ff4655;
+            --dark-bg: #0b0e11;
+            --card-bg: #161b22;
+            --border: #30363d;
+            --gray-text: #8b949e;
+            --white: #f0f6fc;
+            --win-green: #3ddc84;
+            --lose-red: #ff4655;
+            --ult-gold: #ffca28;
+            --blue: #00b2ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background: var(--dark-bg); color: var(--white); font-size: 11px; padding-bottom: 50px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 15px; }
+
+        /* Professional Note Banner */
+        .analytics-stack-note {
+            background: rgba(0, 178, 255, 0.05);
+            border: 1px solid var(--blue);
+            padding: 15px 20px;
+            border-radius: 4px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .note-icon { color: var(--blue); font-size: 1.5rem; }
+        .note-text { font-size: 0.95rem; color: var(--white); line-height: 1.4; }
+        .note-text strong { color: var(--blue); font-family: 'Teko', sans-serif; font-size: 1.2rem; text-transform: uppercase; }
+
+        /* Match Header */
+        .match-header { background: var(--card-bg); padding: 20px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; border: 1px solid var(--border); }
+        .team-name { font-family: 'Teko', sans-serif; font-size: 2.2rem; text-transform: uppercase; }
+        .score-series { font-family: 'Teko', sans-serif; font-size: 3rem; color: var(--red); display: flex; align-items: center; gap: 15px; }
+        .map-badge { background: #21262d; padding: 5px 12px; border-radius: 2px; font-size: 0.85rem; cursor: pointer; border: 1px solid transparent; transition: all 0.2s; }
+        .map-badge.active { border-color: var(--red); color: var(--white); background: rgba(255, 70, 85, 0.1); }
+
+        .stats-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 4px; margin-bottom: 20px; overflow: hidden; }
+        .section-header { padding: 10px 15px; background: #21262d; border-bottom: 1px solid var(--border); font-family: 'Teko', sans-serif; font-size: 1.2rem; color: var(--red); text-transform: uppercase; display: flex; justify-content: space-between; align-items: center; }
+        .btn-generate { background: var(--red); color: white; border: none; padding: 5px 12px; font-family: 'Teko', sans-serif; font-size: 1rem; cursor: pointer; border-radius: 2px; }
+
+        table { width: 100%; border-collapse: collapse; }
+        th { text-align: left; padding: 12px 10px; color: var(--gray-text); font-size: 0.8rem; border-bottom: 1px solid var(--border); text-transform: uppercase; background: rgba(0,0,0,0.1); }
+        td { padding: 12px 10px; border-bottom: 1px solid var(--border); }
+        .val-bold { font-weight: 700; color: var(--white); }
+        .diff-pos { color: var(--win-green); }
+        .diff-neg { color: var(--lose-red); }
+
+        .round-history { display: grid; grid-template-columns: repeat(24, 1fr); gap: 2px; padding: 15px; background: var(--card-bg); }
+        .round-box { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; background: #21262d; border-radius: 2px; position: relative; cursor: pointer; }
+        .round-box.win-a { background: rgba(61, 220, 132, 0.1); border-top: 3px solid var(--win-green); }
+        .round-box.win-b { background: rgba(255, 70, 85, 0.1); border-top: 3px solid var(--lose-red); }
+        .r-num { font-size: 0.6rem; color: var(--gray-text); margin-bottom: 2px; }
+        .ult-icon { font-size: 0.75rem; color: var(--ult-gold); }
+        .fd-icon { font-size: 0.75rem; color: var(--lose-red); }
+        .fb-icon { font-size: 0.75rem; color: var(--win-green); }
+
+        #radarOverlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 1000; justify-content: center; align-items: center; }
+        .radar-content { background: var(--card-bg); padding: 30px; border-radius: 8px; border: 1px solid var(--red); width: 95%; max-width: 650px; }
+        .radar-nav { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
+
+        .global-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-top: 15px; }
+        .map-card { background: var(--card-bg); border: 1px solid var(--border); padding: 15px; border-radius: 4px; border-top: 3px solid var(--red); }
+        .map-card h3 { font-family: 'Teko', sans-serif; font-size: 1.5rem; margin-bottom: 10px; }
+        .stat-row { display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 0.8rem; }
+        .stat-group-title { font-size: 0.7rem; color: var(--red); font-weight: 700; margin: 8px 0 4px; text-transform: uppercase; border-left: 2px solid var(--red); padding-left: 5px; }
+
+        @media (max-width: 1000px) { .global-grid { grid-template-columns: 1fr; } .round-history { grid-template-columns: repeat(12, 1fr); } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <!-- Professional Note Section -->
+    <div class="analytics-stack-note">
+        <div class="note-icon"><i class="fas fa-database"></i></div>
+        <div class="note-text">
+            <strong data-i18n="analytics_note_title">Data & Analytics Stack:</strong> 
+            <span data-i18n="analytics_note_text">Scrim report example. The entire database can be customized to the team's liking or tactical needs, and I can also add more detailed information; this is just an example of analysis capabilities, in this case it is a Bo3. You can interact with the report, view the charts, switch maps, and explore the detailed statistics.</span>
+        </div>
+    </div>
+    
+    <!-- Match Header -->
+    <div class="match-header">
+        <div class="team-info">
+            <div class="team-name">TEAM A</div>
+            <div class="score-series"><span>2</span><span style="font-size:1rem; color:var(--gray-text)">X</span><span>1</span></div>
+            <div class="team-name">TEAM B</div>
+        </div>
+        <div class="match-meta" style="text-align:right">
+            <div style="font-family:'Teko', sans-serif; font-size:1.5rem; color:var(--red)" data-i18n="scrim_report_title">SCRIM PERFORMANCE REPORT</div>
+            <div class="map-scores">
+                <span id="badge-haven" class="map-badge" onclick="switchMap('haven')">Haven: 12-14</span>
+                <span id="badge-split" class="map-badge" onclick="switchMap('split')">Split: 13-5</span>
+                <span id="badge-lotus" class="map-badge" onclick="switchMap('lotus')">Lotus: 13-10</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stats Table -->
+    <div class="stats-section">
+        <div class="section-header">
+            <span><span data-i18n="team_perf">TEAM PERFORMANCE:</span> <span id="current-map-title">SPLIT</span></span>
+            <button class="btn-generate" onclick="openRadar()" data-i18n="btn_gen_radar">GENERATE RADAR ANALYTICS</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th style="width:180px">Player</th>
+                    <th>Rating</th><th>ACS</th><th>K/D/A</th><th>+/-</th><th>K/D</th><th>ADR</th><th>FB</th><th>FD</th>
+                </tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+    <!-- Round History -->
+    <div class="stats-section">
+        <div class="section-header" data-i18n="round_history_title">ROUND HISTORY & TACTICAL ICONS</div>
+        <div class="round-history" id="rounds-container"></div>
+    </div>
+
+    <!-- Global Grid -->
+    <div class="global-grid" id="global-cards"></div>
+</div>
+
+<!-- Radar Overlay -->
+<div id="radarOverlay" onclick="closeRadar()">
+    <div class="radar-content" onclick="event.stopPropagation()">
+        <div class="radar-nav">
+            <span id="radar-haven" class="map-badge" onclick="updateRadar('haven')">HAVEN</span>
+            <span id="radar-split" class="map-badge" onclick="updateRadar('split')">SPLIT</span>
+            <span id="radar-lotus" class="map-badge" onclick="updateRadar('lotus')">LOTUS</span>
+        </div>
+        <canvas id="radarChart"></canvas>
+        <div style="text-align:center; margin-top:20px;"><button class="btn-generate" style="background:var(--gray-text)" onclick="closeRadar()">CLOSE</button></div>
+    </div>
+</div>
+
+<script>
+    const mapData = {
+        split: {
+            name: "SPLIT", radar: [100, 85, 45, 60, 70, 80],
+            players: [
+                { name: "Player X", rating: 1.22, acs: 244, kda: "24/12/5", plus: "+12", kd: 1.26, adr: 161.6, fb: 6, fd: 4 },
+                { name: "Player Y", rating: 1.18, acs: 245, kda: "18/19/14", plus: "+8", kd: 1.16, adr: 143.7, fb: 13, fd: 11 },
+                { name: "Player Z", rating: 1.10, acs: 218, kda: "14/20/8", plus: "+3", kd: 1.06, adr: 137.6, fb: 10, fd: 9 },
+                { name: "Player W", rating: 0.94, acs: 181, kda: "19/19/3", plus: "+6", kd: 1.15, adr: 129.2, fb: 3, fd: 4 },
+                { name: "Player V", rating: 0.93, acs: 163, kda: "11/19/4", plus: "0", kd: 1.00, adr: 101.3, fb: 4, fd: 3 }
+            ],
+            rounds: [{r:1, win:'a', type:'fb'}, {r:2, win:'a', type:'ult'}, {r:4, win:'a', type:'fb'}],
+            stats: { pistol: "100%", retake: "85%", post: "45%", eco: "70%", anti: "60%" }
+        },
+        haven: {
+            name: "HAVEN", radar: [30, 90, 65, 100, 100, 40],
+            players: [
+                { name: "Player X", rating: 0.98, acs: 210, kda: "18/20/5", plus: "-2", kd: 0.90, adr: 130.5, fb: 4, fd: 5 },
+                { name: "Player Y", rating: 1.05, acs: 225, kda: "20/19/6", plus: "+1", kd: 1.05, adr: 142.1, fb: 8, fd: 6 },
+                { name: "Player Z", rating: 0.85, acs: 180, kda: "12/22/8", plus: "-10", kd: 0.54, adr: 110.2, fb: 2, fd: 7 },
+                { name: "Player W", rating: 1.15, acs: 240, kda: "25/20/3", plus: "+5", kd: 1.25, adr: 158.4, fb: 9, fd: 3 },
+                { name: "Player V", rating: 0.92, acs: 195, kda: "15/21/9", plus: "-6", kd: 0.71, adr: 118.9, fb: 3, fd: 4 }
+            ],
+            rounds: [{r:1, win:'b', type:'fd'}, {r:13, win:'b', type:'fd'}],
+            stats: { pistol: "30%", retake: "90%", post: "65%", eco: "100%", anti: "100%" }
+        },
+        lotus: {
+            name: "LOTUS", radar: [50, 40, 100, 100, 33, 75],
+            players: [
+                { name: "Player X", rating: 1.45, acs: 310, kda: "28/15/4", plus: "+13", kd: 1.86, adr: 195.2, fb: 7, fd: 2 },
+                { name: "Player Y", rating: 0.92, acs: 185, kda: "15/19/11", plus: "-4", kd: 0.79, adr: 112.4, fb: 2, fd: 5 },
+                { name: "Player Z", rating: 1.15, acs: 240, kda: "22/18/8", plus: "+4", kd: 1.22, adr: 155.6, fb: 4, fd: 3 },
+                { name: "Player W", rating: 0.85, acs: 165, kda: "12/20/4", plus: "-8", kd: 0.60, adr: 98.2, fb: 1, fd: 6 },
+                { name: "Player V", rating: 1.28, acs: 265, kda: "25/17/14", plus: "+8", kd: 1.47, adr: 165.8, fb: 5, fd: 2 }
+            ],
+            rounds: [{r:1, win:'a', type:'fb'}],
+            stats: { pistol: "50%", retake: "40%", post: "100%", eco: "33%", anti: "100%" }
+        }
+    };
+
+    let currentMap = 'split';
+    let radarChart = null;
+
+    function switchMap(mapId) {
+        currentMap = mapId;
+        const data = mapData[mapId];
+        document.querySelectorAll('.map-badge').forEach(b => b.classList.toggle('active', b.id.includes(mapId)));
+        document.getElementById('current-map-title').textContent = data.name;
+        
+        // Players Table
+        document.getElementById('table-body').innerHTML = data.players.map(p => `
+            <tr>
+                <td><div style="font-weight:700">${p.name}</div></td>
+                <td class="val-bold">${p.rating}</td>
+                <td>${p.acs}</td><td>${p.kda}</td>
+                <td class="${p.plus.startsWith('+') ? 'diff-pos' : p.plus === '0' ? '' : 'diff-neg'}">${p.plus}</td>
+                <td>${p.kd}</td><td>${p.adr}</td><td class="diff-pos">${p.fb}</td><td class="diff-neg">${p.fd}</td>
+            </tr>
+        `).join('');
+
+        // Global Grid
+        document.getElementById('global-cards').innerHTML = Object.keys(mapData).map(key => {
+            const d = mapData[key];
+            return `
+                <div class="map-card" style="opacity:${key===currentMap?1:0.6}" onclick="switchMap('${key}')">
+                    <h3>${d.name}</h3>
+                    <div class="stat-row"><span>Pistol Win %</span><span style="color:${parseInt(d.stats.pistol)>50?'var(--win-green)':'var(--lose-red)'}">${d.stats.pistol}</span></div>
+                    <div class="stat-group-title">Key Win Rates</div>
+                    <div class="stat-row"><span>Retake Win</span><span>${d.stats.retake}</span></div>
+                    <div class="stat-row"><span>Post-plant Win</span><span>${d.stats.post}</span></div>
+                    <div class="stat-row"><span>Eco Conversion</span><span>${d.stats.eco}</span></div>
+                </div>
+            `;
+        }).join('');
+
+        // Rounds
+        document.getElementById('rounds-container').innerHTML = Array.from({length: 24}, (_, i) => {
+            const rd = data.rounds.find(r => r.r === i+1) || {win:(i<12?'b':'a')};
+            let icons = '';
+            if (rd.type === 'ult') icons = '<i class="fas fa-bolt ult-icon"></i>';
+            if (rd.type === 'fd') icons = '<i class="fas fa-skull fd-icon"></i>';
+            if (rd.type === 'fb') icons = '<i class="fas fa-skull fb-icon"></i>';
+            return `<div class="round-box win-${rd.win}"><span class="r-num">R${i+1}</span>${icons}</div>`;
+        }).join('');
+    }
+
+    function openRadar() { document.getElementById('radarOverlay').style.display = 'flex'; updateRadar(currentMap); }
+    function updateRadar(mapId) {
+        document.querySelectorAll('.radar-nav .map-badge').forEach(b => b.classList.toggle('active', b.id.includes(mapId)));
+        const data = mapData[mapId].radar;
+        const ctx = document.getElementById('radarChart').getContext('2d');
+        if (radarChart) radarChart.destroy();
+        
+        // Use translated labels
+        const labels = translations[currentLang].radar_labels;
+        
+        radarChart = new Chart(ctx, {
+            type: 'radar',
+            data: {
+                labels: labels,
+                datasets: [{ 
+                    label: `Win Rates - ${mapData[mapId].name}`, data: data, 
+                    backgroundColor: 'rgba(255, 70, 85, 0.1)', borderColor: '#ff4655',
+                    pointBackgroundColor: data.map(v => v < 50 ? '#ff4655' : '#3ddc84'), pointRadius: 6
+                }]
+            },
+            options: { scales: { r: { suggestedMin: 0, suggestedMax: 100, ticks: { display: false }, pointLabels: { color: '#8b949e', font: { weight:'bold' } } } }, plugins: { legend: { labels: { color: '#fff' } } } }
+        });
+    }
+    function closeRadar() { document.getElementById('radarOverlay').style.display = 'none'; }
+    switchMap('split');
+
+    // Language Sync Logic
+    const translations = {
+        en: {
+            scrim_report_title: "SCRIM PERFORMANCE REPORT",
+            team_perf: "TEAM PERFORMANCE:",
+            btn_gen_radar: "GENERATE RADAR ANALYTICS",
+            round_history_title: "ROUND HISTORY & TACTICAL ICONS",
+            analytics_note_title: "Data & Analytics Stack:",
+            analytics_note_text: "Scrim report example. The entire database can be customized to the team's liking or tactical needs, and I can also add more detailed information; this is just an example of analysis capabilities, in this case it is a Bo3. You can interact with the report, view the charts, switch maps, and explore the detailed statistics.",
+            back: "CLOSE",
+            radar_labels: ['Pistol Win Rate', 'Retake Win Rate', 'Post-plant Win Rate', 'Anti-Eco Win Rate', 'Eco Win Rate', 'Full Buy Win Rate']
+        },
+        jp: {
+            scrim_report_title: "スクリム・パフォーマンスレポート",
+            team_perf: "チームパフォーマンス：",
+            btn_gen_radar: "レーダー分析を表示",
+            round_history_title: "ラウンド履歴と戦術アイコン",
+            analytics_note_title: "データ＆アナリティクススタック：",
+            analytics_note_text: "スクリムレポートの例。データベース全体はチームの好みや戦術的なニーズに合わせてカスタマイズ可能であり、さらに詳細な情報を追加することもできます。これは分析能力の一例に過ぎません。この場合はBo3の例です。レポートを操作したり、グラフを表示したり、マップを切り替えて詳細な統計を確認したりすることができます。",
+            back: "閉じる",
+            radar_labels: ['ピストル勝率', 'リテイク勝率', 'ポストプラント勝率', 'アンチエコ勝率', 'エコ勝率', 'フルバイ勝率']
+        }
+    };
+
+    let currentLang = localStorage.getItem('preferredLang') || 'en';
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            const key = el.getAttribute('data-i18n');
+            if (translations[lang] && translations[lang][key]) {
+                el.innerHTML = translations[lang][key];
+            }
+        });
+    }
+
+    setLanguage(currentLang);
+</script>
+
+</body>
+</html>

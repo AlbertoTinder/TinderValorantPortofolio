@@ -3,8 +3,11 @@ const translations = {
         role: "PROFESSIONAL VALORANT COACH",
         subtitle: "Click my name to explore my coaching philosophy.",
         back: "BACK",
+        btn_scrim_example: "VIEW LIVE SCRIM REPORT EXAMPLE",
+        analytics_note_title: "Data & Analytics Stack:",
+        analytics_note_text: "Scrim report example. The entire database can be customized to the team's liking or tactical needs, and I can also add more detailed information; this is just an example of analysis capabilities, in this case it is a Bo3. You can interact with the report, view the charts, switch maps, and explore the detailed statistics.",
         about_intro_title: "Motivation & Discipline",
-        about_intro_text: "I am a coach driven by discipline, deep tactical understanding, and a relentless desire to improve. My motivation is sky-high, and I focus heavily on creating structured, hard-working environments to maximize team potential.",
+        about_intro_text: "I am a disciplined and driven coach with a strong tactical mindset and a constant focus on improvement. I specialize in creating structured, high-performance environments that push players and teams to their limits.\n\nHighly motivated and detail-oriented, I am ready to contribute as a Head Coach, Assistant Coach, or Analyst, bringing value through strategy, preparation, and continuous development.",
         about_timeline_title: "Career Timeline",
         timeline_rebels_title: "Rebels Gaming (EMEA)",
         timeline_rebels_desc: "League Champions & Development of Tier 1 world-class players.",
@@ -15,6 +18,7 @@ const translations = {
         about_tools_title: "Data & Analytics Stack",
         about_tools_text: "Coming from a software development background, I've worked professionally with databases, APIs, and advanced tracking. I apply this directly to VALORANT by building custom statistical applications, automated player tracking, and data-driven scouting models. My toolset includes Power BI, Apache Superset, and Metabase, allowing me to transform complex raw data into clear, actionable strategies for the team.",
         btn_game_knowledge: "GAME KNOWLEDGE & PHILOSOPHY",
+        btn_more_info: "Click here for more info",
         port_title: "GAME KNOWLEDGE & <span class='highlight'>PHILOSOPHY</span>",
         port_subtitle: "Data x Psychology x Fundamentals x Discipline",
         card_chess_title: "The Game as Chess",
@@ -36,6 +40,9 @@ const translations = {
         role: "プロフェッショナルコーチ",
         subtitle: "名前をクリックして、私のコーチング哲学をご覧ください。",
         back: "戻る",
+        btn_scrim_example: "スクリムレポートの例（ライブ）",
+        analytics_note_title: "データ＆アナリティクススタック：",
+        analytics_note_text: "スクリムレポートの例。データベース全体はチームの好みや戦術的なニーズに合わせてカスタマイズ可能であり、さらに詳細な情報を追加することもできます。これは分析能力の一例に過ぎません。この場合はBo3の例です。レポートを操作したり、グラフを表示したり、マップを切り替えて詳細な統計を確認したりすることができます。",
         about_intro_title: "モチベーションと日本",
         about_intro_text: "私は規律と絶え間ない向上心に突き動かされるコーチです。私の目標は、日本のeスポーツコミュニティと共に成長することです。その労働倫理と情熱には深く刺激を受けています。",
         about_timeline_title: "キャリア・タイムライン",
@@ -48,6 +55,7 @@ const translations = {
         about_tools_title: "データ＆分析ツール",
         about_tools_text: "ソフトウェア開発のバックグラウンドを持ち、データベース、API、高度なトラッキングを専門的に扱ってきました。これをVALORANTに直接応用し、独自の統計アプリケーション、自動化されたプレイヤートラッキング、データ主導のスカウティングモデルを構築しています。Power BI、Apache Superset、Metabaseなどのツールを活用し、複雑な生のデータをチームにとって明確で実行可能な戦略に変換します。",
         btn_game_knowledge: "ゲーム知識と哲学",
+        btn_more_info: "詳細はこちらをクリック",
         port_title: "ゲーム知識と<span class='highlight'>哲学</span>",
         port_subtitle: "データ × 心理学 × 基礎 × 規律",
         card_chess_title: "チェスとしてのゲーム",
@@ -103,6 +111,7 @@ function setLanguage(lang) {
             el.innerHTML = translations[lang][key];
         }
     });
+    localStorage.setItem('preferredLang', lang);
 }
 
 function toggleView(targetViewId) {
@@ -120,4 +129,5 @@ function toggleView(targetViewId) {
 }
 
 // Initial language setup
-setLanguage('en');
+const savedLang = localStorage.getItem('preferredLang') || 'en';
+setLanguage(savedLang);
