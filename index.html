@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alberto "Tinder" Rodriguez - Valorant Coach</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Teko:wght@400;600&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="app">
+        <!-- Language Toggle -->
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+            <span class="lang-separator">|</span>
+            <button class="lang-btn" onclick="setLanguage('jp')">JP</button>
+        </div>
+
+        <div class="background-effects">
+            <div class="glow red"></div>
+            <div class="glow white"></div>
+        </div>
+
+        <!-- HOME VIEW -->
+        <section id="home-view" class="view active">
+            <div class="content">
+                <h2 class="role" data-i18n="role">PROFESSIONAL VALORANT COACH</h2>
+                <h1 class="name" onclick="toggleView('about-view')">
+                    <span class="glitch" data-text="ALBERTO &quot;TINDER&quot; RODRIGUEZ">ALBERTO "TINDER" RODRIGUEZ</span>
+                </h1>
+                <p class="subtitle" data-i18n="subtitle">Click my name to learn more about my vision.</p>
+                
+                <div class="social-links">
+                    <a href="https://x.com/TinderVAL" target="_blank" class="social-btn">
+                        <i class="fab fa-twitter"></i> Twitter
+                    </a>
+                    <a href="https://liquipedia.net/valorant/TinderLvL12" target="_blank" class="social-btn">
+                        <i class="fas fa-trophy"></i> Liquipedia
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ABOUT ME VIEW -->
+        <section id="about-view" class="view hidden">
+            <button class="back-btn" onclick="toggleView('home-view')">
+                <i class="fas fa-arrow-left"></i> <span data-i18n="back">BACK</span>
+            </button>
+
+            <div class="about-container">
+                <div class="about-image-wrapper">
+                    <div style="position: relative; margin-bottom: 1.5rem;">
+                        <img src="perfil.jpg" alt="Profile" class="profile-img" style="max-width: 320px;" onerror="this.src='https://via.placeholder.com/400x500/1a1a1a/ff4655?text=ALBERTO+RODRIGUEZ'">
+                        <div class="image-accent"></div>
+                    </div>
+                    <img src="nth.jpg" alt="NTH Academy" class="profile-img" style="max-width: 320px; border-radius:4px; border:1px solid var(--val-red); box-shadow: 0 10px 30px rgba(0,0,0,0.5);" onerror="this.style.display='none'">
+                </div>
+
+                <div class="about-content">
+                    <h2 class="section-title">ABOUT <span class="highlight">ME</span></h2>
+                    
+                    <div class="text-block">
+                        <h3><i class="fas fa-globe-asia highlight"></i> <span data-i18n="about_intro_title">Motivation & Japan</span></h3>
+                        <p data-i18n="about_intro_text">
+                            I am a coach driven by discipline and a relentless desire to improve. My goal is to progress alongside the Japanese esports community, an environment whose work ethic and passion deeply inspire me.
+                        </p>
+                    </div>
+
+                    <div class="text-block">
+                        <h3><i class="fas fa-medal highlight"></i> <span data-i18n="about_nth_title">NORTHEPTION Experience</span></h3>
+                        <p data-i18n="about_nth_text">
+                            I had the privilege of working with NORTHEPTION in Japan, achieving significant progress with both the Main team and the Academy. Building the Academy roster yielded excellent results, cementing my belief in the incredible potential of Japanese talent.
+                        </p>
+                    </div>
+
+                    <button class="primary-btn" onclick="toggleView('portfolio-view')">
+                        <span data-i18n="btn_game_knowledge">GAME KNOWLEDGE & PHILOSOPHY</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- PORTFOLIO / PHILOSOPHY VIEW -->
+        <section id="portfolio-view" class="view hidden">
+            <button class="back-btn" onclick="toggleView('about-view')">
+                <i class="fas fa-arrow-left"></i> <span data-i18n="back">BACK</span>
+            </button>
+
+            <div class="portfolio-container">
+                <div class="portfolio-header">
+                    <h2 class="section-title" data-i18n="port_title">GAME KNOWLEDGE & <span class="highlight">PHILOSOPHY</span></h2>
+                    <p class="portfolio-subtitle" data-i18n="port_subtitle">Data x Psychology x Fundamentals x Discipline</p>
+                </div>
+
+                <div class="grid-layout">
+                    <!-- Cards -->
+                    <div class="info-card">
+                        <i class="fas fa-chess-knight card-icon"></i>
+                        <h3 data-i18n="card_chess_title">The Game as Chess</h3>
+                        <p data-i18n="card_chess_text">I understand VALORANT as a chessboard. It's about securing numerical superiority, anticipating enemy movements, and executing strategies with precise timing.</p>
+                    </div>
+
+                    <div class="info-card">
+                        <i class="fas fa-brain card-icon"></i>
+                        <h3 data-i18n="card_psy_title">Psychological Pillar</h3>
+                        <p data-i18n="card_psy_text">Players carry a massive emotional load. A coach must be their psychological pillar, providing emotional stability and mental strength under extreme pressure.</p>
+                    </div>
+
+                    <div class="info-card">
+                        <i class="fas fa-dumbbell card-icon"></i>
+                        <h3 data-i18n="card_disc_title">Discipline (In & Out)</h3>
+                        <p data-i18n="card_disc_text">True performance starts outside the server. I enforce strict discipline in lifestyle, routines, and in-game fundamentals to guarantee consistency.</p>
+                    </div>
+
+                    <div class="info-card">
+                        <i class="fas fa-layer-group card-icon"></i>
+                        <h3 data-i18n="card_fund_title">Core Fundamentals</h3>
+                        <p data-i18n="card_fund_text">No advanced tactic works without perfect fundamentals. Crosshair placement, trading, communication, and spacing are the non-negotiable foundations of my teams.</p>
+                    </div>
+                </div>
+
+                <!-- Chessboard Visual Concept -->
+                <div class="chessboard-concept">
+                    <h3 data-i18n="board_title">CHESSBOARD CONCEPT</h3>
+                    <p data-i18n="board_desc">Dividing the map into areas to find advantages, control space, and create winning positions.</p>
+                    <div class="board-visual">
+                        <div class="board-col">
+                            <div class="col-title">A SITE</div>
+                            <div class="board-cells">
+                                <div class="cell player"><i class="fas fa-user"></i></div>
+                                <div class="cell"></div>
+                                <div class="cell player"><i class="fas fa-user"></i></div>
+                                <div class="cell"></div>
+                            </div>
+                        </div>
+                        <div class="board-col highlight-col">
+                            <div class="col-title highlight-text">MID</div>
+                            <div class="board-cells">
+                                <div class="cell enemy"><i class="fas fa-user"></i></div>
+                                <div class="cell"></div>
+                                <div class="cell enemy"><i class="fas fa-user"></i></div>
+                                <div class="cell"></div>
+                            </div>
+                        </div>
+                        <div class="board-col">
+                            <div class="col-title">B SITE</div>
+                            <div class="board-cells">
+                                <div class="cell player"><i class="fas fa-user"></i></div>
+                                <div class="cell"></div>
+                                <div class="cell player"><i class="fas fa-user"></i></div>
+                                <div class="cell"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- IGL & Communication Concept -->
+                <div class="igl-concept">
+                    <h3 data-i18n="igl_title"><i class="fas fa-comments"></i> IGL & COMMUNICATION</h3>
+                    <div class="igl-content">
+                        <p data-i18n="igl_desc1">We believe in the player's own perception. We can all be IGL in different rounds, as in VALORANT there are many aspects and situations given their direct play and utility.</p>
+                        <p data-i18n="igl_desc2"><strong>"What the IGL says"</strong> is a concept that should be largely abandoned. It is a game with infinite variables that requires the attention and active action of all members of the team. Roles are constantly changing; you should not limit yourself to making an aggressive play because you are the smoker, or avoid lurking because you are the entry. Be flexible.</p>
+                        <p data-i18n="igl_desc3"></p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
