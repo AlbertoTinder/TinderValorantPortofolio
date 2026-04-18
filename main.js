@@ -5,8 +5,13 @@ const translations = {
         back: "BACK",
         about_intro_title: "Motivation & Discipline",
         about_intro_text: "I am a coach driven by discipline, deep tactical understanding, and a relentless desire to improve. My motivation is sky-high, and I focus heavily on creating structured, hard-working environments to maximize team potential.",
-        about_nth_title: "Tier 1 & 2 Experience",
-        about_nth_text: "With years of FPS experience, I've worked with Tier 1 and Tier 2 teams since VALORANT's release. My journey began with Rebels in EMEA (Spain), winning the league and developing players who are now in worldwide Tier 1 rosters. More recently, my successful stint at NORTHEPTION in Japan proved my international adaptability.",
+        about_timeline_title: "Career Timeline",
+        timeline_rebels_title: "Rebels Gaming (EMEA)",
+        timeline_rebels_desc: "League Champions & Development of Tier 1 world-class players.",
+        timeline_nth_title: "NORTHEPTION (Japan)",
+        timeline_nth_desc: "Main & Academy roster builder. Significant growth in the Japanese scene.",
+        btn_resume: "DOWNLOAD CV",
+        btn_know_more: "KNOW MY VISION",
         about_tools_title: "Data & Analytics Stack",
         about_tools_text: "Coming from a software development background, I've worked professionally with databases, APIs, and advanced tracking. I apply this directly to VALORANT by building custom statistical applications, automated player tracking, and data-driven scouting models. My toolset includes Power BI, Apache Superset, and Metabase, allowing me to transform complex raw data into clear, actionable strategies for the team.",
         btn_game_knowledge: "GAME KNOWLEDGE & PHILOSOPHY",
@@ -23,9 +28,9 @@ const translations = {
         board_title: "CHESSBOARD CONCEPT",
         board_desc: "The summary of the concept is the knowledge about being active and productive around actions and reactions. We need to be always precise and quick, giving us a fast read of the enemy's weak points.",
         igl_title: "<i class='fas fa-comments'></i> IGL & COMMUNICATION",
-        igl_desc1: "We believe in each player’s own perception and decision-making. In VALORANT, anyone can take the IGL role depending on the round, as the game presents many different situations that require adaptation and initiative from all players.",
-        igl_desc2: "An example of an important concept in VALORANT is the traditional idea of “what the IGL says.” We believe this should be redefined, as it’s a game with nearly infinite variables that demands constant awareness and active participation from the entire team.",
-        igl_desc3: "Roles are not static. You should not restrict yourself to playing aggressively just because you are the smoker, nor avoid lurking because you are the entry. Flexibility and adaptability are essential."
+        igl_desc1: "We prioritize individual perception and decision-making. In VALORANT, leadership is fluid—any player can assume the IGL role depending on the situation, as the game demands constant adaptation and initiative from the entire team.",
+        igl_desc2: "Traditional IGL structures are limited in a game defined by high variability and incomplete information. Instead, we emphasize shared responsibility, where all players actively contribute to decision-making.",
+        igl_desc3: "Roles are dynamic, not restrictive. Playstyle should not be dictated by agent selection—flexibility and adaptability are essential to respond effectively to each round."
     },
     jp: {
         role: "プロフェッショナルコーチ",
@@ -33,8 +38,13 @@ const translations = {
         back: "戻る",
         about_intro_title: "モチベーションと日本",
         about_intro_text: "私は規律と絶え間ない向上心に突き動かされるコーチです。私の目標は、日本のeスポーツコミュニティと共に成長することです。その労働倫理と情熱には深く刺激を受けています。",
-        about_nth_title: "NORTHEPTIONでの経験",
-        about_nth_text: "日本でNORTHEPTIONと仕事をする機会に恵まれ、メインチームとアカデミーの両方で大きな進歩を遂げました。アカデミーのロースター構築は素晴らしい結果をもたらし、日本の才能の信じられないほどの可能性を確信しました。",
+        about_timeline_title: "キャリア・タイムライン",
+        timeline_rebels_title: "Rebels Gaming (EMEA)",
+        timeline_rebels_desc: "リーグ優勝、および世界レベルのTier 1プレイヤーの育成。",
+        timeline_nth_title: "NORTHEPTION (日本)",
+        timeline_nth_desc: "メインおよびアカデミーのロースター構築。日本シーンにおける大幅な成長。",
+        btn_resume: "履歴書をダウンロード",
+        btn_know_more: "私のビジョンを知る",
         about_tools_title: "データ＆分析ツール",
         about_tools_text: "ソフトウェア開発のバックグラウンドを持ち、データベース、API、高度なトラッキングを専門的に扱ってきました。これをVALORANTに直接応用し、独自の統計アプリケーション、自動化されたプレイヤートラッキング、データ主導のスカウティングモデルを構築しています。Power BI、Apache Superset、Metabaseなどのツールを活用し、複雑な生のデータをチームにとって明確で実行可能な戦略に変換します。",
         btn_game_knowledge: "ゲーム知識と哲学",
@@ -51,9 +61,9 @@ const translations = {
         board_title: "チェスボード・コンセプト",
         board_desc: "アクションとリアクションに対して常にアクティブで生産的であるための知識です。常に正確かつ迅速に行動することで、敵の弱点を素早く読み取ることができます。",
         igl_title: "<i class='fas fa-comments'></i> IGLとコミュニケーション",
-        igl_desc1: "私たちは、各プレイヤー自身の判断力と認識を重視しています。VALORANTでは、ラウンドごとに誰でもIGLの役割を担うことができ、ゲーム内の多様な状況に応じて全員が判断し、行動する必要があります。",
-        igl_desc2: "VALORANTにおける重要な考え方の一例として、「IGLの指示が絶対である」という概念があります。私たちはこれを見直すべきだと考えています。このゲームは無限に近い変数を持ち、チーム全員が常に状況を把握し、積極的に関与することが求められるためです。",
-        igl_desc3: "役割は固定されたものではありません。コントローラーだから積極的に動いてはいけない、エントリーだからラーカーをしてはいけない、といった制限を自分に課すべきではありません。柔軟性と適応力が非常に重要です。"
+        igl_desc1: "私たちは個々の認識力と意思決定を重視する。VALORANTにおいてリーダーシップは流動的であり、状況に応じて誰もがIGLの役割を担うことができる。このゲームは高い変動性と不完全な情報環境の中で進行するため、チーム全体に継続的な適応力と主体性が求められる。",
+        igl_desc2: "従来のIGL中心の指示体系は、このような環境では限界がある。私たちは意思決定をチーム全体で共有し、全員が能動的に関与する体制を重視する。",
+        igl_desc3: "役割は固定されたものではない。エージェントによってプレイスタイルを制限するべきではなく、各ラウンドに最適に対応するための柔軟性と適応力が不可欠である。"
     }
 };
 

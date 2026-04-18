@@ -3,7 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alberto "Tinder" Rodriguez - Valorant Coach</title>
+    <title>Alberto "Tinder" Rodriguez | Professional VALORANT Coach</title>
+    
+    <!-- SEO & Social Cards -->
+    <meta name="description" content="Professional VALORANT Coach with experience in EMEA (Rebels) and Japan (NORTHEPTION). Specialized in data analytics, psychology, and tactical fundamentals.">
+    <meta property="og:title" content="Alberto 'Tinder' Rodriguez | VALORANT Coach">
+    <meta property="og:description" content="Explore the tactical vision and coaching philosophy of Tinder. Tier 1 & 2 experience in Spain and Japan.">
+    <meta property="og:image" content="perfil.jpg">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Alberto 'Tinder' Rodriguez | VALORANT Coach">
+    <meta name="twitter:description" content="Professional VALORANT Coach specialized in data and tactical structure.">
+    <meta name="twitter:image" content="perfil.jpg">
+    
+    <link rel="icon" type="image/jpeg" href="perfil.jpg">
     <link rel="stylesheet" href="styles.css">
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -35,6 +48,15 @@
                 </h1>
                 <p class="subtitle" data-i18n="subtitle">Click my name to learn more about my vision.</p>
                 
+                <div class="action-buttons">
+                    <button class="primary-btn" onclick="toggleView('about-view')">
+                        <span data-i18n="btn_know_more">KNOW MY VISION</span> <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <a href="resume.pdf" class="secondary-btn" download>
+                        <i class="fas fa-file-pdf"></i> <span data-i18n="btn_resume">DOWNLOAD CV</span>
+                    </a>
+                </div>
+
                 <div class="social-links">
                     <a href="https://x.com/TinderVAL" target="_blank" class="social-btn">
                         <i class="fab fa-twitter"></i> Twitter
@@ -75,10 +97,23 @@
                     </div>
 
                     <div class="text-block">
-                        <h3><i class="fas fa-medal highlight"></i> <span data-i18n="about_nth_title">NORTHEPTION Experience</span></h3>
-                        <p data-i18n="about_nth_text">
-                            I had the privilege of working with NORTHEPTION in Japan, achieving significant progress with both the Main team and the Academy. Building the Academy roster yielded excellent results, cementing my belief in the incredible potential of Japanese talent.
-                        </p>
+                        <h3><i class="fas fa-history highlight"></i> <span data-i18n="about_timeline_title">Career Timeline</span></h3>
+                        <div class="timeline">
+                            <div class="timeline-item">
+                                <div class="timeline-date">2022</div>
+                                <div class="timeline-content">
+                                    <h4 data-i18n="timeline_rebels_title">Rebels Gaming (EMEA)</h4>
+                                    <p data-i18n="timeline_rebels_desc">League Champions & Development of Tier 1 world-class players.</p>
+                                </div>
+                            </div>
+                            <div class="timeline-item">
+                                <div class="timeline-date">2024</div>
+                                <div class="timeline-content">
+                                    <h4 data-i18n="timeline_nth_title">NORTHEPTION (Japan)</h4>
+                                    <p data-i18n="timeline_nth_desc">Main & Academy roster builder. Significant growth in the Japanese scene.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="text-block">
@@ -124,13 +159,13 @@
                     <div class="info-card">
                         <i class="fas fa-chess-knight card-icon"></i>
                         <h3 data-i18n="card_chess_title">The Game as Chess</h3>
-                        <p data-i18n="card_chess_text">I understand VALORANT as a chessboard. It's about securing numerical superiority, anticipating enemy movements, and executing strategies with precise timing.</p>
+                        <p data-i18n="card_chess_text">I interpret VALORANT as a real-time adaptation of chess: controlling space, trading resources efficiently, and leveraging information to anticipate and counter enemy decision-making.</p>
                     </div>
 
                     <div class="info-card">
                         <i class="fas fa-brain card-icon"></i>
                         <h3 data-i18n="card_psy_title">Psychological Pillar</h3>
-                        <p data-i18n="card_psy_text">Players carry a massive emotional load. A coach must be their psychological pillar, providing emotional stability and mental strength under extreme pressure.</p>
+                        <p data-i18n="card_psy_text">Players operate under significant cognitive load and emotional volatility, both of which directly impact performance and decision-making. A coach must provide psychological structure: stabilizing mindset, reinforcing resilience, and implementing systems that maintain clarity and consistency under pressure.</p>
                     </div>
 
                     <div class="info-card">
@@ -150,9 +185,9 @@
                 <div class="igl-concept">
                     <h3 data-i18n="igl_title"><i class="fas fa-comments"></i> IGL & COMMUNICATION</h3>
                     <div class="igl-content">
-                        <p data-i18n="igl_desc1">We believe in the player's own perception. We can all be IGL in different rounds, as in VALORANT there are many aspects and situations given their direct play and utility.</p>
-                        <p data-i18n="igl_desc2"><strong>"What the IGL says"</strong> is a concept that should be largely abandoned. It is a game with infinite variables that requires the attention and active action of all members of the team. Roles are constantly changing; you should not limit yourself to making an aggressive play because you are the smoker, or avoid lurking because you are the entry. Be flexible.</p>
-                        <p data-i18n="igl_desc3"></p>
+                        <p data-i18n="igl_desc1">We prioritize individual perception and decision-making. In VALORANT, leadership is fluid—any player can assume the IGL role depending on the situation, as the game demands constant adaptation and initiative from the entire team.</p>
+                        <p data-i18n="igl_desc2">Traditional IGL structures are limited in a game defined by high variability and incomplete information. Instead, we emphasize shared responsibility, where all players actively contribute to decision-making.</p>
+                        <p data-i18n="igl_desc3">Roles are dynamic, not restrictive. Playstyle should not be dictated by agent selection—flexibility and adaptability are essential to respond effectively to each round.</p>
                     </div>
                 </div>
 
