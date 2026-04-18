@@ -347,14 +347,14 @@ body {
 /* Grid Layout for Cards */
 .grid-layout {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3rem;
     margin-bottom: 4rem;
 }
 
 .info-card {
     background: var(--val-bg-alt);
-    padding: 2rem;
+    padding: 3rem;
     border-top: 3px solid transparent;
     transition: border-color 0.3s, transform 0.3s;
 }
@@ -452,6 +452,7 @@ body {
     .about-container { flex-direction: column; gap: 2rem; }
     .about-image-wrapper { max-width: 300px; }
     .name { font-size: 3.5rem; }
+    .grid-layout { grid-template-columns: 1fr; }
     .board-visual { flex-direction: column; align-items: center; }
     .board-cells { grid-template-columns: repeat(4, 50px); grid-template-rows: 50px; }
     .board-col { align-items: center; }
@@ -462,4 +463,16 @@ body {
 .igl-concept { background: var(--val-bg-alt); padding: 3rem; margin-top: 2rem; border-left: 4px solid var(--val-red); }
 .igl-concept h3 { font-family: 'Teko', sans-serif; font-size: 2.5rem; margin-bottom: 1.5rem; letter-spacing: 0.1em; color: var(--val-red); }
 .igl-content p { color: #bbb; margin-bottom: 1rem; line-height: 1.6; font-size: 1.05rem; }
+
+
+/* Tools Grid */
+.tools-grid { display: flex; flex-wrap: wrap; gap: 0.8rem; margin-top: 1rem; }
+.tool-tag { background: rgba(255, 70, 85, 0.1); border: 1px solid rgba(255, 70, 85, 0.3); color: var(--val-white); padding: 0.5rem 1rem; border-radius: 4px; font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; transition: all 0.3s ease; }
+.tool-tag:hover { background: rgba(255, 70, 85, 0.3); border-color: var(--val-red); transform: translateY(-2px); }
+
+
+/* Tech Logos */
+.tech-logos { display: flex; gap: 2.5rem; margin-top: 2rem; align-items: center; }
+.tech-logo { height: 45px; filter: grayscale(100%) brightness(200%) opacity(0.5); transition: all 0.3s ease; cursor: pointer; }
+.tech-logo:hover { filter: grayscale(0%) brightness(100%) opacity(1) drop-shadow(0 0 15px rgba(255, 70, 85, 0.6)); transform: translateY(-5px); }
 
