@@ -4,6 +4,7 @@ const translations = {
         subtitle: "Click my name to explore my coaching philosophy.",
         back: "BACK",
         btn_scrim_example: "CLICK HERE: VIEW LIVE SCRIM REPORT EXAMPLE",
+        btn_player_stats: "CLICK HERE: VIEW PLAYER STATS",
         btn_vod_philosophy: "CLICK HERE: VOD REVIEW PHILOSOPHY",
         home_featured_label: "DEVELOPING WORLD-CLASS TALENT:",
         analytics_note_title: "Data & Analytics Stack:",
@@ -46,6 +47,7 @@ const translations = {
         subtitle: "名前をクリックして、私のコーチング哲学をご覧ください。",
         back: "戻る",
         btn_scrim_example: "ここをクリック：スクリムレポートの例（ライブ）",
+        btn_player_stats: "ここをクリック：プレイヤーの統計情報を見る",
         btn_vod_philosophy: "ここをクリック：VODレビューの哲学",
         home_featured_label: "世界クラスの才能を育成中:",
         analytics_note_title: "データ＆アナリティクススタック：",
@@ -88,6 +90,7 @@ const translations = {
         subtitle: "点击我的名字了解我的执教理念。",
         back: "返回",
         btn_scrim_example: "点击此处：查看实时训练赛报告示例",
+        btn_player_stats: "点击此处：查看选手数据分析",
         btn_vod_philosophy: "点击此处：VOD 回顾哲学",
         home_featured_label: "培养世界级人才:",
         analytics_note_title: "数据与分析栈：",
@@ -130,6 +133,7 @@ const translations = {
         subtitle: "제 이름을 클릭하여 코칭 철학을 확인해 보세요.",
         back: "뒤로 가기",
         btn_scrim_example: "여기를 클릭: 실시간 스크림 리포트 예시 보기",
+        btn_player_stats: "여기를 클릭: 선수 세부 통계 보기",
         btn_vod_philosophy: "여기를 클릭: VOD 리뷰 철학",
         home_featured_label: "세계적인 인재 육성:",
         analytics_note_title: "데이터 및 분석 스택:",
@@ -220,6 +224,12 @@ function toggleView(targetViewId) {
             view.classList.add('hidden');
         }
     });
+    
+    // Ensure the page scrolls to top when switching views, preventing weird anchor jumps
+    window.scrollTo(0, 0);
+    
+    // Remove the anti-flicker class now that JS has correctly set the active classes
+    document.documentElement.classList.remove('has-hash');
 }
 
 // Initial language setup

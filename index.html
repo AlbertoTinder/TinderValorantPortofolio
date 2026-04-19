@@ -24,7 +24,17 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Teko:wght@400;600&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        // Prevent flash of home-view when navigating directly to a hash
+        if (window.location.hash && window.location.hash !== '#home-view') {
+            document.documentElement.classList.add('has-hash');
+        }
+    </script>
     <style>
+        html.has-hash #home-view {
+            display: none !important;
+            opacity: 0 !important;
+        }
         #home-view {
             position: relative;
             overflow: hidden;
@@ -166,6 +176,9 @@
                         <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
                             <a href="analytics_preview.html" class="scrim-cta">
                                 <i class="fas fa-chart-line"></i> <span data-i18n="btn_scrim_example">VIEW LIVE SCRIM REPORT EXAMPLE</span>
+                            </a>
+                            <a href="player_stats.html" class="scrim-cta">
+                                <i class="fas fa-crosshairs"></i> <span data-i18n="btn_player_stats">VIEW PLAYER STATS</span>
                             </a>
                             <a href="vod_philosophy.html" class="scrim-cta">
                                 <i class="fas fa-brain"></i> <span data-i18n="btn_vod_philosophy">CLICK HERE: VOD REVIEW PHILOSOPHY</span>

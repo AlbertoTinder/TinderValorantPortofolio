@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Player Stats Dashboard | Tinder Coach</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Teko:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            background-color: #0f1923;
+            padding: 2rem 1rem;
+            color: #ece8e1;
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+        }
+
+        .lang-switcher {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.3rem;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+            font-family: 'Teko', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background: #ff4655;
+            border-color: #ff4655;
+        }
+
+        .dashboard {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            z-index: 100;
+            background: rgba(15, 25, 35, 0.9);
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-home:hover {
+            background: #ff4655;
+            border-color: #ff4655;
+        }
+
+        /* Header Section */
+        .player-header {
+            background: linear-gradient(135deg, #161d24 0%, #0f1923 100%);
+            padding: 2.5rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            border-radius: 4px;
+            border-bottom: 3px solid #ff4655;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .player-info {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            z-index: 2;
+        }
+
+        .player-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 4px;
+            object-fit: contain;
+            background: rgba(255,70,85,0.1);
+            padding: 10px;
+        }
+
+        .player-select-wrapper {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 0.2rem;
+        }
+
+        .player-select {
+            background: transparent;
+            border: none;
+            color: #ece8e1;
+            font-family: 'Teko', sans-serif;
+            font-size: 4rem;
+            margin: 0;
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            cursor: pointer;
+            outline: none;
+            appearance: none;
+            -webkit-appearance: none;
+            padding-right: 40px;
+        }
+
+        .player-select option {
+            background: #0f1923;
+            font-size: 1.5rem;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .player-select-icon {
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: #ff4655;
+            pointer-events: none;
+        }
+
+        .player-role {
+            color: #ff4655;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 0.5rem;
+        }
+
+        .match-type-selectors {
+            display: flex;
+            gap: 1rem;
+            z-index: 2;
+        }
+
+        .type-tag {
+            background: #242e38;
+            padding: 0.6rem 1.5rem;
+            border-radius: 2px;
+            font-size: 1rem;
+            font-family: 'Teko', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+        }
+
+        .type-tag.active {
+            background: #ff4655;
+            border: 1px solid #ff4655;
+            color: white;
+        }
+
+        .type-tag:hover:not(.active) {
+            background: #2a3642;
+            border-color: rgba(255, 70, 85, 0.5);
+        }
+
+        /* Unified Layout Section */
+        .section-container {
+            background: #161d24;
+            padding: 2rem;
+            border-radius: 4px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .section-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.8rem;
+            color: #ff4655;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: baseline;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .unified-layout {
+            display: flex;
+            gap: 2rem;
+            align-items: stretch;
+        }
+
+        .cards-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            min-width: 300px;
+        }
+
+        .chart-column {
+            flex: 1.5;
+            background: #1f2833;
+            border-radius: 4px;
+            padding: 2rem;
+            border-left: 3px solid #00bcd4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .comparison-chart-wrapper {
+            position: relative;
+            height: 450px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .vs-badge-large {
+            background: rgba(0, 188, 212, 0.1);
+            color: #00bcd4;
+            border: 1px solid #00bcd4;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.5rem;
+            padding: 0.2rem 1.5rem;
+            border-radius: 20px;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+        }
+
+        /* Map Cards */
+        .map-card {
+            background: #1f2833;
+            border-radius: 4px;
+            padding: 1.2rem;
+            border-left: 3px solid #333;
+            transition: transform 0.2s, border-color 0.2s;
+            position: relative;
+        }
+
+        /* Color coding the cards to match the radar chart */
+        .map-card:nth-child(1) { border-left-color: #ff4655; }
+        .map-card:nth-child(2) { border-left-color: #00bcd4; }
+
+        .map-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .selectors-container {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .custom-select {
+            background: #0f1923;
+            color: #ece8e1;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.2rem 0.5rem;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            border-radius: 2px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .custom-select:focus {
+            border-color: #ff4655;
+            outline: none;
+        }
+
+        .agent-played {
+            width: 50px;
+            height: 50px;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(0,0,0,0.6);
+            object-fit: cover;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .stat-item {
+            background: rgba(0,0,0,0.2);
+            padding: 0.8rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .stat-label {
+            color: #768079;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        .stat-value {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.8rem;
+            color: #ece8e1;
+            line-height: 1;
+        }
+
+        .stat-value.excellent { color: #4CAF50; }
+        .stat-value.good { color: #8BC34A; }
+        .stat-value.average { color: #FFC107; }
+        .stat-value.poor { color: #F44336; }
+
+        @media (max-width: 900px) {
+            .unified-layout { flex-direction: column; }
+        }
+        @media (max-width: 768px) {
+            .player-header {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 2rem;
+            }
+            .player-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('jp')">JP</button>
+        <button class="lang-btn" onclick="setLanguage('zh')">ZH</button>
+        <button class="lang-btn" onclick="setLanguage('ko')">KO</button>
+    </div>
+
+    <a href="index.html#about-view" class="back-home"><i class="fas fa-arrow-left"></i> <span data-i18n="back">BACK TO PORTFOLIO</span></a>
+
+    <div class="dashboard" style="margin-top: 4rem;">
+        
+        <div class="disclaimer-banner" style="background: rgba(255, 255, 255, 0.03); border-left: 3px solid #ff4655; padding: 1rem 1.5rem; margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.5; color: #ece8e1;">
+            <i class="fas fa-info-circle" style="color: #ff4655; margin-right: 0.5rem;"></i>
+            <span data-i18n="disclaimer">"These are the total statistics collected across all internal scrims, allowing us to track performance by agent and player. We can also compare the statistics simultaneously with the graph to see which agent has more impact for the player on the chosen map."</span>
+        </div>
+
+        <!-- Header -->
+        <div class="player-header">
+            <div class="player-info">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Valorant_logo_-_pink_color_version.svg" alt="Valorant Logo" class="player-avatar">
+                <div class="player-details">
+                    <div class="player-select-wrapper">
+                        <select id="playerSelect" class="player-select" onchange="updatePlayer()">
+                            <option value="Player X">PLAYER "X"</option>
+                            <option value="Player Y">PLAYER "Y"</option>
+                            <option value="Player Z">PLAYER "Z"</option>
+                            <option value="Player W">PLAYER "W"</option>
+                        </select>
+                        <i class="fas fa-chevron-down player-select-icon"></i>
+                    </div>
+                    <div class="player-role" data-i18n="role_duelist" id="playerRole">Duelist / Flex</div>
+                </div>
+            </div>
+            
+            <div class="match-type-selectors">
+                <div class="type-tag active" onclick="setMatchType('pracc', this)" data-i18n="type_pracc">Practice (Pracc)</div>
+                <div class="type-tag" onclick="setMatchType('official', this)" data-i18n="type_off">Officials</div>
+            </div>
+        </div>
+
+        <!-- Unified Stats & Comparison Section -->
+        <div class="section-container">
+            <div class="section-title">
+                <div style="display: flex; align-items: center; gap: 0.5rem;"><i class="fas fa-chart-pie"></i> <span data-i18n="avg_title">PERFORMANCE & COMPARISON</span></div>
+                <span data-i18n="avg_sub" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #768079; text-transform: none; letter-spacing: normal; font-weight: normal;">(we can simultaneously view agent performance and compare them with others on the same map)</span>
+            </div>
+            
+            <div class="unified-layout">
+                <!-- Left Column: 2 Map Cards -->
+                <div class="cards-column" id="mapsContainer">
+                    <!-- Dynamically filled by JS -->
+                </div>
+
+                <!-- Right Column: Radar Chart -->
+                <div class="chart-column">
+                    <div class="vs-badge-large" data-i18n="comp_title">HEAD TO HEAD</div>
+                    <div class="comparison-chart-wrapper">
+                        <canvas id="comparisonRadar"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        const agentsDict = {
+            'Yoru': 'https://media.valorant-api.com/agents/7f94d92c-4234-0a36-9646-3a87eb8b5c89/displayicon.png',
+            'Raze': 'https://media.valorant-api.com/agents/f94c3b30-42be-e959-889c-5aa313dba261/displayicon.png',
+            'Jett': 'https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/displayicon.png',
+            'Omen': 'https://media.valorant-api.com/agents/8e253930-4c05-31dd-1b6c-968525494517/displayicon.png',
+            'Viper': 'https://media.valorant-api.com/agents/707eab51-4836-f488-046a-cda6bf494859/displayicon.png',
+            'Neon': 'https://media.valorant-api.com/agents/bb2a4828-46eb-8cd1-e765-15848195d751/displayicon.png',
+            'Sova': 'https://media.valorant-api.com/agents/320b2a48-4d9b-a075-30f1-1f93a9b638fa/displayicon.png',
+            'Killjoy': 'https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/displayicon.png',
+            'Cypher': 'https://media.valorant-api.com/agents/117ed9e3-49f3-6512-3ccf-0cada7e3823b/displayicon.png'
+        };
+
+        const mapList = ['Bind', 'Split', 'Haven', 'Lotus', 'Ascent', 'Icebox', 'Sunset'];
+        const agentList = Object.keys(agentsDict);
+
+        let currentMatchType = 'pracc';
+        let currentLang = 'en';
+
+        const translations = {
+            en: {
+                back: "BACK TO PORTFOLIO",
+                disclaimer: "\"These are the total statistics collected across all internal scrims, allowing us to track performance by agent and player. We can also compare the statistics simultaneously with the graph to see which agent has more impact for the player on the chosen map.\"",
+                role_duelist: "Duelist / Flex",
+                role_sentinel: "Sentinel / Anchor",
+                role_initiator: "Initiator / Support",
+                role_controller: "Controller / IGL",
+                type_pracc: "Practice (Pracc)",
+                type_off: "Officials",
+                avg_title: "PERFORMANCE & COMPARISON",
+                avg_sub: "(we can simultaneously view agent performance and compare them with others on the same map)",
+                sample: "Sample Size:",
+                matches: "Matches",
+                kdr: "K/D Ratio",
+                kpr: "Kills Per Round (KPR)",
+                acs: "ACS",
+                comp_title: "HEAD TO HEAD",
+                radar_fb: "First Blood %",
+                radar_surv: "Survival %",
+                radar_win: "Win Rate %"
+            },
+            jp: {
+                back: "戻る",
+                disclaimer: "「これらはすべての内部スクリムから収集された総合統計であり、エージェントおよびプレイヤーごとのパフォーマンスを追跡できるようになっています。また、グラフを使って統計を同時に比較し、選択したマップでどのエージェントがプレイヤーにとってより大きなインパクトを持っているかを確認することもできます。」",
+                role_duelist: "デュエリスト / フレックス",
+                role_sentinel: "センチネル / アンカー",
+                role_initiator: "イニシエーター / サポート",
+                role_controller: "コントローラー / IGL",
+                type_pracc: "練習（Pracc）",
+                type_off: "公式戦",
+                avg_title: "パフォーマンスとグラフ比較",
+                avg_sub: "(エージェントのパフォーマンスを同時に確認し、同じマップ上で他のエージェントと比較することができます)",
+                sample: "サンプルサイズ:",
+                matches: "試合",
+                kdr: "K/D比",
+                kpr: "ラウンドあたりのキル (KPR)",
+                acs: "平均戦闘スコア",
+                comp_title: "直接対決",
+                radar_fb: "ファーストブラッド %",
+                radar_surv: "生存率 %",
+                radar_win: "勝率 %"
+            },
+            zh: {
+                back: "返回",
+                disclaimer: "“这些是所有内部训练赛收集的总统计数据，使我们能够追踪每个特工和玩家的表现。我们还可以通过图表同时比较统计数据，以查看在所选地图上哪个特工对该玩家的影响更大。”",
+                role_duelist: "决斗者 / 自由人",
+                role_sentinel: "哨卫 / 守点",
+                role_initiator: "先锋 / 辅助",
+                role_controller: "控场者 / IGL",
+                type_pracc: "训练赛 (Pracc)",
+                type_off: "正式比赛",
+                avg_title: "表现与对比图",
+                avg_sub: "(我们可以同时查看特工的表现，并在同一地图上与其他人进行比较)",
+                sample: "样本量:",
+                matches: "场比赛",
+                kdr: "K/D 比率",
+                kpr: "每回合击杀 (KPR)",
+                acs: "平均战斗评分",
+                comp_title: "正面交锋",
+                radar_fb: "首杀 %",
+                radar_surv: "存活率 %",
+                radar_win: "胜率 %"
+            },
+            ko: {
+                back: "뒤로 가기",
+                disclaimer: "“이는 모든 내부 스크림에서 수집된 전체 통계이며, 이를 통해 요원 및 플레이어별 성과를 추적할 수 있습니다. 또한 그래프를 통해 통계를 동시에 비교하여 선택한 맵에서 어떤 요원이 플레이어에게 더 큰 영향을 미치는지 확인할 수 있습니다.”",
+                role_duelist: "타격대 / 플렉스",
+                role_sentinel: "감시자 / 앵커",
+                role_initiator: "척후대 / 서포트",
+                role_controller: "전략가 / IGL",
+                type_pracc: "연습 (Pracc)",
+                type_off: "공식전",
+                avg_title: "성과 및 비교 분석",
+                avg_sub: "(요원의 성과를 동시에 확인하고, 같은 맵에서 다른 요원들과 비교할 수 있습니다)",
+                sample: "표본 크기:",
+                matches: "경기",
+                kdr: "K/D 비율",
+                kpr: "라운드 당 킬 (KPR)",
+                acs: "평균 전투 점수",
+                comp_title: "정면 승부",
+                radar_fb: "퍼스트 블러드 %",
+                radar_surv: "생존율 %",
+                radar_win: "승률 %"
+            }
+        };
+
+        // We use exactly 2 slots now, acting as the controls for the chart
+        const slots = [
+            { map: 'Split', agent: 'Yoru' },
+            { map: 'Split', agent: 'Raze' }
+        ];
+
+        const playersInfo = {
+            'Player X': { roleKey: 'role_duelist' },
+            'Player Y': { roleKey: 'role_sentinel' },
+            'Player Z': { roleKey: 'role_initiator' },
+            'Player W': { roleKey: 'role_controller' }
+        };
+
+        let currentPlayer = 'Player X';
+
+        function updatePlayer() {
+            const selected = document.getElementById('playerSelect').value;
+            currentPlayer = selected;
+            
+            const roleKey = playersInfo[selected].roleKey;
+            const roleEl = document.getElementById('playerRole');
+            roleEl.setAttribute('data-i18n', roleKey);
+            roleEl.innerText = translations[currentLang][roleKey];
+            
+            renderSlots();
+        }
+
+        function getScoreClass(value, type) {
+            if (type === 'kdr') {
+                if (value >= 1.3) return 'excellent';
+                if (value >= 1.1) return 'good';
+                if (value >= 0.9) return 'average';
+                return 'poor';
+            }
+            if (type === 'acs') {
+                if (value >= 250) return 'excellent';
+                if (value >= 220) return 'good';
+                if (value >= 190) return 'average';
+                return 'poor';
+            }
+            if (type === 'kpr') {
+                if (value >= 0.85) return 'excellent';
+                if (value >= 0.75) return 'good';
+                if (value >= 0.65) return 'average';
+                return 'poor';
+            }
+            return '';
+        }
+
+        function generateStats(map, agent, type, player) {
+            let hash = 0;
+            const str = map + agent + type + player;
+            for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
+            hash = Math.abs(hash);
+
+            const acsBase = type === 'pracc' ? 220 : 200;
+            const acs = acsBase + (hash % 60) - 20;
+            const kdrBase = type === 'pracc' ? 1.05 : 0.95;
+            const kdr = (kdrBase + (hash % 40) * 0.01).toFixed(2);
+            const kprBase = type === 'pracc' ? 0.75 : 0.68;
+            const kpr = (kprBase + (hash % 20) * 0.01).toFixed(2);
+            const matches = 3 + (hash % 12);
+
+            return { acs, kdr, kpr, matches };
+        }
+
+        function renderSlots() {
+            const container = document.getElementById('mapsContainer');
+            container.innerHTML = '';
+            
+            const t = translations[currentLang];
+
+            slots.forEach((slot, index) => {
+                const stats = generateStats(slot.map, slot.agent, currentMatchType, currentPlayer);
+                const card = document.createElement('div');
+                card.className = 'map-card';
+                
+                let mapOptions = mapList.map(m => `<option value="${m}" ${m === slot.map ? 'selected' : ''}>${m}</option>`).join('');
+                let agentOptions = agentList.map(a => `<option value="${a}" ${a === slot.agent ? 'selected' : ''}>${a}</option>`).join('');
+
+                card.innerHTML = `
+                    <div class="map-header">
+                        <div class="selectors-container">
+                            <select class="custom-select" style="color: ${index === 0 ? '#ff4655' : '#00bcd4'}; border-color: ${index === 0 ? 'rgba(255,70,85,0.4)' : 'rgba(0,188,212,0.4)'};" onchange="updateSlot(${index}, 'map', this.value)">
+                                ${mapOptions}
+                            </select>
+                            <select class="custom-select" style="color: ${index === 0 ? '#ff4655' : '#00bcd4'}; border-color: ${index === 0 ? 'rgba(255,70,85,0.4)' : 'rgba(0,188,212,0.4)'};" onchange="updateSlot(${index}, 'agent', this.value)">
+                                ${agentOptions}
+                            </select>
+                        </div>
+                        <img src="${agentsDict[slot.agent]}" alt="${slot.agent}" class="agent-played">
+                    </div>
+                    <div style="font-size: 0.75rem; color: #768079; margin-bottom: 0.8rem; text-transform: uppercase;">
+                        ${t.sample} <span style="color: #fff;">${stats.matches} ${t.matches}</span>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-label">${t.acs}</span>
+                            <span class="stat-value ${getScoreClass(stats.acs, 'acs')}">${stats.acs}</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-label">${t.kdr}</span>
+                            <span class="stat-value ${getScoreClass(stats.kdr, 'kdr')}">${stats.kdr}</span>
+                        </div>
+                        <div class="stat-item" style="grid-column: span 2;">
+                            <span class="stat-label">${t.kpr}</span>
+                            <span class="stat-value ${getScoreClass(stats.kpr, 'kpr')}">${stats.kpr}</span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+            
+            // Automatically update the comparison chart whenever a slot changes
+            updateComparison();
+        }
+
+        function updateSlot(index, field, value) {
+            slots[index][field] = value;
+            renderSlots();
+        }
+
+        function setMatchType(type, btnElement) {
+            document.querySelectorAll('.type-tag').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            currentMatchType = type;
+            renderSlots();
+        }
+
+        let comparisonChart = null;
+
+        function updateComparison() {
+            const slot1 = slots[0];
+            const slot2 = slots[1];
+
+            const stats1 = generateStats(slot1.map, slot1.agent, currentMatchType, currentPlayer);
+            const stats2 = generateStats(slot2.map, slot2.agent, currentMatchType, currentPlayer);
+
+            // Generate additional % based stats for radar
+            let h1 = 0, h2 = 0;
+            const str1 = slot1.map + slot1.agent + currentPlayer;
+            const str2 = slot2.map + slot2.agent + currentPlayer;
+            for(let i=0; i<str1.length; i++) h1 += str1.charCodeAt(i);
+            for(let i=0; i<str2.length; i++) h2 += str2.charCodeAt(i);
+
+            const fb1 = 15 + (h1 % 10);
+            const fb2 = 15 + (h2 % 10);
+            const surv1 = 20 + (h1 % 15);
+            const surv2 = 20 + (h2 % 15);
+            const win1 = 45 + (h1 % 20);
+            const win2 = 45 + (h2 % 20);
+
+            // Normalize values for a 0-100 radar scale
+            const norm1 = [
+                Math.min(100, (stats1.acs / 300) * 100),
+                Math.min(100, (stats1.kdr / 1.5) * 100),
+                Math.min(100, (stats1.kpr / 1.0) * 100),
+                fb1 * 3,
+                surv1 * 2,
+                win1
+            ];
+            
+            const norm2 = [
+                Math.min(100, (stats2.acs / 300) * 100),
+                Math.min(100, (stats2.kdr / 1.5) * 100),
+                Math.min(100, (stats2.kpr / 1.0) * 100),
+                fb2 * 3,
+                surv2 * 2,
+                win2
+            ];
+
+            const t = translations[currentLang];
+            const labels = [t.acs, t.kdr, t.kpr, t.radar_fb, t.radar_surv, t.radar_win];
+            const label1 = `${slot1.agent} (${slot1.map})`;
+            const label2 = `${slot2.agent} (${slot2.map})`;
+
+            if (comparisonChart) {
+                comparisonChart.data.labels = labels;
+                comparisonChart.data.datasets[0].label = label1;
+                comparisonChart.data.datasets[0].data = norm1;
+                comparisonChart.data.datasets[1].label = label2;
+                comparisonChart.data.datasets[1].data = norm2;
+                
+                comparisonChart.data.datasets[0].actualData = [stats1.acs, stats1.kdr, stats1.kpr, fb1+'%', surv1+'%', win1+'%'];
+                comparisonChart.data.datasets[1].actualData = [stats2.acs, stats2.kdr, stats2.kpr, fb2+'%', surv2+'%', win2+'%'];
+                
+                comparisonChart.update();
+                return;
+            }
+
+            const ctx = document.getElementById('comparisonRadar').getContext('2d');
+            Chart.defaults.color = '#ece8e1';
+            Chart.defaults.font.family = "'Inter', sans-serif";
+
+            comparisonChart = new Chart(ctx, {
+                type: 'radar',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: label1,
+                            data: norm1,
+                            actualData: [stats1.acs, stats1.kdr, stats1.kpr, fb1+'%', surv1+'%', win1+'%'],
+                            backgroundColor: 'rgba(255, 70, 85, 0.3)',
+                            borderColor: '#ff4655',
+                            pointBackgroundColor: '#ff4655',
+                            borderWidth: 2
+                        },
+                        {
+                            label: label2,
+                            data: norm2,
+                            actualData: [stats2.acs, stats2.kdr, stats2.kpr, fb2+'%', surv2+'%', win2+'%'],
+                            backgroundColor: 'rgba(0, 188, 212, 0.3)',
+                            borderColor: '#00bcd4',
+                            pointBackgroundColor: '#00bcd4',
+                            borderWidth: 2
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.1)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                            pointLabels: {
+                                font: { size: 14, family: "'Teko', sans-serif" },
+                                color: '#ece8e1'
+                            },
+                            ticks: { display: false, min: 0, max: 100 }
+                        }
+                    },
+                    plugins: {
+                        legend: { position: 'bottom', labels: { font: { size: 14 } } },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const ds = context.dataset;
+                                    const actual = ds.actualData[context.dataIndex];
+                                    return ds.label.split(' ')[0] + ': ' + actual;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function setLanguage(lang) {
+            if (!translations[lang]) return;
+            currentLang = lang;
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key];
+                }
+            });
+            
+            localStorage.setItem('preferredLang', lang);
+            renderSlots();
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedLang = localStorage.getItem('preferredLang') || 'en';
+            setLanguage(savedLang);
+        });
+    </script>
+</body>
+</html>
