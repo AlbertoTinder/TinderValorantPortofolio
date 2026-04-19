@@ -673,8 +673,6 @@
 
             const fb1 = 15 + (h1 % 10);
             const fb2 = 15 + (h2 % 10);
-            const surv1 = 20 + (h1 % 15);
-            const surv2 = 20 + (h2 % 15);
             const win1 = 45 + (h1 % 20);
             const win2 = 45 + (h2 % 20);
 
@@ -684,7 +682,6 @@
                 Math.min(100, (stats1.kdr / 1.5) * 100),
                 Math.min(100, (stats1.kpr / 1.0) * 100),
                 fb1 * 3,
-                surv1 * 2,
                 win1
             ];
             
@@ -693,12 +690,11 @@
                 Math.min(100, (stats2.kdr / 1.5) * 100),
                 Math.min(100, (stats2.kpr / 1.0) * 100),
                 fb2 * 3,
-                surv2 * 2,
                 win2
             ];
 
             const t = translations[currentLang];
-            const labels = [t.acs, t.kdr, t.kpr, t.radar_fb, t.radar_surv, t.radar_win];
+            const labels = [t.acs, t.kdr, t.kpr, t.radar_fb, t.radar_win];
             const label1 = `${slot1.agent} (${slot1.map})`;
             const label2 = `${slot2.agent} (${slot2.map})`;
 
@@ -709,8 +705,8 @@
                 comparisonChart.data.datasets[1].label = label2;
                 comparisonChart.data.datasets[1].data = norm2;
                 
-                comparisonChart.data.datasets[0].actualData = [stats1.acs, stats1.kdr, stats1.kpr, fb1+'%', surv1+'%', win1+'%'];
-                comparisonChart.data.datasets[1].actualData = [stats2.acs, stats2.kdr, stats2.kpr, fb2+'%', surv2+'%', win2+'%'];
+                comparisonChart.data.datasets[0].actualData = [stats1.acs, stats1.kdr, stats1.kpr, fb1+'%', win1+'%'];
+                comparisonChart.data.datasets[1].actualData = [stats2.acs, stats2.kdr, stats2.kpr, fb2+'%', win2+'%'];
                 
                 comparisonChart.update();
                 return;
@@ -728,7 +724,7 @@
                         {
                             label: label1,
                             data: norm1,
-                            actualData: [stats1.acs, stats1.kdr, stats1.kpr, fb1+'%', surv1+'%', win1+'%'],
+                            actualData: [stats1.acs, stats1.kdr, stats1.kpr, fb1+'%', win1+'%'],
                             backgroundColor: 'rgba(255, 70, 85, 0.3)',
                             borderColor: '#ff4655',
                             pointBackgroundColor: '#ff4655',
@@ -737,7 +733,7 @@
                         {
                             label: label2,
                             data: norm2,
-                            actualData: [stats2.acs, stats2.kdr, stats2.kpr, fb2+'%', surv2+'%', win2+'%'],
+                            actualData: [stats2.acs, stats2.kdr, stats2.kpr, fb2+'%', win2+'%'],
                             backgroundColor: 'rgba(0, 188, 212, 0.3)',
                             borderColor: '#00bcd4',
                             pointBackgroundColor: '#00bcd4',
