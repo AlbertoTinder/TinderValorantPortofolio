@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Coaching Impact | Tinder Coach</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Teko:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0f1923;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(255, 70, 85, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(255, 70, 85, 0.05) 0%, transparent 50%);
+            padding: 4rem 1rem;
+            min-height: 100vh;
+            color: #ece8e1;
+        }
+
+        .lang-switcher {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            display: flex;
+            gap: 0.3rem;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.4rem 0.6rem;
+            cursor: pointer;
+            font-family: 'Teko', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background: #ff4655;
+            border-color: #ff4655;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .preview-header h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            margin: 0;
+            line-height: 1;
+        }
+
+        .main-philosophy {
+            max-width: 900px;
+            margin: 0 auto 3rem auto;
+            text-align: center;
+            padding: 1.5rem;
+            border-top: 1px solid rgba(255, 70, 85, 0.2);
+            border-bottom: 1px solid rgba(255, 70, 85, 0.2);
+            background: rgba(255, 70, 85, 0.01);
+        }
+
+        .main-philosophy blockquote {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #fff;
+            font-style: italic;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .main-philosophy cite {
+            display: block;
+            margin-top: 0.5rem;
+            color: #ff4655;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.3rem;
+            text-transform: uppercase;
+            font-style: normal;
+            letter-spacing: 1px;
+        }
+
+        .testimonials-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .player-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .player-card:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: #ff4655;
+            transform: translateY(-3px);
+        }
+
+        .player-img-container {
+            width: 100px;
+            height: 100px;
+            flex-shrink: 0;
+            border: 2px solid #ff4655;
+        }
+
+        .player-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .player-content {
+            flex-grow: 1;
+        }
+
+        .player-quote {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin-bottom: 0.8rem;
+            font-style: italic;
+            opacity: 0.9;
+            color: #fff;
+        }
+
+        .player-info {
+            border-left: 3px solid #ff4655;
+            padding-left: 0.8rem;
+        }
+
+        .player-name {
+            font-family: 'Teko', sans-serif;
+            font-size: 1.8rem;
+            color: #fff;
+            text-transform: uppercase;
+            line-height: 1;
+            margin-bottom: 0.2rem;
+        }
+
+        .player-team {
+            font-size: 0.7rem;
+            color: #ff4655;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .highlight-human {
+            color: #ff4655;
+            font-weight: 700;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.1rem;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 600px) {
+            .player-card { flex-direction: column; text-align: center; }
+            .player-info { border-left: none; border-top: 3px solid #ff4655; padding-left: 0; padding-top: 0.5rem; }
+            .preview-header h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('jp')">JP</button>
+        <button class="lang-btn" onclick="setLanguage('zh')">ZH</button>
+        <button class="lang-btn" onclick="setLanguage('ko')">KO</button>
+    </div>
+
+    <a href="index.html#about-view" class="back-home"><i class="fas fa-arrow-left"></i> BACK</a>
+
+    <div class="preview-header">
+        <h1>Player Testimonials</h1>
+    </div>
+
+    <div class="main-philosophy">
+        <blockquote data-i18n="philosophy_text">"Talent opens the door, but discipline and teamwork build champions."</blockquote>
+        <cite>— Tinder</cite>
+    </div>
+
+    <div class="testimonials-container">
+        <!-- 1. Wolverine -->
+        <div class="player-card">
+            <div class="player-img-container">
+                <img src="wolverine.jpg" alt="Wolverine" class="player-img">
+            </div>
+            <div class="player-content">
+                <p class="player-quote" data-i18n="quote_wolverine">"Essential team motivator for building a winning mindset. Helped me mentally and in-game to reach my peak."</p>
+                <div class="player-info">
+                    <div class="player-name">Wolverine</div>
+                    <div class="player-team" data-i18n="team_wolverine">KOREA CHAMPION | ONG</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. musashi -->
+        <div class="player-card">
+            <div class="player-img-container">
+                <img src="musashi.jpg" alt="musashi" class="player-img">
+            </div>
+            <div class="player-content">
+                <p class="player-quote" data-i18n="quote_musashi">"Very detail-oriented and focused on team growth. Helped me refine my game and stay consistently competitive."</p>
+                <div class="player-info">
+                    <div class="player-name">musashi</div>
+                    <div class="player-team" data-i18n="team_musashi">VCL SPAIN CHAMPION | ACEND</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. Esperanza -->
+        <div class="player-card">
+            <div class="player-img-container">
+                <img src="esperanza.jpg" alt="Esperanza" class="player-img">
+            </div>
+            <div class="player-content">
+                <p class="player-quote" data-i18n="quote_esperanza">"Great detailed coaching and exceptional human support. Always attentive to individual and collective progress to keep us focused."</p>
+                <div class="player-info">
+                    <div class="player-name">Esperanza</div>
+                    <div class="player-team" data-i18n="team_esperanza">MASTERS BERLIN | T1 / F4Q / DK</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. Vo0kashu -->
+        <div class="player-card">
+            <div class="player-img-container">
+                <img src="vo0kashu.jpg" alt="Vo0kashu" class="player-img">
+            </div>
+            <div class="player-content">
+                <p class="player-quote" data-i18n="quote_vo0kashu">"A key pillar for the start of my career. Helped me understand the professional game and was a constant support inside and outside the server."</p>
+                <div class="player-info">
+                    <div class="player-name">Vo0kashu</div>
+                    <div class="player-team" data-i18n="team_vo0kashu">VCL SPAIN CHAMPION | REBELS</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 5. jannyxd -->
+        <div class="player-card">
+            <div class="player-img-container">
+                <img src="jannyXD.jpg" alt="jannyxd" class="player-img">
+            </div>
+            <div class="player-content">
+                <p class="player-quote" data-i18n="quote_jannyxd">"Essential in my career for understanding the game more deeply. His ability to motivate and guide us outside the game made the difference."</p>
+                <div class="player-info">
+                    <div class="player-name">jannyxd</div>
+                    <div class="player-team" data-i18n="team_jannyxd">VCL SPAIN CHAMPION | REBELS / UCAM</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 6. tomaszy -->
+        <div class="player-card">
+            <div class="player-img-container">
+                <img src="tomaszy.jpg" alt="tomaszy" class="player-img">
+            </div>
+            <div class="player-content">
+                <p class="player-quote" data-i18n="quote_tomaszy">"His detailed coaching and winning mentality were key. He is someone who cares about the person behind the player."</p>
+                <div class="player-info">
+                    <div class="player-name">tomaszy</div>
+                    <div class="player-team" data-i18n="team_tomaszy">VCT EMEA | KARMINE CORP / SAW / GIANTS</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 7. fizzy -->
+        <div class="player-card">
+            <div class="player-img-container">
+                <img src="fizzy.jpg" alt="fizzy" class="player-img">
+            </div>
+            <div class="player-content">
+                <p class="player-quote" data-i18n="quote_fizzy">"The discipline and mental support Tinder brings are fundamental. He is a natural motivator who helps you believe in the project."</p>
+                <div class="player-info">
+                    <div class="player-name">fizzy</div>
+                    <div class="player-team" data-i18n="team_fizzy">VCL SPAIN CHAMPION | SAW / REBELS</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                philosophy_text: "\"Talent opens the door, but discipline and teamwork build champions.\"",
+                quote_wolverine: "\"Essential team motivator for building a winning mindset. Helped me mentally and in-game to reach my peak.\"",
+                quote_musashi: "\"Very detail-oriented and focused on team growth. Helped me refine my game and stay consistently competitive.\"",
+                quote_esperanza: "\"Great detailed coaching and exceptional human support. Always attentive to individual and collective progress to keep us focused.\"",
+                quote_vo0kashu: "\"A key pillar for the start of my career. Helped me understand the professional game and was a constant support inside and outside the server.\"",
+                quote_jannyxd: "\"Essential in my career for understanding the game more deeply. His ability to motivate and guide us outside the game made the difference.\"",
+                quote_tomaszy: "\"His detailed coaching and winning mentality were key. He is someone who cares about the person behind the player.\"",
+                quote_fizzy: "\"The discipline and mental support Tinder brings are fundamental. He is a natural motivator who helps you believe in the project.\"",
+                team_wolverine: "KOREA CHAMPION | ONG",
+                team_musashi: "VCL SPAIN CHAMPION | ACEND",
+                team_esperanza: "MASTERS BERLIN | T1 / F4Q / DK",
+                team_vo0kashu: "VCL SPAIN CHAMPION | REBELS",
+                team_jannyxd: "VCL SPAIN CHAMPION | REBELS / UCAM",
+                team_tomaszy: "VCT EMEA | KARMINE CORP / SAW / GIANTS",
+                team_fizzy: "VCL SPAIN CHAMPION | SAW / REBELS"
+            },
+            jp: {
+                philosophy_text: "\"マインドセットがすべてです。才能は扉を開きますが、規律と集団があなたをチャンピオンにします。\"",
+                quote_wolverine: "\"勝利のマインドセットを築くための不可欠なチームのモチベーター。精神面とゲーム内の両方で私のピークに達するのを助けてくれました。\"",
+                quote_musashi: "\"非常に詳細にこだわり、チームの成長に重点を置いています。私のゲームを洗練させ、絶えず競争力を維持するのを助けてくれました。\"",
+                quote_esperanza: "\"素晴らしい詳細なコーチングと例外的な人間的サポート。私たちを集中させるために、常に個々の、そして集団の進歩に注意を払っています。\"",
+                quote_vo0kashu: "\"私のキャリアのスタートにおける重要な柱。プロのゲームを理解するのを助け、サーバーの内外で絶え間ないサポートをしてくれました。\"",
+                quote_jannyxd: "\"ゲームをより深く理解するために、私のキャリアにおいて不可欠。ゲーム外で私たちを動機づけ、導く彼の能力が違いを生みました。\"",
+                quote_tomaszy: "\"彼の詳細なコーチングと勝利のメンタリティが鍵でした。彼はプレイヤーの背後にいる人間を大切にする人です。\"",
+                quote_fizzy: "\"Tinderがもたらす規律と精神的サポートは基本的です。彼はプロジェクトを信じるのを助けてくれる天性のモチベーターです。\"",
+                team_wolverine: "韓国チャンピオン | ONG",
+                team_musashi: "VCL スペインチャンピオン | ACEND",
+                team_esperanza: "マスターズ・ベルリン | T1 / F4Q / DK",
+                team_vo0kashu: "VCL スペインチャンピオン | REBELS",
+                team_jannyxd: "VCL スペインチャンピオン | REBELS / UCAM",
+                team_tomaszy: "VCT EMEA | KARMINE CORP / SAW / GIANTS",
+                team_fizzy: "VCL スペインチャンピオン | SAW / REBELS"
+            },
+            zh: {
+                philosophy_text: "\"心态决定一切：天赋为你开启大门，但纪律和集体成就冠军。\"",
+                quote_wolverine: "\"建立获胜心态不可缺少的团队激励者。在心理和比赛中都帮助我达到了巅峰。\"",
+                quote_musashi: "\"非常注重细节并专注于团队成长。帮助我精进技术并保持持久的竞争力。\"",
+                quote_esperanza: "\"出色的细节执教和非凡的人文关怀。始终关注个人和集体的进步，让我们保持专注。\"",
+                quote_vo0kashu: "\"我职业生涯初期的关键支柱。帮助我理解职业比赛，并在服务器内外提供恒定的支持。\"",
+                quote_jannyxd: "\"对我更深入地理解比赛至关重要。他在赛场外激励和引导我们的能力创造了不同。\"",
+                quote_tomaszy: "\"他细致的执教和获胜的心态是关键。他是那种关心球员背后的人。\"",
+                quote_fizzy: "\"Tinder 带来的纪律和心理支持是根本。他是一位天生的激励者，帮助你信任项目。\"",
+                team_wolverine: "韩国冠军 | ONG",
+                team_musashi: "西班牙 VCL 冠军 | ACEND",
+                team_esperanza: "柏林大师赛 | T1 / F4Q / DK",
+                team_vo0kashu: "西班牙 VCL 冠军 | REBELS",
+                team_jannyxd: "西班牙 VCL 冠军 | REBELS / UCAM",
+                team_tomaszy: "VCT EMEA | KARMINE CORP / SAW / GIANTS",
+                team_fizzy: "西班牙 VCL 冠军 | SAW / REBELS"
+            },
+            ko: {
+                philosophy_text: "\"마인드셋이 전부입니다. 재능은 문을 열어주지만, 규율과 팀워크가 당신을 챔피언으로 만듭니다.\"",
+                quote_wolverine: "\"우승 마인드셋 구축을 위한 필수적인 팀 모티베이터. 정신적으로나 게임 내적으로나 제가 정점에 도달할 수 있도록 도와주었습니다.\"",
+                quote_musashi: "\"매우 세세한 부분까지 신경 쓰며 팀의 성장에 집중합니다. 제 게임 플레이를 정교하게 다듬고 끊임없이 경쟁력을 유지하도록 도와주었습니다.\"",
+                quote_esperanza: "\"훌륭한 디테일 코칭과 뛰어난 인간적 지원. 우리가 집중할 수 있도록 항상 개인과 팀의 발전에 주의를 기울입니다.\"",
+                quote_vo0kashu: "\"제 커리어 시작의 핵심 기둥. 프로 게임을 이해하도록 도와주었고 서버 안팎에서 끊임없는 지원군이 되어주었습니다.\"",
+                quote_jannyxd: "\"게임을 더 깊이 이해하는 데 있어 제 커리어에 필수적이었습니다. 게임 밖에서 우리를 독려하고 이끄는 그의 능력이 차이를 만들었습니다.\"",
+                quote_tomaszy: "\"그의 디테일한 코칭과 우승 멘탈리티가 핵심이었습니다. 그는 선수 뒤에 있는 사람을 아끼는 분입니다.\"",
+                quote_fizzy: "\"Tinder가 가져다주는 규율과 정신적 지주는 근본적입니다. 그는 프로젝트를 믿게 만드는 타고난 모티베이터입니다.\"",
+                team_wolverine: "한국 챔피언 | ONG",
+                team_musashi: "VCL 스페인 챔피언 | ACEND",
+                team_esperanza: "마스터스 베를린 | T1 / F4Q / DK",
+                team_vo0kashu: "VCL 스페인 챔피언 | REBELS",
+                team_jannyxd: "VCL 스페인 챔피언 | REBELS / UCAM",
+                team_tomaszy: "VCT EMEA | KARMINE CORP / SAW / GIANTS",
+                team_fizzy: "VCL 스페인 챔피언 | SAW / REBELS"
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key].replace(/\"/g, '"');
+                }
+            });
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        // Initial language setup
+        const savedLang = localStorage.getItem('preferredLang') || 'en';
+        setLanguage(savedLang);
+    </script>
+</body>
+</html>

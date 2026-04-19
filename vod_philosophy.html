@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VOD Philosophy | Tinder Coach</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Teko:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            background-color: #0f1923;
+            background-image: 
+                radial-gradient(circle at 0% 0%, rgba(255, 70, 85, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 100% 100%, rgba(255, 70, 85, 0.05) 0%, transparent 50%);
+            padding: 4rem 1rem;
+            min-height: 100vh;
+            color: #ece8e1;
+        }
+
+        .lang-switcher {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            display: flex;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #fff;
+            padding: 0.5rem 0.8rem;
+            cursor: pointer;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.1rem;
+            transition: all 0.3s;
+        }
+
+        .lang-btn.active, .lang-btn:hover {
+            background: #ff4655;
+            border-color: #ff4655;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .preview-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .preview-header h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 3.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #fff;
+            margin: 0;
+        }
+
+        .preview-header p {
+            color: #ff4655;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 0.2em;
+        }
+
+        /* Hero Image Section */
+        .socrates-hero {
+            width: 100%;
+            height: 350px;
+            overflow: hidden;
+            margin-bottom: 4rem;
+            border: 1px solid rgba(255, 70, 85, 0.3);
+            border-radius: 8px;
+            position: relative;
+            background: #000;
+        }
+
+        .socrates-hero img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.5s;
+        }
+
+        .socrates-hero:hover img {
+            opacity: 1;
+        }
+
+        .hero-caption {
+            position: absolute;
+            bottom: 2rem;
+            left: 2rem;
+            background: rgba(255, 70, 85, 0.9);
+            color: #fff;
+            padding: 1rem 2rem;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+        }
+
+        /* Philosophy Section */
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 3rem;
+            margin-bottom: 6rem;
+            align-items: flex-start;
+        }
+
+        .phil-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 2.8rem;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 1.5rem;
+            border-left: 5px solid #ff4655;
+            padding-left: 1.5rem;
+        }
+
+        .phil-text {
+            font-size: 1.15rem;
+            line-height: 1.8;
+            opacity: 0.95;
+            color: #ece8e1;
+        }
+
+        /* Table Section */
+        .vod-table {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .vod-col {
+            padding: 1.5rem;
+            border-top: 5px solid;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+        }
+
+        .col-good { border-color: #4CAF50; }
+        .col-work { border-color: #F44336; }
+        .col-fix { border-color: #FFC107; }
+
+        .vod-col h3 {
+            font-family: 'Teko', sans-serif;
+            font-size: 2rem;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .vod-list {
+            list-style: none;
+            padding: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .vod-list li {
+            margin-bottom: 1.2rem;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .vod-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #ff4655;
+        }
+
+        .back-home {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Teko', sans-serif;
+            font-size: 1.2rem;
+            z-index: 100;
+            background: rgba(15, 25, 35, 0.9);
+            padding: 0.5rem 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 1000px) {
+            .philosophy-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .vod-table { grid-template-columns: 1fr; }
+            .socrates-hero { height: 250px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher">
+        <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+        <button class="lang-btn" onclick="setLanguage('jp')">JP</button>
+        <button class="lang-btn" onclick="setLanguage('zh')">ZH</button>
+        <button class="lang-btn" onclick="setLanguage('ko')">KO</button>
+    </div>
+
+    <a href="index.html#about-view" class="back-home"><i class="fas fa-arrow-left"></i> BACK</a>
+
+    <div class="container">
+        <!-- Artistic Socrates Hero -->
+        <div class="socrates-hero">
+            <img src="socrates_chess_natural.png" alt="Socrates playing chess with a Valorant player">
+            <div class="hero-caption" data-i18n="hero_caption">Tactical Chess: Modern Warriors x Ancient Wisdom</div>
+        </div>
+
+        <div class="philosophy-grid">
+            <div class="phil-content">
+                <h2 class="phil-title" data-i18n="phil_title">The Socratic Dialogue</h2>
+                <div class="phil-text">
+                    <p data-i18n="phil_text_1">
+                        I believe players often already have the answers within them—they just need the right guidance to uncover them. Using a dialogue-based, question-driven approach inspired by maieutics, I aim to stimulate critical thinking and help players reach their own understanding through strategic questioning rather than direct instruction.
+                    </p>
+                    <p data-i18n="phil_text_2" style="margin-top: 1rem;">
+                        My individual VOD analysis helps players reconnect with their intuition while also understanding the team’s overall synergy. It’s an evolving process where the player effectively “brings to life” their own tactical solutions.
+                    </p>
+                </div>
+            </div>
+
+            <!-- VOD Example Structure -->
+            <div class="vod-section">
+                <h2 data-i18n="vod_example_title" class="phil-title">Individual VOD Framework</h2>
+                <div class="vod-table">
+                    <div class="vod-col col-good">
+                        <h3 data-i18n="col_good_title" style="color: #4CAF50;">Good Points</h3>
+                        <ul class="vod-list">
+                            <li data-i18n="good_1">Highlighting correct decisions to provide crucial positive input.</li>
+                            <li data-i18n="good_2">Asking 'Why was this a good play?' so the brain registers and repeats it.</li>
+                        </ul>
+                    </div>
+                    <div class="vod-col col-work">
+                        <h3 data-i18n="col_work_title" style="color: #F44336;">To Work On</h3>
+                        <ul class="vod-list">
+                            <li data-i18n="work_1">Using the Socratic method to ask the player: 'Why did you make this decision?'</li>
+                            <li data-i18n="work_2">Guiding the player to self-identify mistakes without direct criticism.</li>
+                        </ul>
+                    </div>
+                    <div class="vod-col col-fix">
+                        <h3 data-i18n="col_fix_title" style="color: #FFC107;">Evolution Path</h3>
+                        <ul class="vod-list">
+                            <li data-i18n="fix_1">Defining clear, actionable methods for improvement.</li>
+                            <li data-i18n="fix_2">Concluding every session with concrete individual and collective goals.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="phil-quote" style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.1); display: flex; justify-content: space-between; align-items: center;">
+                    <blockquote style="font-size: 1.6rem; font-style: italic; color: #ff4655; margin: 0;" data-i18n="main_quote">
+                        "To find yourself, think for yourself."
+                    </blockquote>
+                    <p style="font-family: 'Teko', sans-serif; font-size: 1.4rem; color: #ece8e1; margin: 0;">— Socrates</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const translations = {
+            en: {
+                header_sub: "EVOLUTIONARY POSITIVE VOD",
+                header_title: "Maieutics in Coaching",
+                hero_caption: "Tactical Chess: Modern Warriors x Ancient Wisdom",
+                phil_title: "The Socratic Dialogue",
+                phil_text_1: "I believe players often already have the answers within them—they just need the right guidance to uncover them. Using a dialogue-based, question-driven approach inspired by maieutics, I aim to stimulate critical thinking and help players reach their own understanding through strategic questioning rather than direct instruction.",
+                phil_text_2: "My individual VOD analysis helps players reconnect with their intuition while also understanding the team’s overall synergy. It’s an evolving process where the player effectively “brings to life” their own tactical solutions.",
+                main_quote: "\"To find yourself, think for yourself.\"",
+                vod_example_title: "Individual VOD Framework",
+                col_good_title: "Good Points",
+                col_work_title: "To Work On",
+                col_fix_title: "Evolution Path",
+                good_1: "Highlighting correct decisions to provide crucial positive input.",
+                good_2: "Asking 'Why was this a good play?' so the brain registers and repeats it.",
+                work_1: "Using the Socratic method to ask the player: 'Why did you make this decision?'",
+                work_2: "Guiding the player to self-identify mistakes without direct criticism.",
+                fix_1: "Defining clear, actionable methods for improvement.",
+                fix_2: "Concluding every session with concrete individual and collective goals."
+            },
+            jp: {
+                header_sub: "進化的ポジティブVOD",
+                header_title: "コーチングにおける助産術",
+                hero_caption: "戦術的チェス：現代の戦士 × 古代の知恵",
+                phil_title: "ソクラテス式対話",
+                phil_text_1: "プレイヤー自身が答えを持っていることが多いと私は信じています。彼らにはそれを見つけるための適切なガイダンスが必要です。助産術（マイエウティカ）に基づいた対話と質問のテクニックを活用し、批判的思考を刺激し、直接的な教授ではなく戦略的な質問を通じて真実に到達することを目指しています。",
+                phil_text_2: "私の個別VOD分析は、プレイヤーを彼ら自身の直感とチームの集団的なシナジーに結びつけます。それは、プレイヤーが自らの戦術的解決策を「産み落とす」進化のプロセスです。",
+                main_quote: "\"自分を見つけるためには、自分で考えなさい。\"",
+                vod_example_title: "個別VODフレームワーク",
+                col_good_title: "良い点",
+                col_work_title: "改善点",
+                col_fix_title: "進化の道筋",
+                good_1: "重要なポジティブなフィードバックを提供するために、正しい決断を強調する。",
+                good_2: "「なぜこれが良いプレイだったのか？」と問いかけ、脳に成功パターンを認識・反復させる。",
+                work_1: "ソクラテス式問答法を用いて「なぜその決断をしたのか？」とプレイヤーに問いかける。",
+                work_2: "直接的な批判を避け、プレイヤー自身がミスに気づけるよう導く。",
+                fix_1: "改善のための明確で実行可能な方法を定義する。",
+                fix_2: "毎回のセッションを、具体的な個人およびチームの目標を設定して締めくくる。"
+            },
+            zh: {
+                header_sub: "进化性正向 VOD",
+                header_title: "执教中的助产术",
+                hero_caption: "战术棋局：现代战士 x 古代智慧",
+                phil_title: "苏格拉底式对话",
+                phil_text_1: "我相信球员通常自己就有答案——他们只是需要正确的引导来找到答案。利用基于“助产术”的对话和提问技术，我旨在激发批判性思维，并通过策略性提问而非直接教学来达成真理。",
+                phil_text_2: "我的个人 VOD 分析将球员与他们自己的直觉以及团队的集体协同效应联系起来。这是一个进化过程，球员在此过程中“产出”自己的战术解决方案。",
+                main_quote: "\"要想找到自我，就要独立思考。\"",
+                vod_example_title: "个人 VOD 框架",
+                col_good_title: "优点",
+                col_work_title: "需改进",
+                col_fix_title: "进化路径",
+                good_1: "强调正确的决策，提供关键的正面反馈。",
+                good_2: "询问“为什么这是一次好操作？”让大脑记住并重复成功模式。",
+                work_1: "使用苏格拉底法问球员：“你为什么做这个决定？”",
+                work_2: "引导球员自我发现错误，而不是直接指出。",
+                fix_1: "明确界定可执行的改进方法。",
+                fix_2: "每次复盘都以具体的个人和团队目标结束。"
+            },
+            ko: {
+                header_sub: "진화적 긍정 VOD",
+                header_title: "코칭에서의 산파술",
+                hero_caption: "전술적 체스: 현대의 전사 x 고대의 지혜",
+                phil_title: "소크라테스식 대화",
+                phil_text_1: "저는 선수들이 종종 스스로 답을 가지고 있다고 믿습니다. 단지 그것을 찾기 위한 적절한 안내가 필요할 뿐입니다. 산파술(Maieutics)에 기반한 대화 및 질문 기법을 활용하여, 비판적 사고를 자극하고 직접적인 가르침 대신 전략적인 질문을 통해 진리에 도달하는 것을 목표로 합니다.",
+                phil_text_2: "저의 개인 VOD 분석은 선수를 자신의 직관 및 팀의 집단적 시너지와 연결합니다. 이는 선수가 스스로 전술적 해결책을 '낳는' 진화 과정입니다.",
+                main_quote: "\"자신을 찾으려면, 스스로 생각하십시오.\"",
+                vod_example_title: "개인 VOD 프레임워크",
+                col_good_title: "좋은 점",
+                col_work_title: "개선점",
+                col_fix_title: "진화 경로",
+                good_1: "올바른 결정을 강조하여 중요한 긍정적 피드백을 제공합니다.",
+                good_2: "뇌가 성공 패턴을 인식하고 반복하도록 '왜 이것이 좋은 플레이였나?'라고 질문합니다.",
+                work_1: "소크라테스식 문답법을 사용하여 '왜 그런 결정을 내렸나?'라고 선수에게 묻습니다.",
+                work_2: "직접적인 비판 없이 선수가 스스로 실수를 깨닫도록 유도합니다.",
+                fix_1: "개선을 위한 명확하고 실행 가능한 방법을 정의합니다.",
+                fix_2: "항상 구체적인 개인 및 팀 목표를 설정하며 세션을 마무리합니다."
+            }
+        };
+
+        function setLanguage(lang) {
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText.toLowerCase() === lang) btn.classList.add('active');
+            });
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    el.innerText = translations[lang][key].replace(/\"/g, '"');
+                }
+            });
+            localStorage.setItem('preferredLang', lang);
+        }
+
+        const savedLang = localStorage.getItem('preferredLang') || 'en';
+        setLanguage(savedLang);
+    </script>
+</body>
+</html>

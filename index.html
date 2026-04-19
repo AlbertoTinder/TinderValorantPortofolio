@@ -24,14 +24,42 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&family=Teko:wght@400;600&family=Noto+Sans+JP:wght@300;400;700;900&display=swap" rel="stylesheet">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        #home-view {
+            position: relative;
+            overflow: hidden;
+            background: #0f1923 !important; /* Fallback */
+        }
+        #home-view::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('tinderfoto.jpg') no-repeat center center;
+            background-size: cover;
+            filter: blur(6px) brightness(0.4);
+            z-index: 0;
+            transform: scale(1.1); /* Prevents white edges from blur */
+        }
+        #home-view .content {
+            position: relative;
+            z-index: 1;
+        }
+    </style>
 </head>
-<body>
+<body class="preload">
     <div id="app">
         <!-- Language Toggle -->
         <div class="lang-toggle">
             <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
             <span class="lang-separator">|</span>
             <button class="lang-btn" onclick="setLanguage('jp')">JP</button>
+            <span class="lang-separator">|</span>
+            <button class="lang-btn" onclick="setLanguage('zh')">ZH</button>
+            <span class="lang-separator">|</span>
+            <button class="lang-btn" onclick="setLanguage('ko')">KO</button>
         </div>
 
         <div class="background-effects">
@@ -121,6 +149,12 @@
                     </div>
 
                     <div class="text-block">
+                        <h3><i class="fas fa-users highlight"></i> <span data-i18n="about_players_title">Pro Players I Work With</span></h3>
+                        <p data-i18n="about_players_text">I have worked with top-tier talent across various regions, helping them reach their peak performance and secure championships.</p>
+                        <a href="players_preview.html" class="scrim-cta"><i class="fas fa-user-check"></i> <span data-i18n="btn_view_players">VIEW PLAYER SUCCESS STORIES</span></a>
+                    </div>
+
+                    <div class="text-block">
                         <h3><i class="fas fa-chart-line highlight"></i> <span data-i18n="about_tools_title">Data & Analytics Stack</span></h3>
                         <div class="tools-grid">
                             <div class="tool-tag"><i class="fas fa-chart-bar"></i> PowerBI, Superset, Metabase</div>
@@ -129,9 +163,12 @@
                             <div class="tool-tag"><i class="fas fa-crosshairs"></i> Pro Player Tracking</div>
                             <div class="tool-tag"><i class="fas fa-search"></i> Data-Driven Scouting</div>
                         </div>
-                        <div style="margin-top: 1.5rem;">
+                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
                             <a href="analytics_preview.html" class="scrim-cta">
                                 <i class="fas fa-chart-line"></i> <span data-i18n="btn_scrim_example">VIEW LIVE SCRIM REPORT EXAMPLE</span>
+                            </a>
+                            <a href="vod_philosophy.html" class="scrim-cta">
+                                <i class="fas fa-brain"></i> <span data-i18n="btn_vod_philosophy">CLICK HERE: VOD REVIEW PHILOSOPHY</span>
                             </a>
                         </div>
                         <p data-i18n="about_tools_text" style="margin-top: 1rem;">
