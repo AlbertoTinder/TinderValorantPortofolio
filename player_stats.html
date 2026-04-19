@@ -424,16 +424,30 @@
             'Yoru': 'https://media.valorant-api.com/agents/7f94d92c-4234-0a36-9646-3a87eb8b5c89/displayicon.png',
             'Raze': 'https://media.valorant-api.com/agents/f94c3b30-42be-e959-889c-5aa313dba261/displayicon.png',
             'Jett': 'https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/displayicon.png',
+            'Neon': 'https://media.valorant-api.com/agents/bb2a4828-46eb-8cd1-e765-15848195d751/displayicon.png',
             'Omen': 'https://media.valorant-api.com/agents/8e253930-4c05-31dd-1b6c-968525494517/displayicon.png',
             'Viper': 'https://media.valorant-api.com/agents/707eab51-4836-f488-046a-cda6bf494859/displayicon.png',
-            'Neon': 'https://media.valorant-api.com/agents/bb2a4828-46eb-8cd1-e765-15848195d751/displayicon.png',
+            'Brimstone': 'https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/displayicon.png',
+            'Astra': 'https://media.valorant-api.com/agents/41fb69c1-4189-7b37-f117-bcaf1e96f1bf/displayicon.png',
             'Sova': 'https://media.valorant-api.com/agents/320b2a48-4d9b-a075-30f1-1f93a9b638fa/displayicon.png',
+            'Breach': 'https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/displayicon.png',
+            'Skye': 'https://media.valorant-api.com/agents/6f2a04ca-43e0-be17-7f36-b3908627744d/displayicon.png',
+            'KAY/O': 'https://media.valorant-api.com/agents/601dbbe7-43ce-be57-2a40-4abd24953621/displayicon.png',
             'Killjoy': 'https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/displayicon.png',
-            'Cypher': 'https://media.valorant-api.com/agents/117ed9e3-49f3-6512-3ccf-0cada7e3823b/displayicon.png'
+            'Cypher': 'https://media.valorant-api.com/agents/117ed9e3-49f3-6512-3ccf-0cada7e3823b/displayicon.png',
+            'Sage': 'https://media.valorant-api.com/agents/569fdd95-4d10-43ab-ca70-79becc718b46/displayicon.png',
+            'Chamber': 'https://media.valorant-api.com/agents/22697a3d-45bf-8dd7-4fec-84a9e28c69d7/displayicon.png'
         };
 
+        const agentCategories = {
+            duelist: ['Yoru', 'Raze', 'Jett', 'Neon'],
+            controller: ['Omen', 'Viper', 'Brimstone', 'Astra'],
+            initiator: ['Sova', 'Breach', 'Skye', 'KAY/O'],
+            sentinel: ['Killjoy', 'Cypher', 'Sage', 'Chamber']
+        };
+
+        const allAgents = Object.keys(agentsDict);
         const mapList = ['Bind', 'Split', 'Haven', 'Lotus', 'Ascent', 'Icebox', 'Sunset'];
-        const agentList = Object.keys(agentsDict);
 
         let currentMatchType = 'pracc';
         let currentLang = 'en';
@@ -532,10 +546,10 @@
         ];
 
         const playersInfo = {
-            'Player X': { roleKey: 'role_duelist' },
-            'Player Y': { roleKey: 'role_sentinel' },
-            'Player Z': { roleKey: 'role_initiator' },
-            'Player W': { roleKey: 'role_controller' }
+            'Player X': { roleKey: 'role_duelist', allowedAgents: allAgents }, // Flex can use all
+            'Player Y': { roleKey: 'role_sentinel', allowedAgents: agentCategories.sentinel },
+            'Player Z': { roleKey: 'role_initiator', allowedAgents: agentCategories.initiator },
+            'Player W': { roleKey: 'role_controller', allowedAgents: agentCategories.controller }
         };
 
         let currentPlayer = 'Player X';
@@ -544,10 +558,18 @@
             const selected = document.getElementById('playerSelect').value;
             currentPlayer = selected;
             
-            const roleKey = playersInfo[selected].roleKey;
+            const pInfo = playersInfo[selected];
             const roleEl = document.getElementById('playerRole');
-            roleEl.setAttribute('data-i18n', roleKey);
-            roleEl.innerText = translations[currentLang][roleKey];
+            roleEl.setAttribute('data-i18n', pInfo.roleKey);
+            roleEl.innerText = translations[currentLang][pInfo.roleKey];
+            
+            // Validate slots so they don't contain agents not in the new role
+            const allowed = pInfo.allowedAgents;
+            slots.forEach(slot => {
+                if (!allowed.includes(slot.agent)) {
+                    slot.agent = allowed[0]; // Reset to the first valid agent for that role
+                }
+            });
             
             renderSlots();
         }
@@ -603,7 +625,9 @@
                 card.className = 'map-card';
                 
                 let mapOptions = mapList.map(m => `<option value="${m}" ${m === slot.map ? 'selected' : ''}>${m}</option>`).join('');
-                let agentOptions = agentList.map(a => `<option value="${a}" ${a === slot.agent ? 'selected' : ''}>${a}</option>`).join('');
+                
+                const allowedAgents = playersInfo[currentPlayer].allowedAgents;
+                let agentOptions = allowedAgents.map(a => `<option value="${a}" ${a === slot.agent ? 'selected' : ''}>${a}</option>`).join('');
 
                 card.innerHTML = `
                     <div class="map-header">
