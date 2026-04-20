@@ -470,8 +470,6 @@
                 kpr: "Kills Per Round (KPR)",
                 acs: "ACS",
                 comp_title: "HEAD TO HEAD",
-                radar_fb: "First Blood %",
-                radar_surv: "Survival %",
                 radar_win: "Win Rate %"
             },
             jp: {
@@ -602,15 +600,23 @@
             for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
             hash = Math.abs(hash);
 
-            const acsBase = type === 'pracc' ? 220 : 200;
-            const acs = acsBase + (hash % 60) - 20;
-            const kdrBase = type === 'pracc' ? 1.05 : 0.95;
-            const kdr = (kdrBase + (hash % 40) * 0.01).toFixed(2);
-            const kprBase = type === 'pracc' ? 0.75 : 0.68;
-            const kpr = (kprBase + (hash % 20) * 0.01).toFixed(2);
-            const matches = 3 + (hash % 12);
+            // Base stats by role
+            let acsBase = type === 'pracc' ? 220 : 200;
+            if (agentCategories.duelist.includes(agent)) acsBase += 30;
+            if (agentCategories.controller.includes(agent)) acsBase -= 10;
+            
+            // Map affinity logic (randomized but consistent per agent/map combo)
+            const mapAffinity = (hash % 40) - 20; 
+            
+            const acs = acsBase + mapAffinity + (hash % 20);
+            const kdr = (1.0 + (mapAffinity * 0.01) + (hash % 30) * 0.01).toFixed(2);
+            const kpr = (0.7 + (mapAffinity * 0.005) + (hash % 25) * 0.01).toFixed(2);
+            const matches = 11;
 
-            return { acs, kdr, kpr, matches };
+            const winRate = 45 + (hash % 20);
+            const survivalRate = 25 + (hash % 15);
+
+            return { acs: Math.round(acs), kdr, kpr, matches, winRate, survivalRate };
         }
 
         function renderSlots() {
@@ -653,6 +659,10 @@
                             <span class="stat-label">${t.kdr}</span>
                             <span class="stat-value ${getScoreClass(stats.kdr, 'kdr')}">${stats.kdr}</span>
                         </div>
+                        <div class="stat-item">
+                            <span class="stat-label">${t.radar_win}</span>
+                            <span class="stat-value">${stats.winRate}%</span>
+                        </div>
                         <div class="stat-item" style="grid-column: span 2;">
                             <span class="stat-label">${t.kpr}</span>
                             <span class="stat-value ${getScoreClass(stats.kpr, 'kpr')}">${stats.kpr}</span>
@@ -688,37 +698,24 @@
             const stats1 = generateStats(slot1.map, slot1.agent, currentMatchType, currentPlayer);
             const stats2 = generateStats(slot2.map, slot2.agent, currentMatchType, currentPlayer);
 
-            // Generate additional % based stats for radar
-            let h1 = 0, h2 = 0;
-            const str1 = slot1.map + slot1.agent + currentPlayer;
-            const str2 = slot2.map + slot2.agent + currentPlayer;
-            for(let i=0; i<str1.length; i++) h1 += str1.charCodeAt(i);
-            for(let i=0; i<str2.length; i++) h2 += str2.charCodeAt(i);
-
-            const fb1 = 15 + (h1 % 10);
-            const fb2 = 15 + (h2 % 10);
-            const win1 = 45 + (h1 % 20);
-            const win2 = 45 + (h2 % 20);
-
             // Normalize values for a 0-100 radar scale
+            // We adjust divisors to make the radar look more 'open' and balanced
             const norm1 = [
                 Math.min(100, (stats1.acs / 300) * 100),
-                Math.min(100, (stats1.kdr / 1.5) * 100),
+                Math.min(100, (stats1.kdr / 1.4) * 100),
                 Math.min(100, (stats1.kpr / 1.0) * 100),
-                fb1 * 3,
-                win1
+                Math.min(100, (stats1.winRate / 70) * 100)
             ];
             
             const norm2 = [
                 Math.min(100, (stats2.acs / 300) * 100),
-                Math.min(100, (stats2.kdr / 1.5) * 100),
+                Math.min(100, (stats2.kdr / 1.4) * 100),
                 Math.min(100, (stats2.kpr / 1.0) * 100),
-                fb2 * 3,
-                win2
+                Math.min(100, (stats2.winRate / 70) * 100)
             ];
 
             const t = translations[currentLang];
-            const labels = [t.acs, t.kdr, t.kpr, t.radar_fb, t.radar_win];
+            const labels = [t.acs, t.kdr, t.kpr, t.radar_win];
             const label1 = `${slot1.agent} (${slot1.map})`;
             const label2 = `${slot2.agent} (${slot2.map})`;
 
@@ -729,8 +726,8 @@
                 comparisonChart.data.datasets[1].label = label2;
                 comparisonChart.data.datasets[1].data = norm2;
                 
-                comparisonChart.data.datasets[0].actualData = [stats1.acs, stats1.kdr, stats1.kpr, fb1+'%', win1+'%'];
-                comparisonChart.data.datasets[1].actualData = [stats2.acs, stats2.kdr, stats2.kpr, fb2+'%', win2+'%'];
+                comparisonChart.data.datasets[0].actualData = [stats1.acs, stats1.kdr, stats1.kpr, stats1.winRate+'%'];
+                comparisonChart.data.datasets[1].actualData = [stats2.acs, stats2.kdr, stats2.kpr, stats2.winRate+'%'];
                 
                 comparisonChart.update();
                 return;
@@ -748,7 +745,7 @@
                         {
                             label: label1,
                             data: norm1,
-                            actualData: [stats1.acs, stats1.kdr, stats1.kpr, fb1+'%', win1+'%'],
+                            actualData: [stats1.acs, stats1.kdr, stats1.kpr, stats1.winRate+'%'],
                             backgroundColor: 'rgba(255, 70, 85, 0.3)',
                             borderColor: '#ff4655',
                             pointBackgroundColor: '#ff4655',
@@ -757,7 +754,7 @@
                         {
                             label: label2,
                             data: norm2,
-                            actualData: [stats2.acs, stats2.kdr, stats2.kpr, fb2+'%', win2+'%'],
+                            actualData: [stats2.acs, stats2.kdr, stats2.kpr, stats2.winRate+'%'],
                             backgroundColor: 'rgba(0, 188, 212, 0.3)',
                             borderColor: '#00bcd4',
                             pointBackgroundColor: '#00bcd4',

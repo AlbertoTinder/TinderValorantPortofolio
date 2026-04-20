@@ -185,6 +185,41 @@
             .player-info { border-left: none; border-top: 3px solid #ff4655; padding-left: 0; padding-top: 0.5rem; }
             .preview-header h1 { font-size: 2.2rem; }
         }
+
+        /* === PLAYER POPUP === */
+        .player-popup-overlay {
+            position: fixed; inset: 0;
+            background: rgba(0,0,0,0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            z-index: 9999;
+            display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none;
+            transition: opacity 0.25s ease;
+        }
+        .player-popup-overlay.active { opacity: 1; pointer-events: all; }
+        .player-popup {
+            background: linear-gradient(135deg, rgba(12,20,30,0.99), rgba(18,28,40,0.99));
+            border: 1px solid rgba(255,70,85,0.45);
+            border-left: 4px solid #ff4655;
+            display: flex; max-width: 660px; width: 90%;
+            overflow: hidden;
+            transform: translateY(18px) scale(0.95);
+            transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
+            box-shadow: 0 30px 80px rgba(0,0,0,0.65), 0 0 40px rgba(255,70,85,0.12);
+        }
+        .player-popup-overlay.active .player-popup { transform: translateY(0) scale(1); }
+        .popup-big-img { width: 230px; height: 290px; object-fit: cover; flex-shrink: 0; display: block; }
+        .popup-info { flex:1; padding: 2rem 1.8rem; display:flex; flex-direction:column; justify-content:center; position:relative; }
+        .popup-close-btn { position:absolute; top:0.7rem; right:0.7rem; background:none; border:none; color:rgba(255,255,255,0.35); font-size:1rem; cursor:pointer; transition:color 0.2s; }
+        .popup-close-btn:hover { color:#ff4655; }
+        .popup-player-name { font-family:'Teko',sans-serif; font-size:2.6rem; color:#fff; text-transform:uppercase; line-height:1; margin-bottom:0.3rem; }
+        .popup-divider { width:38px; height:3px; background:#ff4655; margin-bottom:1.2rem; }
+        .popup-ach-title { font-family:'Teko',sans-serif; font-size:0.8rem; color:#ff4655; text-transform:uppercase; letter-spacing:2px; margin-bottom:0.7rem; }
+        .popup-ach-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:0.5rem; }
+        .popup-ach-item { display:flex; align-items:center; gap:0.65rem; font-size:0.82rem; color:#ece8e1; opacity:0.9; }
+        .popup-ach-item i { color:#ff4655; font-size:0.65rem; width:13px; flex-shrink:0; }
+        @media(max-width:540px){ .player-popup{flex-direction:column;} .popup-big-img{width:100%;height:190px;} }
     </style>
 </head>
 <body>
@@ -258,7 +293,7 @@
                 <p class="player-quote" data-i18n="quote_vo0kashu">"A key pillar for the start of my career. Helped me understand the professional game and was a constant support inside and outside the server."</p>
                 <div class="player-info">
                     <div class="player-name">Vo0kashu</div>
-                    <div class="player-team" data-i18n="team_vo0kashu">VCL SPAIN CHAMPION | REBELS</div>
+                    <div class="player-team" data-i18n="team_vo0kashu">VCT/VCJ CHAMPION | REBELS / DRG</div>
                 </div>
             </div>
         </div>
@@ -300,7 +335,7 @@
                 <p class="player-quote" data-i18n="quote_fizzy">"The discipline and mental support Tinder brings are fundamental. He is a natural motivator who helps you believe in the project."</p>
                 <div class="player-info">
                     <div class="player-name">fizzy</div>
-                    <div class="player-team" data-i18n="team_fizzy">VCL SPAIN CHAMPION | SAW / REBELS</div>
+                    <div class="player-team" data-i18n="team_fizzy">VCJ DACH CHAMPION | REBELS / SAW / MOUZ</div>
                 </div>
             </div>
         </div>
@@ -335,10 +370,10 @@
                 team_wolverine: "KOREA CHAMPION | ONG",
                 team_musashi: "VCL SPAIN CHAMPION | ACEND",
                 team_esperanza: "MASTERS BERLIN | T1 / F4Q / DK",
-                team_vo0kashu: "VCL SPAIN CHAMPION | REBELS",
+                team_vo0kashu: "VCT/VCJ CHAMPION | REBELS / DRG",
                 team_jannyxd: "VCL SPAIN CHAMPION | REBELS / UCAM",
                 team_tomaszy: "VCT EMEA | KARMINE CORP / SAW / GIANTS",
-                team_fizzy: "VCL SPAIN CHAMPION | SAW / REBELS",
+                team_fizzy: "VCJ DACH CHAMPION | REBELS / SAW / MOUZ",
                 quote_yowamu: "\"Tinder showed me my true capacity as a player with his positivity and winning mentality, he changed my playstyle.\"",
                 team_yowamu: "VCJ JAPAN | NORTHEPTION"
             },
@@ -355,10 +390,10 @@
                 team_wolverine: "韓国チャンピオン | ONG",
                 team_musashi: "VCL スペインチャンピオン | ACEND",
                 team_esperanza: "マスターズ・ベルリン | T1 / F4Q / DK",
-                team_vo0kashu: "VCL スペインチャンピオン | REBELS",
+                team_vo0kashu: "VCT/VCJ CHAMPION | REBELS / DRG",
                 team_jannyxd: "VCL スペインチャンピオン | REBELS / UCAM",
                 team_tomaszy: "VCT EMEA | KARMINE CORP / SAW / GIANTS",
-                team_fizzy: "VCL スペインチャンピオン | SAW / REBELS",
+                team_fizzy: "VCJ DACH CHAMPION | REBELS / SAW / MOUZ",
                 quote_yowamu: "\"Tinderは彼のポジティブさと勝利のメンタリティで私のプレイヤーとしての真の能力を教えてくれ、私のプレイスタイルを変えました。\"",
                 team_yowamu: "VCJ JAPAN | NORTHEPTION"
             },
@@ -375,10 +410,10 @@
                 team_wolverine: "韩国冠军 | ONG",
                 team_musashi: "西班牙 VCL 冠军 | ACEND",
                 team_esperanza: "柏林大师赛 | T1 / F4Q / DK",
-                team_vo0kashu: "西班牙 VCL 冠军 | REBELS",
+                team_vo0kashu: "VCT/VCJ CHAMPION | REBELS / DRG",
                 team_jannyxd: "西班牙 VCL 冠军 | REBELS / UCAM",
                 team_tomaszy: "VCT EMEA | KARMINE CORP / SAW / GIANTS",
-                team_fizzy: "西班牙 VCL 冠军 | SAW / REBELS",
+                team_fizzy: "VCJ DACH CHAMPION | REBELS / SAW / MOUZ",
                 quote_yowamu: "\"Tinder以他的积极性和获胜的心态让我看到了我作为一名球员的真正能力，他改变了我的比赛风格。\"",
                 team_yowamu: "VCJ 日本 | NORTHEPTION"
             },
@@ -395,10 +430,10 @@
                 team_wolverine: "한국 챔피언 | ONG",
                 team_musashi: "VCL 스페인 챔피언 | ACEND",
                 team_esperanza: "마스터스 베를린 | T1 / F4Q / DK",
-                team_vo0kashu: "VCL 스페인 챔피언 | REBELS",
+                team_vo0kashu: "VCT/VCJ CHAMPION | REBELS / DRG",
                 team_jannyxd: "VCL 스페인 챔피언 | REBELS / UCAM",
                 team_tomaszy: "VCT EMEA | KARMINE CORP / SAW / GIANTS",
-                team_fizzy: "VCL 스페인 챔피언 | SAW / REBELS",
+                team_fizzy: "SAW / REBELS / MOUZ",
                 quote_yowamu: "\"Tinder는 긍정적인 태도와 우승 마인드로 선수로서의 저의 진정한 능력을 보여주었고, 제 플레이 스타일을 바꿨습니다.\"",
                 team_yowamu: "VCJ JAPAN | NORTHEPTION"
             }
@@ -422,6 +457,104 @@
         // Initial language setup
         const savedLang = localStorage.getItem('preferredLang') || 'en';
         setLanguage(savedLang);
+
+        // === PLAYER POPUP ===
+        const playerData = {
+            'wolverine':  { img:'wolverine.jpg',  name:'Wolverine', achievements:[
+                {icon:'fa-trophy', text:'Korea Regional Champion'},
+                {icon:'fa-users',  text:'Team ONG'},
+                {icon:'fa-star',   text:'Top Ranked Korean Server'},
+                {icon:'fa-chart-line', text:'Consistent VCT Contender'}
+            ]},
+            'musashi':    { img:'musashi.jpg',    name:'musashi', achievements:[
+                {icon:'fa-trophy', text:'VCL Spain Champion'},
+                {icon:'fa-users',  text:'Team ACEND'},
+                {icon:'fa-medal',  text:'VCL EMEA Playoffs'},
+                {icon:'fa-fire',   text:'Elite Duelist / Controller'}
+            ]},
+            'esperanza':  { img:'esperanza.jpg',  name:'Esperanza', achievements:[
+                {icon:'fa-globe',  text:'VCT Masters Berlin'},
+                {icon:'fa-users',  text:'Team T1'},
+                {icon:'fa-users',  text:'Team F4Q'},
+                {icon:'fa-users',  text:'Team DK'},
+                {icon:'fa-medal',  text:'International LAN Experience'}
+            ]},
+            'vo0kashu':   { img:'vo0kashu.jpg',   name:'Vo0kashu', achievements:[
+                {icon:'fa-trophy', text:'VCT / VCJ Champion'},
+                {icon:'fa-users',  text:'Team REBELS'},
+                {icon:'fa-users',  text:'Team DRG'},
+                {icon:'fa-star',   text:'International Circuit Experience'}
+            ]},
+            'jannyxd':    { img:'jannyXD.jpg',    name:'jannyxd', achievements:[
+                {icon:'fa-trophy', text:'VCL Spain Champion'},
+                {icon:'fa-users',  text:'Team REBELS'},
+                {icon:'fa-users',  text:'Team UCAM'},
+                {icon:'fa-fire',   text:'Top IGL & Strategist'}
+            ]},
+            'tomaszy':    { img:'tomaszy.jpg',    name:'tomaszy', achievements:[
+                {icon:'fa-globe',  text:'VCT EMEA'},
+                {icon:'fa-users',  text:'Team Karmine Corp'},
+                {icon:'fa-users',  text:'Team SAW'},
+                {icon:'fa-users',  text:'Team Giants'},
+                {icon:'fa-medal',  text:'Multi-region Pro Career'}
+            ]},
+            'fizzy':      { img:'fizzy.jpg',      name:'fizzy', achievements:[
+                {icon:'fa-trophy', text:'VCJ DACH Champion'},
+                {icon:'fa-users',  text:'Team REBELS'},
+                {icon:'fa-users',  text:'Team SAW'},
+                {icon:'fa-users',  text:'Team MOUZ'},
+                {icon:'fa-fire',   text:'Aggressive Entry Fragger'}
+            ]},
+            'yowamu':     { img:'yowamu.jpg',     name:'Yowamu', achievements:[
+                {icon:'fa-globe',  text:'VCJ Japan Circuit'},
+                {icon:'fa-users',  text:'Team NORTHEPTION'},
+                {icon:'fa-star',   text:'Top Japanese Pro Player'},
+                {icon:'fa-chart-line', text:'Consistent LAN Performer'}
+            ]}
+        };
+
+        const overlay  = document.getElementById('playerPopupOverlay');
+        const popupImg = document.getElementById('popupBigImg');
+        const popupName = document.getElementById('popupPlayerName');
+        const popupList = document.getElementById('popupAchList');
+        let hideTimer = null;
+
+        function showPopup(key) {
+            const d = playerData[key]; if (!d) return;
+            clearTimeout(hideTimer);
+            popupImg.src = d.img; popupImg.alt = d.name;
+            popupName.textContent = d.name;
+            popupList.innerHTML = d.achievements.map(a =>
+                `<li class="popup-ach-item"><i class="fas ${a.icon}"></i> ${a.text}</li>`
+            ).join('');
+            overlay.classList.add('active');
+        }
+        function hidePopup() { overlay.classList.remove('active'); }
+        function scheduleHide() { hideTimer = setTimeout(hidePopup, 150); }
+
+        document.querySelectorAll('.player-card').forEach(card => {
+            const key = card.querySelector('.player-name')?.textContent.trim().toLowerCase();
+            card.addEventListener('mouseenter', () => showPopup(key));
+            card.addEventListener('mouseleave', scheduleHide);
+        });
+        overlay.addEventListener('mouseenter', () => clearTimeout(hideTimer));
+        overlay.addEventListener('mouseleave', scheduleHide);
+        document.getElementById('popupCloseBtn').addEventListener('click', hidePopup);
+        overlay.addEventListener('click', e => { if (e.target === overlay) hidePopup(); });
     </script>
+
+    <!-- Player Popup Overlay -->
+    <div class="player-popup-overlay" id="playerPopupOverlay">
+        <div class="player-popup">
+            <img src="" alt="" class="popup-big-img" id="popupBigImg">
+            <div class="popup-info">
+                <button class="popup-close-btn" id="popupCloseBtn"><i class="fas fa-times"></i></button>
+                <div class="popup-player-name" id="popupPlayerName"></div>
+                <div class="popup-divider"></div>
+                <div class="popup-ach-title">Career Highlights</div>
+                <ul class="popup-ach-list" id="popupAchList"></ul>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
