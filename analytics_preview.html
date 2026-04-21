@@ -43,7 +43,7 @@
 
         .dashboard {
             max-width: 1200px;
-            margin: 0 auto;
+            margin: 4rem auto 0;
             display: flex;
             flex-direction: column;
             gap: 1.5rem;
@@ -121,6 +121,7 @@
 
         .stats-table {
             width: 100%;
+            min-width: 600px;
             border-collapse: collapse;
             text-align: left;
         }
@@ -152,7 +153,7 @@
         
         .tables-wrapper .section-container {
             flex: 1 1 calc(50% - 0.75rem);
-            min-width: 480px;
+            min-width: 0;
             overflow-x: auto;
         }
         
@@ -341,6 +342,44 @@
             .round-history { grid-template-columns: repeat(12, 1fr); }
             .map-analysis-layout { flex-direction: column; }
             .map-minimap-container { flex: 0 0 auto; width: 100%; }
+            .dash-header {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+                text-align: center;
+            }
+            .score-container {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            .map-selectors {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .lang-switcher {
+                top: 0.5rem;
+                right: 0.5rem;
+            }
+            .lang-btn {
+                padding: 0.3rem 0.4rem;
+                font-size: 0.8rem;
+            }
+            .back-home {
+                top: 0.5rem;
+                left: 0.5rem;
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .dashboard { margin-top: 3.5rem; }
+            .score-container {
+                flex-direction: column;
+            }
+            .round-history { grid-template-columns: repeat(6, 1fr); }
+            .legend { flex-direction: column; gap: 0.5rem; }
         }
 
         /* Radar Modal */
@@ -785,8 +824,8 @@
             
             const metricFilters = document.getElementById('metricFilters');
             const metrics = side === 'T' ? 
-                [{id:'defaults', label:'⚙ DEFAULTS'}, {id:'executes', label:'🚀 EXECUTES'}, {id:'postplant', label:'💣 POST-PLANT'}, {id:'eco', label:'💰 ECO/ANTI-ECO'}] : 
-                [{id:'defaults', label:'⚙ DEFAULTS'}, {id:'retakes', label:'🔄 RETAKES'}, {id:'eco', label:'💰 ECO/ANTI-ECO'}];
+                [{id:'defaults', label:'DEFAULTS'}, {id:'executes', label:'EXECUTES'}, {id:'postplant', label:'POST-PLANT'}, {id:'eco', label:'ECO/ANTI-ECO'}] : 
+                [{id:'defaults', label:'DEFAULTS'}, {id:'retakes', label:'RETAKES'}, {id:'eco', label:'ECO/ANTI-ECO'}];
             
             metricFilters.innerHTML = metrics.map(m => {
                 const activeClass = currentMetric === m.id ? (side === 'T' ? 't-active' : 'ct-active') : '';

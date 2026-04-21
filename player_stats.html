@@ -350,6 +350,34 @@
                 gap: 1rem;
             }
         }
+        @media (max-width: 600px) {
+            .lang-switcher {
+                top: 0.5rem;
+                right: 0.5rem;
+            }
+            .lang-btn {
+                padding: 0.3rem 0.4rem;
+                font-size: 0.8rem;
+            }
+            .back-home {
+                top: 0.5rem;
+                left: 0.5rem;
+                font-size: 1rem;
+                padding: 0.4rem 0.8rem;
+            }
+            .dashboard { margin-top: 3.5rem; }
+            .player-header { padding: 1.5rem 1rem; }
+            .section-container { padding: 1.5rem 1rem; }
+            .stats-grid { grid-template-columns: 1fr; }
+            .stat-item[style*="grid-column"] { grid-column: auto !important; }
+            .chart-column { padding: 1rem; }
+            .comparison-chart-wrapper { height: 350px; }
+            .player-select { font-size: 2.5rem; padding-right: 30px; }
+            .match-type-selectors { flex-wrap: wrap; justify-content: center; }
+            .vs-badge-large { font-size: 1.2rem; }
+            .map-header { flex-direction: column; gap: 1rem; text-align: center; justify-content: center; }
+            .selectors-container { align-items: center; }
+        }
     </style>
 </head>
 <body>

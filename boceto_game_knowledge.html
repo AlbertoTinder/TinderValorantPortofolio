@@ -1,0 +1,349 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BOCETO — Chessboard Concept</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Teko:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box;}
+:root{--red:#ff4655;--bg:#06080f;--muted:rgba(236,232,225,0.5);}
+body{background:var(--bg);color:#ece8e1;font-family:'Inter',sans-serif;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:99;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to bottom,rgba(6,8,15,.95),transparent);}
+.nb{font-family:'Teko',sans-serif;font-size:.85rem;letter-spacing:.25em;color:rgba(255,255,255,.3);}
+.na{color:rgba(255,255,255,.4);text-decoration:none;font-family:'Teko',sans-serif;font-size:.85rem;letter-spacing:.15em;transition:color .3s;}
+.na:hover{color:var(--red);}
+.corner{position:fixed;width:24px;height:24px;z-index:100;pointer-events:none;}
+.tl{top:.8rem;left:.8rem;border-top:1.5px solid rgba(255,70,85,.4);border-left:1.5px solid rgba(255,70,85,.4);}
+.tr{top:.8rem;right:.8rem;border-top:1.5px solid rgba(255,70,85,.4);border-right:1.5px solid rgba(255,70,85,.4);}
+.bl{bottom:.8rem;left:.8rem;border-bottom:1.5px solid rgba(255,70,85,.4);border-left:1.5px solid rgba(255,70,85,.4);}
+.br{bottom:.8rem;right:.8rem;border-bottom:1.5px solid rgba(255,70,85,.4);border-right:1.5px solid rgba(255,70,85,.4);}
+
+/* HERO */
+.hero{position:relative;height:65vh;min-height:380px;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.hbg{position:absolute;inset:0;background:url('socrates_chess_natural.png') center/contain no-repeat #000;filter:brightness(.28) saturate(.75);z-index:0;}
+.hov{position:absolute;inset:0;z-index:1;background:radial-gradient(ellipse at 50% 100%,rgba(255,70,85,.13) 0%,transparent 60%),linear-gradient(to top,#06080f 0%,transparent 50%),linear-gradient(to bottom,rgba(6,8,15,.6) 0%,transparent 30%);}
+.hc{position:relative;z-index:2;text-align:center;padding:0 2rem;}
+.htag{font-family:'Teko',sans-serif;font-size:.7rem;letter-spacing:.5em;color:var(--red);text-transform:uppercase;margin-bottom:.7rem;opacity:0;animation:fu .7s .2s forwards;}
+.htitle{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,8vw,6rem);font-weight:300;line-height:.95;color:#fff;opacity:0;animation:fu .9s .4s forwards;}
+.htitle em{font-style:italic;color:var(--red);}
+.hsub{margin-top:.9rem;font-size:.85rem;color:var(--muted);letter-spacing:.08em;opacity:0;animation:fu .7s .7s forwards;}
+@keyframes fu{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.hero::after{content:'';position:absolute;inset:0;z-index:3;pointer-events:none;background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.04) 3px,rgba(0,0,0,.04) 4px);}
+
+.wrap{max-width:1080px;margin:0 auto;padding:3rem 2rem 5rem;}
+
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(255,255,255,.05);margin-bottom:3rem;}
+.card{background:var(--bg);padding:1.5rem 1.2rem;position:relative;}
+.card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--red);transition:width .5s;}
+.card:hover::after{width:100%;}
+.ci{font-size:1.1rem;color:var(--red);margin-bottom:.6rem;opacity:.8;}
+.ct-{font-family:'Cormorant Garamond',serif;font-size:1.15rem;font-weight:400;color:#fff;margin-bottom:.4rem;}
+.cx{font-size:.77rem;line-height:1.7;color:var(--muted);}
+
+.bi{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem;align-items:center;margin-bottom:2rem;}
+.bi-l .stag{font-family:'Teko',sans-serif;font-size:.68rem;letter-spacing:.45em;color:var(--red);text-transform:uppercase;margin-bottom:.5rem;}
+.bi-l h2{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,3rem);font-weight:300;line-height:1;color:#fff;}
+.bi-l h2 em{font-style:italic;color:var(--red);}
+.bi-r p{font-size:.88rem;line-height:1.85;color:var(--muted);}
+
+/* TURN INDICATOR */
+.turn-bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.5rem 1.2rem;margin-bottom:.8rem;
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:3px;
+}
+.turn-info{font-family:'Teko',sans-serif;font-size:.8rem;letter-spacing:.2em;color:rgba(255,255,255,.5);text-transform:uppercase;}
+.turn-name{font-family:'Teko',sans-serif;font-size:1.1rem;letter-spacing:.1em;color:#fff;transition:color .3s;}
+.turn-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;transition:background .3s,box-shadow .3s;}
+.move-trail{font-family:'Teko',sans-serif;font-size:.7rem;letter-spacing:.12em;color:rgba(255,255,255,.3);}
+
+/* MAP */
+.map-outer{border:1px solid rgba(255,70,85,.2);border-radius:4px;overflow:hidden;}
+.sb{display:flex;align-items:center;justify-content:center;gap:.5rem;padding:.4rem 1rem;font-family:'Teko',sans-serif;font-size:.62rem;letter-spacing:.4em;text-transform:uppercase;}
+.sb-ct{background:rgba(92,154,255,.1);border-bottom:1px solid rgba(92,154,255,.22);color:#5c9aff;}
+.sb-t{background:rgba(255,70,85,.1);border-top:1px solid rgba(255,70,85,.22);color:#ff4655;}
+
+.map-container{position:relative;height:500px;overflow:hidden;background:#000;}
+
+/* MAP IMAGE — contain so full map visible */
+.map-img{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:contain;object-position:center;
+  filter:brightness(.5) saturate(1.3) contrast(1.05);
+  z-index:0;
+}
+
+/* Chess overlay */
+.chess-ov{
+  position:absolute;inset:0;z-index:1;
+  display:grid;grid-template-columns:repeat(12,1fr);grid-template-rows:repeat(8,1fr);
+  pointer-events:none;
+}
+.cc{border:1px solid rgba(255,255,255,.03);}
+.cc.l{background:rgba(255,255,255,.035);}
+.cc.d{background:rgba(0,0,0,.07);}
+
+/* Zone overlays */
+.zo{position:absolute;top:0;bottom:0;z-index:2;pointer-events:none;display:flex;align-items:flex-start;justify-content:center;padding-top:.6rem;}
+.zo-a{left:0;width:28%;background:rgba(255,70,85,.05);border-right:1px solid rgba(255,70,85,.15);}
+.zo-m{left:28%;width:44%;background:rgba(255,193,7,.025);}
+.zo-b{right:0;width:28%;background:rgba(76,175,80,.05);border-left:1px solid rgba(76,175,80,.15);}
+.zl{font-family:'Teko',sans-serif;font-size:.6rem;letter-spacing:.35em;text-transform:uppercase;padding:.18rem .6rem;border-radius:2px;}
+.zl-a{color:rgba(255,70,85,.8);background:rgba(255,70,85,.12);border:1px solid rgba(255,70,85,.2);}
+.zl-m{color:rgba(255,193,7,.8);background:rgba(255,193,7,.08);border:1px solid rgba(255,193,7,.15);}
+.zl-b{color:rgba(76,175,80,.8);background:rgba(76,175,80,.1);border:1px solid rgba(76,175,80,.18);}
+
+/* Agents */
+.agents-layer{position:absolute;inset:0;z-index:10;}
+
+.piece{
+  position:absolute;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  cursor:pointer;
+  transform:translate(-50%,-50%);
+  /* Smooth chess-like glide */
+  transition:left 1.1s cubic-bezier(.4,0,.2,1), top 1.1s cubic-bezier(.4,0,.2,1);
+}
+.piece:hover{transform:translate(-50%,-50%) scale(1.15);}
+
+/* Pulse when it's this piece's turn */
+.piece.active .av{animation:turn-pulse .6s ease-in-out 3;}
+@keyframes turn-pulse{0%,100%{transform:scale(1);}50%{transform:scale(1.15);}}
+
+/* Move path line */
+.piece.active::before{
+  content:'';position:absolute;
+  width:200%;height:200%;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(255,255,255,.08) 0%,transparent 70%);
+  pointer-events:none;z-index:-1;
+  animation:glow-ring .6s ease-out;
+}
+@keyframes glow-ring{from{opacity:1;transform:translate(-25%,-25%) scale(.5);}to{opacity:0;transform:translate(-25%,-25%) scale(1.5);}}
+
+.av{width:46px;height:46px;border-radius:50%;border:2.5px solid;overflow:hidden;background:#0d1220;flex-shrink:0;box-shadow:0 2px 10px rgba(0,0,0,.7);}
+.av img{width:100%;height:100%;object-fit:cover;object-position:top center;}
+.av.ct{border-color:#5c9aff;box-shadow:0 0 14px rgba(92,154,255,.6),0 2px 10px rgba(0,0,0,.7);}
+.av.t{border-color:#ff4655;box-shadow:0 0 14px rgba(255,70,85,.6),0 2px 10px rgba(0,0,0,.7);}
+
+/* Tile base under piece */
+.tile{
+  position:absolute;width:54px;height:54px;z-index:-1;
+  border-radius:4px;transform:rotate(45deg) scale(.72);
+  border:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.5);
+}
+
+.pname{font-family:'Teko',sans-serif;font-size:.55rem;letter-spacing:.1em;color:rgba(255,255,255,.65);text-transform:uppercase;background:rgba(0,0,0,.65);padding:.08rem .3rem;border-radius:2px;white-space:nowrap;}
+.rpip{width:4px;height:4px;border-radius:50%;margin:0 auto;}
+.ptip{position:absolute;bottom:112%;left:50%;transform:translateX(-50%);background:rgba(6,8,15,.97);border:1px solid var(--red);padding:.22rem .6rem;white-space:nowrap;font-family:'Teko',sans-serif;font-size:.62rem;letter-spacing:.1em;color:#fff;opacity:0;transition:opacity .2s;pointer-events:none;z-index:30;}
+.piece:hover .ptip{opacity:1;}
+
+.legend{display:flex;justify-content:center;gap:1.6rem;margin-top:1.2rem;flex-wrap:wrap;}
+.li{display:flex;align-items:center;gap:.4rem;font-family:'Teko',sans-serif;font-size:.65rem;letter-spacing:.12em;color:rgba(255,255,255,.35);}
+.ld{width:6px;height:6px;border-radius:50%;}
+
+.rv{opacity:0;transform:translateY(20px);transition:opacity .75s,transform .75s;}
+.rv.in{opacity:1;transform:translateY(0);}
+.badge{position:fixed;bottom:1rem;right:1rem;z-index:200;font-family:'Teko',sans-serif;font-size:.55rem;letter-spacing:.3em;color:rgba(255,70,85,.3);border:1px solid rgba(255,70,85,.12);padding:.1rem .4rem;pointer-events:none;}
+@media(max-width:768px){.cards{grid-template-columns:1fr 1fr;}.bi{grid-template-columns:1fr;}.map-container{height:340px;}.av{width:36px;height:36px;}}
+</style>
+</head>
+<body>
+<div class="corner tl"></div><div class="corner tr"></div><div class="corner bl"></div><div class="corner br"></div>
+<nav><span class="nb">TINDER · VALORANT COACH</span><a href="index.html#about-view" class="na">← BACK</a></nav>
+
+<section class="hero">
+  <div class="hbg"></div><div class="hov"></div>
+  <div class="hc">
+    <p class="htag">Game Knowledge &amp; Philosophy</p>
+    <h1 class="htitle">Chessboard<br><em>Concept</em></h1>
+    <p class="hsub">Data × Psychology × Fundamentals × Discipline</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="cards rv">
+    <div class="card"><div class="ci"><i class="fas fa-chess-knight"></i></div><div class="ct-">The Game as Chess</div><div class="cx">I interpret VALORANT as a real-time adaptation of chess: controlling space, trading resources efficiently, and leveraging information to anticipate and counter enemy decision-making.</div></div>
+    <div class="card"><div class="ci"><i class="fas fa-brain"></i></div><div class="ct-">Psychological Pillar</div><div class="cx">Players operate under significant cognitive load and emotional volatility, both of which directly impact performance and decision-making. A coach must provide psychological structure.</div></div>
+    <div class="card"><div class="ci"><i class="fas fa-dumbbell"></i></div><div class="ct-">Discipline (In &amp; Out)</div><div class="cx">Performance starts from life outside the game. Discipline is important, but it doesn't need to be overly strict; ideally, it fits the personality and the team. Balance is key.</div></div>
+    <div class="card"><div class="ci"><i class="fas fa-layer-group"></i></div><div class="ct-">Core Fundamentals</div><div class="cx">For me, the core of a team is discipline, communication, and mutual support. A strong team built on players who help each other grow, stay motivated, and constantly strive to improve.</div></div>
+  </div>
+
+  <div class="bi rv">
+    <div class="bi-l"><div class="stag">Tactical Model</div><h2>Chessboard<br><em>Concept</em></h2></div>
+    <div class="bi-r"><p>The summary of the concept is the knowledge about being active and productive around actions and reactions. We need to be always precise and quick, giving us a fast read of the enemy's weak points.</p></div>
+  </div>
+
+  <!-- Turn indicator -->
+  <div class="turn-bar rv">
+    <div class="turn-dot" id="turn-dot"></div>
+    <div>
+      <div class="turn-info">Current Move</div>
+      <div class="turn-name" id="turn-name">—</div>
+    </div>
+    <div class="move-trail" id="move-trail">Waiting...</div>
+  </div>
+
+  <div class="map-outer rv">
+    <div class="sb sb-ct"><i class="fas fa-shield-alt"></i>&nbsp;CT SIDE</div>
+    <div class="map-container">
+      <img class="map-img" src="lotus.jpg" alt="Lotus map">
+      <div class="chess-ov" id="chess-ov"></div>
+      <div class="zo zo-a"><span class="zl zl-a">A SITE</span></div>
+      <div class="zo zo-m"><span class="zl zl-m">MID</span></div>
+      <div class="zo zo-b"><span class="zl zl-b">B SITE</span></div>
+      <div class="agents-layer" id="agents-layer"></div>
+    </div>
+    <div class="sb sb-t"><i class="fas fa-crosshairs"></i>&nbsp;T SIDE</div>
+  </div>
+
+  <div class="legend">
+    <div class="li"><div class="ld" style="background:#ff4655;box-shadow:0 0 5px #ff4655"></div>Duelist</div>
+    <div class="li"><div class="ld" style="background:#5c9aff;box-shadow:0 0 5px #5c9aff"></div>Controller</div>
+    <div class="li"><div class="ld" style="background:#4caf50;box-shadow:0 0 5px #4caf50"></div>Sentinel</div>
+    <div class="li"><div class="ld" style="background:#ffc107;box-shadow:0 0 5px #ffc107"></div>Initiator</div>
+    <div class="li"><div class="ld" style="border:1px solid #5c9aff"></div>CT</div>
+    <div class="li"><div class="ld" style="border:1px solid #ff4655"></div>T Side</div>
+  </div>
+</div>
+
+<div class="badge">BOCETO</div>
+
+
+<script>
+const ov=document.getElementById('chess-ov');
+for(let r=0;r<8;r++) for(let c=0;c<12;c++){const d=document.createElement('div');d.className='cc '+((r+c)%2===0?'l':'d');ov.appendChild(d);}
+
+const API='https://media.valorant-api.com/agents/';
+const layer=document.getElementById('agents-layer');
+const mapImg=document.querySelector('.map-img');
+const container=document.querySelector('.map-container');
+let B={l:0,t:0,w:100,h:100};
+
+function calcBounds(){
+  const cW=container.offsetWidth,cH=container.offsetHeight;
+  const iW=mapImg.naturalWidth||1200,iH=mapImg.naturalHeight||900;
+  const iR=iW/iH,cR=cW/cH;
+  let rW,rH;
+  if(iR>cR){rW=cW;rH=cW/iR;}else{rH=cH;rW=cH*iR;}
+  B.l=((cW-rW)/2/cW)*100;B.t=((cH-rH)/2/cH)*100;
+  B.w=(rW/cW)*100;B.h=(rH/cH)*100;
+}
+function toC(ix,iy){return[B.l+ix*B.w/100,B.t+iy*B.h/100];}
+
+const AGENTS=[
+  {name:'CYPHER',   role:'Sentinel',   rc:'#4caf50',side:'ct',img:'cypher.png',         wps:[[15,15],[18,22],[12,12],[16,18]]},
+  {name:'BRIMSTONE',role:'Controller', rc:'#5c9aff',side:'ct',img:API+'9f0d8ba9-4140-b941-57d3-a7ad57c6b417/displayicon.png',wps:[[42,12],[45,18],[40,22],[43,15]]},
+  {name:'OMEN',     role:'Controller', rc:'#5c9aff',side:'ct',img:'omen.png',            wps:[[55,28],[52,22],[58,32],[54,26]]},
+  {name:'KILLJOY',  role:'Sentinel',   rc:'#4caf50',side:'ct',img:API+'1dbf2edd-4729-0984-3115-daa5eed44993/displayicon.png',wps:[[80,15],[83,22],[78,12],[81,18]]},
+  {name:'KAY/O',    role:'Initiator',  rc:'#ffc107',side:'ct',img:'kayo.png',            wps:[[68,32],[65,28],[72,36],[67,30]]},
+  {name:'JETT',     role:'Duelist',    rc:'#ff4655',side:'t', img:API+'add6443a-41bd-e414-f6ad-e58d267f4e95/displayicon.png',wps:[[18,68],[22,62],[15,75],[20,66]]},
+  {name:'SOVA',     role:'Initiator',  rc:'#ffc107',side:'t', img:'sova.png',            wps:[[45,72],[48,66],[42,78],[46,70]]},
+  {name:'NEON',     role:'Duelist',    rc:'#ff4655',side:'t', img:'neon.png',            wps:[[77,66],[80,62],[74,72],[78,64]]},
+  {name:'REYNA',    role:'Duelist',    rc:'#ff4655',side:'t', img:API+'a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/displayicon.png',wps:[[12,82],[16,76],[10,86],[14,80]]},
+  {name:'ASTRA',    role:'Controller', rc:'#5c9aff',side:'t', img:'astra.png',           wps:[[60,85],[57,80],[63,82],[59,87]]},
+];
+
+const pieceEls=[];
+AGENTS.forEach(ag=>{
+  ag.wpIdx=0;ag.alive=true;ag.cur=[...ag.wps[0]];
+  const el=document.createElement('div');el.className='piece';
+  const fb=ag.side==='ct'?'92,154,255':'255,70,85';
+  el.innerHTML=`<div class="ptip">${ag.name} · ${ag.role}</div><div class="tile"></div>
+    <div class="av ${ag.side}"><img src="${ag.img}" alt="${ag.name}"
+      onerror="this.parentNode.innerHTML='<div style=\\'width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-family:Teko,sans-serif;font-size:.9rem;color:rgba(255,255,255,.7);background:rgba(${fb},.18)\\'>${ag.name.slice(0,2)}</div>'">
+    </div><div class="pname">${ag.name}</div><div class="rpip" style="background:${ag.rc}"></div>`;
+  layer.appendChild(el);pieceEls.push(el);
+});
+
+function place(i){const[cx,cy]=toC(...AGENTS[i].cur);pieceEls[i].style.left=cx+'%';pieceEls[i].style.top=cy+'%';}
+function init(){calcBounds();AGENTS.forEach((_,i)=>place(i));}
+if(mapImg.complete)init();else mapImg.addEventListener('load',init);
+window.addEventListener('resize',()=>{calcBounds();AGENTS.forEach((_,i)=>place(i));});
+
+// Combat events: at turn N, T agent pushes toward CT agent, eliminates them
+const COMBATS={
+  12:{t:5,ct:0,push:[15,32],msg:'⚡ Jett flanks A — Cypher eliminated!'},
+  18:{t:7,ct:4,push:[68,44],msg:'⚡ Neon pushes B — Kay/O eliminated!'},
+  24:{t:6,ct:2,push:[50,38],msg:'⚡ Sova catches Omen mid!'},
+  30:{t:8,ct:3,push:[80,32],msg:'⚡ Reyna takes B — Killjoy eliminated!'},
+  36:{t:9,ct:1,push:[42,24],msg:'⚡ Astra smokes — Brimstone eliminated!'},
+};
+
+function showX(ix,iy,loserEl){
+  const[cx,cy]=toC(ix,iy);
+  const m=document.createElement('div');
+  m.style.cssText=`position:absolute;left:${cx}%;top:${cy}%;transform:translate(-50%,-50%);
+    font-size:2.4rem;color:#ff4655;text-shadow:0 0 20px #ff4655,0 0 40px #ff4655;
+    font-family:Teko,sans-serif;font-weight:700;z-index:50;pointer-events:none;
+    animation:xi .35s ease-out forwards;`;
+  m.textContent='✕';layer.appendChild(m);
+  loserEl.style.transition='opacity .5s .5s,transform .5s .5s';
+  loserEl.style.opacity='0';loserEl.style.transform='translate(-50%,-50%) scale(0)';
+  setTimeout(()=>m.remove(),2200);
+}
+
+const TURN_ORDER=[0,5,1,6,2,7,3,8,4,9];
+let turnIdx=0;
+const turnDot=document.getElementById('turn-dot');
+const turnName=document.getElementById('turn-name');
+const moveTrail=document.getElementById('move-trail');
+
+function doTurn(){
+  pieceEls.forEach(el=>el.classList.remove('active'));
+  const ev=COMBATS[turnIdx];
+  if(ev&&AGENTS[ev.t].alive&&AGENTS[ev.ct].alive){
+    AGENTS[ev.t].cur=ev.push;place(ev.t);pieceEls[ev.t].classList.add('active');
+    turnName.style.color='#ff4655';turnName.textContent=AGENTS[ev.t].name+' — COMBAT!';
+    setTimeout(()=>{
+      AGENTS[ev.ct].alive=false;showX(...ev.push,pieceEls[ev.ct]);
+      moveTrail.textContent=ev.msg;moveTrail.style.color='#ff4655';
+      setTimeout(()=>moveTrail.style.color='',2200);
+    },900);
+    turnIdx++;setTimeout(doTurn,3000);return;
+  }
+  for(let i=0;i<TURN_ORDER.length;i++){
+    const ai=TURN_ORDER[turnIdx%TURN_ORDER.length];turnIdx++;
+    const ag=AGENTS[ai];if(!ag.alive)continue;
+    ag.wpIdx=(ag.wpIdx+1)%ag.wps.length;ag.cur=[...ag.wps[ag.wpIdx]];
+    place(ai);pieceEls[ai].classList.add('active');
+    const ct=ag.side==='ct';
+    turnDot.style.background=ct?'#5c9aff':'#ff4655';
+    turnDot.style.boxShadow=`0 0 8px ${ct?'#5c9aff':'#ff4655'}`;
+    turnName.style.color=ct?'#5c9aff':'#ff4655';
+    turnName.textContent=ag.name+' — '+(ct?'CT':'T');
+    moveTrail.textContent=ct?'Holding position...':'Pushing...';
+    break;
+  }
+  const ctDead=AGENTS.slice(0,5).every(a=>!a.alive);
+  const tDead=AGENTS.slice(5).every(a=>!a.alive);
+  if(ctDead||tDead){
+    moveTrail.textContent=ctDead?'🔴 T WIN — New round...':'🔵 CT WIN — New round...';
+    moveTrail.style.color=ctDead?'#ff4655':'#5c9aff';
+    setTimeout(reset,4500);return;
+  }
+  setTimeout(doTurn,2200);
+}
+
+function reset(){
+  AGENTS.forEach((ag,i)=>{
+    ag.alive=true;ag.wpIdx=0;ag.cur=[...ag.wps[0]];
+    const el=pieceEls[i];
+    el.style.opacity='1';el.style.transform='translate(-50%,-50%)';
+    place(i);
+  });
+  turnIdx=0;moveTrail.style.color='';moveTrail.textContent='New round...';
+  setTimeout(doTurn,1800);
+}
+
+setTimeout(doTurn,1400);
+
+const ob=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');ob.unobserve(x.target);}});},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>ob.observe(el));
+</script>
+<style>@keyframes xi{from{opacity:0;transform:translate(-50%,-50%) scale(2.5);}to{opacity:1;transform:translate(-50%,-50%) scale(1);}}</style>
+</body>
+</html>
+
