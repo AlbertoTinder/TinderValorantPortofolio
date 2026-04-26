@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valorant Team Coaching System</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header" style="display: flex; justify-content: space-between; align-items: center; padding-right: 15px;">
+                <h1>Valo Coach OS</h1>
+                <select id="lang-switch" class="lang-switch" style="background: rgba(255,255,255,0.1); color: white; border: none; border-radius: 4px; padding: 4px; outline: none; cursor: pointer;">
+                    <option value="en" style="background: #1e293b; color: white;">EN</option>
+                    <option value="jp" style="background: #1e293b; color: white;">JP</option>
+                    <option value="zh" style="background: #1e293b; color: white;">ZH</option>
+                    <option value="ko" style="background: #1e293b; color: white;">KO</option>
+                </select>
+            </div>
+            <ul class="nav-menu" id="nav-menu">
+                <li class="nav-item active" data-target="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span data-i18n="nav_dashboard">Performance Dashboard</span>
+                </li>
+                <li class="nav-item" data-target="goals">
+                    <i class="fa-solid fa-bullseye"></i>
+                    <span data-i18n="nav_goals">Goals & Progress</span>
+                </li>
+                <li class="nav-item" data-target="scrims">
+                    <i class="fa-solid fa-calendar-days"></i>
+                    <span data-i18n="nav_scrims">Calendar</span>
+                </li>
+                <li class="nav-item" data-target="playbook">
+                    <i class="fa-solid fa-map"></i>
+                    <span data-i18n="nav_playbook">Tactical Playbook</span>
+                </li>
+                <li class="nav-item" data-target="vods">
+                    <i class="fa-solid fa-video"></i>
+                    <span data-i18n="nav_vods">VOD Review</span>
+                </li>
+                <li class="nav-item" data-target="coach">
+                    <i class="fa-solid fa-users"></i>
+                    <span data-i18n="nav_coach">Coach Panel</span>
+                </li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <div class="header">
+                <h2 id="page-title">Performance Dashboard</h2>
+                <p id="page-desc">Analyzing recent scrims and official matches data.</p>
+            </div>
+
+            <div id="content-area">
+                <!-- Dashboard Content (Rendered via JS) -->
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

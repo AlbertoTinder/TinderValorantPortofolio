@@ -13,9 +13,9 @@ const translations = {
         about_intro_text: "I’m a focused and disciplined coach with a strong tactical mindset and a constant drive to improve. I specialize in building structured, competitive environments that help teams develop and perform consistently. I’m ready to work as a Head Coach, Assistant Coach, or Analyst, contributing through strategy, preparation, and continuous improvement.",
         about_timeline_title: "Career Timeline",
         timeline_rebels_title: "Rebels Gaming (EMEA)",
-        timeline_rebels_desc: "League Champions & Development of Tier 1 world-class players.",
+        timeline_rebels_desc: "VRL Spain: Rising Split 1 Champions & Top 4 at VCT EMEA Promotion. Key figure in the strategic development of Tier 1 world-class players.",
         timeline_nth_title: "NORTHEPTION (Japan)",
-        timeline_nth_desc: "Main & Academy roster builder. Significant growth in the Japanese scene.",
+        timeline_nth_desc: "Built and restructured the Main & Academy rosters. Achieved significant progress, establishing one of the best academies in the Japanese scene.",
         btn_resume: "DOWNLOAD CV",
         btn_know_more: "KNOW MY VISION",
         about_players_title: "Pro Players I Work With",
@@ -23,6 +23,9 @@ const translations = {
         btn_view_players: "CLICK HERE: VIEW PLAYER SUCCESS STORIES",
         about_tools_title: "Data & Analytics Stack",
         about_tools_text: "Coming from a software development background, I've worked professionally with databases, APIs, and advanced tracking. I apply this directly to VALORANT by building custom statistical applications, automated player tracking, and data-driven scouting models. My toolset includes Power BI, Apache Superset, and Metabase, allowing me to transform complex raw data into clear, actionable strategies for the team.",
+        about_app_title: "Interactive Team Coaching App",
+        about_app_text: "It’s an internal tool for our competitive team to manage everything—scrims, schedules, playbooks, VODs, and goals—in one centralized place across mobile and desktop.",
+        btn_coaching_app: "LAUNCH COACHING APP DEMO",
         btn_game_knowledge: "GAME KNOWLEDGE & CHESSBOARD CONCEPT",
         btn_more_info: "Click here for more info",
         port_title: "GAME KNOWLEDGE & <span class='highlight'>PHILOSOPHY</span>",
@@ -56,9 +59,9 @@ const translations = {
         about_intro_text: "私は、強力な戦術的マインドセットと継続的な改善への意欲を持つ、集中力と規律のあるコーチです。チームが安定して成長し、パフォーマンスを発揮できるよう、構造化された競争力のある環境を構築することを専門としています。ヘッドコーチ、アシスタントコーチ、またはアナリストとして、戦略、準備、そして絶え間ない改善を通じて貢献する準備ができています。",
         about_timeline_title: "キャリア・タイムライン",
         timeline_rebels_title: "Rebels Gaming (EMEA)",
-        timeline_rebels_desc: "リーグ優勝、および世界レベルのTier 1プレイヤーの育成。",
+        timeline_rebels_desc: "VRL Spain: Rising Split 1 優勝 ＆ VCT EMEA Promotion ベスト4。世界レベルのTier 1プレイヤーの戦略的育成における重要人物。",
         timeline_nth_title: "NORTHEPTION (日本)",
-        timeline_nth_desc: "メインおよびアカデミーのロースター構築。日本シーンにおける大幅な成長。",
+        timeline_nth_desc: "メインおよびアカデミーのロースターを構築と再編。大きな進歩を遂げ、日本シーンで最高のアカデミーの一つを確立。",
         btn_resume: "履歴書をダウンロード",
         btn_know_more: "私のビジョンを知る",
         about_players_title: "共に歩んだプロプレイヤー",
@@ -66,6 +69,9 @@ const translations = {
         btn_view_players: "ここをクリック：プレイヤーの成功事例を見る",
         about_tools_title: "データ＆分析ツール",
         about_tools_text: "ソフトウェア開発のバックグラウンドを持ち、データベース、API、高度なトラッキングを専門的に扱ってきました。これをVALORANTに直接応用し、独自の統計アプリケーション、自動化されたプレイヤートラッキング、データ主導のスカウティングモデルを構築しています。Power BI、Apache Superset、Metabaseなどのツールを活用し、複雑な生のデータをチームにとって明確で実行可能な戦略に変換します。",
+        about_app_title: "インタラクティブなチームコーチングアプリ",
+        about_app_text: "競技チームがスクリム、スケジュール、戦術、VOD、目標を管理するための一元化されたハブを構築しています。すべてが1か所にまとめられ、複数のツールを切り替えることなく、モバイルとデスクトップの両方から即座にアクセスできます。",
+        btn_coaching_app: "コーチングアプリのデモを起動",
         btn_game_knowledge: "ゲーム知識と哲学",
         btn_more_info: "詳細はこちらをクリック",
         port_title: "ゲーム知識と<span class='highlight'>哲学</span>",
@@ -99,9 +105,9 @@ const translations = {
         about_intro_text: "我是一名专注且纪律严明的教练，拥有强大的战术思维和不断进步的动力。我擅长构建结构化、富有竞争力的环境，帮助球队持续发展和表现。我准备好担任主教练、助理教练或分析师，通过战略、准备和持续改进做出贡献。",
         about_timeline_title: "职业生涯时间线",
         timeline_rebels_title: "Rebels Gaming (EMEA)",
-        timeline_rebels_desc: "联赛冠军及世界级 Tier 1 球员的培养。",
+        timeline_rebels_desc: "VRL Spain: Rising Split 1 冠军及 VCT EMEA Promotion 四强。在世界级 Tier 1 球员的战略发展中发挥关键作用。",
         timeline_nth_title: "NORTHEPTION (日本)",
-        timeline_nth_desc: "主队及青训营阵容构建。在日本赛区取得显著增长。",
+        timeline_nth_desc: "负责构建和重组主队及青训营阵容。取得了显著进展，建立在日本赛区最优秀的青训队之一。",
         btn_resume: "下载简历",
         btn_know_more: "了解我的愿景",
         about_players_title: "合作过的职业球员",
@@ -109,6 +115,9 @@ const translations = {
         btn_view_players: "点击此处：查看球员成功案例",
         about_tools_title: "数据与分析栈",
         about_tools_text: "凭借软件开发背景，我曾专业从事数据库、API 和高级追踪工作。我将这些经验直接应用于 VALORANT，构建自定义统计应用、自动化球员追踪和数据驱动的侦察模型。我的工具集包括 Power BI、Apache Superset 和 Metabase，使我能够将复杂的原始数据转化为团队清晰、可操作的策略。",
+        about_app_title: "交互式战队执教应用程序",
+        about_app_text: "我正在为竞技战队构建一个集中枢纽，用于管理训练赛、日程安排、战术手册、VOD 和目标。所有内容都保存在一个地方，无需在不同工具之间切换，即可在手机和桌面上即时访问。",
+        btn_coaching_app: "启动执教应用程序演示",
         btn_game_knowledge: "游戏知识与哲学",
         btn_more_info: "点击查看更多信息",
         port_title: "游戏知识与 <span class='highlight'>哲学</span>",
@@ -142,9 +151,9 @@ const translations = {
         about_intro_text: "저는 강력한 전술적 사고방식과 지속적인 발전 의지를 갖춘 집중력 있고 규율 있는 코치입니다. 팀이 지속적으로 성장하고 성과를 낼 수 있도록 체계적이고 경쟁력 있는 환경을 구축하는 데 전문성이 있습니다. 전략, 준비 및 지속적인 개선을 통해 기여하며 헤드 코치, 어시스턴트 코치 또는 분석가로 일할 준비가 되어 있습니다.",
         about_timeline_title: "경력 타임라인",
         timeline_rebels_title: "Rebels Gaming (EMEA)",
-        timeline_rebels_desc: "리그 우승 및 세계적인 Tier 1 선수 육성.",
+        timeline_rebels_desc: "VRL Spain: Rising Split 1 우승 및 VCT EMEA Promotion 4강. 세계적인 Tier 1 선수 육성을 위한 전략적 발전에 핵심적인 역할을 수행.",
         timeline_nth_title: "NORTHEPTION (일본)",
-        timeline_nth_desc: "메인 및 아카데미 로스터 구축. 일본 씬에서의 유의미한 성장.",
+        timeline_nth_desc: "메인 및 아카데미 로스터 구축과 재편. 큰 진전을 이루어 일본 씬에서 최고의 아카데미 중 하나를 설립.",
         btn_resume: "이력서 다운로드",
         btn_know_more: "나의 비전 알아보기",
         about_players_title: "함께한 프로 선수들",
@@ -152,6 +161,9 @@ const translations = {
         btn_view_players: "여기를 클릭: 선수 성공 사례 보기",
         about_tools_title: "데이터 및 분석 스택",
         about_tools_text: "소프트웨어 개발 배경을 바탕으로 데이터베이스, API 및 고급 트래킹 분야에서 전문적으로 일해 왔습니다. 이를 발로란트에 직접 적용하여 맞춤형 통계 애플리케이션, 자동화된 선수 트래킹, 데이터 기반 스카우팅 모델을 구축합니다. Power BI, Apache Superset, Metabase를 포함한 저의 툴셋을 통해 복잡한 원시 데이터를 팀을 위한 명확하고 실행 가능한 전략으로 전환합니다.",
+        about_app_title: "인터랙티브 팀 코칭 앱",
+        about_app_text: "경쟁 팀이 스크림, 일정, 전술 북, VOD 및 목표를 관리할 수 있는 중앙 허브를 구축하고 있습니다. 모든 것이 한 곳에 보관되며, 여러 도구를 전환할 필요 없이 모바일과 데스크톱 모두에서 즉시 액세스할 수 있습니다.",
+        btn_coaching_app: "코칭 앱 데모 실행하기",
         btn_game_knowledge: "게임 지식 및 철학",
         btn_more_info: "더 많은 정보를 보려면 클릭",
         port_title: "게임 지식 및 <span class='highlight'>철학</span>",
@@ -209,6 +221,13 @@ function setLanguage(lang) {
             el.innerHTML = translations[lang][key];
         }
     });
+
+    // Update demo app link with lang parameter
+    const demoLink = document.getElementById('demo-app-link');
+    if (demoLink) {
+        demoLink.href = `valorant-coaching-system/index.html?lang=${lang}`;
+    }
+
     localStorage.setItem('preferredLang', lang);
 }
 

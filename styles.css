@@ -339,9 +339,9 @@ body.preload * {
 
 .about-container {
     display: flex;
-    max-width: 1100px;
-    width: 100%;
-    gap: 4rem;
+    max-width: 1250px;
+    width: 95%;
+    gap: 3rem;
     align-items: flex-start;
 }
 
@@ -391,6 +391,16 @@ body.preload * {
 
 .about-text, .about-content {
     flex: 1.5;
+}
+
+.about-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+.about-grid .text-block {
+    margin-bottom: 0;
 }
 
 .text-block {
@@ -742,6 +752,7 @@ body.preload * {
         grid-template-columns: repeat(4, 46px);
     }
     .cell { width: 46px; height: 46px; }
+    .about-grid { grid-template-columns: 1fr; gap: 2rem; }
 }
 
 @media (max-width: 600px) {
