@@ -49,22 +49,85 @@ const getPlayers = () => [
 
 const getMockVods = () => [
     { 
-      map: "Ascent", opponent: "FNATIC", date: "Oct 12", result: t('vod_1_result', 'Win 13-10'), issue: t('vod_1_issue', 'Mid Control & Trading'),
+      id: 1,
+      map: "Ascent", opponent: "FNATIC", result: t('vod_1_result', 'Win 13-10'), date: "Oct 12, 2025", patch: "7.08",
+      issue: t('vod_1_issue', 'Mid Control & Trading'), 
+      matchType: "Official",
+      link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=205",
+      comps: { team: ["Jett", "KAY/O", "Sova", "Omen", "Killjoy"], enemy: ["Jett", "Sova", "KAY/O", "Omen", "Killjoy"] },
+      timeline: [
+        { time: "CT", note: t('tl_1_ct', 'CT Side'), type: "info" },
+        { time: "03:25", note: t('tl_1_1', 'Bad positioning on A main peek'), type: "negative" },
+        { time: "10:15", note: t('tl_1_2', 'Great mid pinch execution'), type: "positive" },
+        { time: "T", note: t('tl_1_t', 'T Side'), type: "info" },
+        { time: "16:40", note: t('tl_1_4', 'Round 13: 3vs1 discipline, good postplant'), type: "positive" },
+        { time: "22:40", note: t('tl_1_3', 'Missed trade on B site'), type: "negative" }
+      ],
       positives: t('vod_1_pos', "Great double peeks on A Main. vo0kashu's KJ setups stalled B effectively."),
       coachNote: t('vod_1_coach', "jannyxD needs to wait for the flash before jumping out of the smoke on Market."),
       playerNote: t('vod_1_player', "wolverine: My smokes were late on round 5, will fix.")
     },
     { 
-      map: "Haven", opponent: "Team Heretics", date: "Oct 10", result: t('vod_2_result', 'Loss 9-13'), issue: t('vod_2_issue', 'A Retake Coordination'),
+      id: 2,
+      map: "Haven", opponent: "Team Heretics", result: t('vod_2_result', 'Loss 9-13'), date: "Oct 10, 2025", patch: "7.08",
+      issue: t('vod_2_issue', 'A Retake Coordination'),
+      matchType: "Scrim",
+      link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=310",
+      comps: { team: ["Jett", "Breach", "Sova", "Omen", "Killjoy"], enemy: ["Neon", "Breach", "Sova", "Omen", "Cypher"] },
+      timeline: [
+        { time: "05:10", note: t('tl_2_1', 'Gave up A lobby for free'), type: "negative" },
+        { time: "18:20", note: t('tl_2_2', 'Good eco round win'), type: "positive" }
+      ],
       positives: t('vod_2_pos', "Good eco rounds. Yowamu's Breach flashes created space."),
       coachNote: t('vod_2_coach', "A-retakes are failing because we are giving up lobby too easily."),
       playerNote: t('vod_2_player', "musashi: I will save drone for the retake instead of early info.")
     },
     { 
-      map: "Lotus", opponent: "Karmine Corp", date: "Oct 08", result: t('vod_3_result', 'Win 13-8'), issue: t('vod_3_issue', 'Rubble Aggression'),
+      id: 3,
+      map: "Lotus", opponent: "Karmine Corp", result: t('vod_3_result', 'Win 13-8'), date: "Oct 08, 2025", patch: "7.07",
+      issue: t('vod_3_issue', 'Rubble Aggression'),
+      matchType: "Scrim",
+      link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=135",
+      comps: { team: ["Raze", "Sova", "Viper", "Omen", "Killjoy"], enemy: ["Raze", "Sova", "Viper", "Omen", "Killjoy"] },
+      timeline: [
+        { time: "02:15", note: t('tl_3_1', 'Perfect A rubble take'), type: "positive" },
+        { time: "14:50", note: t('tl_3_2', 'Overextended into spawn'), type: "negative" }
+      ],
       positives: t('vod_3_pos', "Perfect early Rubble control. Trades were on point."),
       coachNote: t('vod_3_coach', "Keep pressing A Rubble, but don't overextend into their spawn."),
       playerNote: t('vod_3_player', "jannyxD: Felt very comfortable taking the aggressive duels today.")
+    },
+    {
+      id: 4,
+      map: "Sunset", opponent: "LOUD", result: t('vod_4_result', 'Loss 11-13'), date: "Oct 05, 2025", patch: "7.06",
+      issue: t('vod_4_issue', 'Mid Round Adjustments'),
+      matchType: "Official",
+      link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=420",
+      comps: { team: ["Raze", "Breach", "Sova", "Omen", "Cypher"], enemy: ["Raze", "KAY/O", "Sova", "Omen", "Cypher"] },
+      timeline: [
+        { time: "06:12", note: t('tl_4_1', 'Excellent B main exec with Breach stun'), type: "positive" },
+        { time: "11:05", note: t('tl_4_2', 'Failed to adapt when LOUD pushed B main'), type: "negative" },
+        { time: "25:30", note: t('tl_4_3', 'Crucial clutch by Yowamu on round 22'), type: "positive" }
+      ],
+      positives: t('vod_4_pos', "Strong individual mechanics. We won 60% of our opening duels. Good clutch potential shown."),
+      coachNote: t('vod_4_coach', "We are becoming predictable in mid-rounds. Once they conditioned our B takes, we kept forcing it instead of defaulting and probing A."),
+      playerNote: t('vod_4_player', "vo0kashu: Cypher setups on B were constantly broken by Sova shock darts. Need new variations.")
+    },
+    {
+      id: 5,
+      map: "Bind", opponent: "Paper Rex", result: t('vod_5_result', 'Win 13-5'), date: "Oct 02, 2025", patch: "7.06",
+      issue: t('vod_5_issue', 'Handling Aggression'),
+      matchType: "Scrim",
+      link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=50",
+      comps: { team: ["Raze", "Skye", "Brimstone", "Viper", "Cypher"], enemy: ["Reyna", "Raze", "Skye", "Brimstone", "Sova"] },
+      timeline: [
+        { time: "08:45", note: t('tl_5_1', 'Punished PRX early push in Showers (Great awareness)'), type: "positive" },
+        { time: "16:10", note: t('tl_5_2', 'Great spacing on A site retake'), type: "positive" },
+        { time: "19:20", note: t('tl_5_3', 'Lost anti-eco due to rushing Hookah'), type: "negative" }
+      ],
+      positives: t('vod_5_pos', "Outstanding discipline against a chaotic playstyle. Maintained structure and punished their over-extensions beautifully."),
+      coachNote: t('vod_5_coach', "Perfectly executed the anti-aggression gameplan. Keep this level of patience and crossfire setups."),
+      playerNote: t('vod_5_player', "jannyxD: Felt very easy to entry when they were constantly giving us map control for free.")
     }
 ];
 
@@ -722,54 +785,69 @@ const viewsData = {
     },
     vods: {
         title: "VOD Review",
-        desc: "Match recordings, positives, and timeline feedback.",
-        render: () => `
-            <div class="dashboard-grid">
-                ${getMockVods().map(v => `
-                    <div class="stat-card" style="padding: 0; overflow: hidden; display: flex; flex-direction: column;">
-                        <!-- Video Thumbnail -->
-                        <div style="height: 170px; background: #111; display: flex; justify-content: center; align-items: center; position: relative; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05);">
-                            <i class="fa-solid fa-play" style="font-size: 3rem; color: rgba(255,255,255,0.4); transition: 0.2s;"></i>
-                            <span style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); padding: 3px 8px; font-size: 0.75rem; border-radius: 4px;">45:20</span>
-                        </div>
-                        
-                        <!-- Video Info -->
-                        <div style="padding: 1.2rem;">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
-                                <h4 style="color: var(--text-primary); font-size: 1.1rem; margin: 0;">vs ${v.opponent} (${v.map})</h4>
-                                <span style="font-weight: bold; font-size: 0.9rem; color: ${v.result.includes('Win') ? 'var(--success)' : 'var(--danger)'};">${v.result}</span>
-                            </div>
-                            
-                            <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 15px; display: flex; gap: 15px; flex-wrap: wrap;">
-                                <span><i class="fa-regular fa-calendar"></i> ${v.date}</span>
-                                <span><i class="fa-solid fa-crosshairs" style="color: var(--accent-red);"></i> ${v.issue}</span>
-                            </div>
+        desc: "Interactive Match Database and In-depth VOD Analysis.",
+        render: () => {
+            setTimeout(window.renderVodList, 0);
+            return `
+            <div class="vod-dashboard">
+                <!-- Dashboard Summary -->
+                <div class="dashboard-grid" style="margin-bottom: 2rem;">
+                    <div class="stat-card">
+                        <div class="stat-card-header"><span>Total Matches</span><i class="fa-solid fa-database" style="color: #60a5fa"></i></div>
+                        <div class="stat-value">34</div>
+                        <div class="stat-trend trend-up"><span>+5 this week</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header"><span>Win Rate (VODs)</span><i class="fa-solid fa-trophy" style="color: #fcd34d"></i></div>
+                        <div class="stat-value">62%</div>
+                        <div class="stat-trend trend-up"><span>Consistent</span></div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-card-header"><span>Most Played Map</span><i class="fa-solid fa-map" style="color: #c084fc"></i></div>
+                        <div class="stat-value">Ascent</div>
+                        <div class="stat-trend"><span>12 Matches (65% WR)</span></div>
+                    </div>
+                </div>
 
-                            <!-- Native HTML Accordion for Feedback -->
-                            <details style="background: rgba(0,0,0,0.2); border-radius: 6px; padding: 10px 12px; font-size: 0.85rem; cursor: pointer; outline: none; transition: 0.2s;">
-                                <summary style="color: var(--text-primary); font-weight: 500; outline: none; user-select: none;">
-                                    <i class="fa-solid fa-comment-dots" style="color: #60a5fa; margin-right: 5px;"></i> ${t('vods_feedback', 'View Feedback & Notes')}
-                                </summary>
-                                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(255,255,255,0.1); display: flex; flex-direction: column; gap: 10px; cursor: default;">
-                                    <div>
-                                        <strong style="color: var(--success);"><i class="fa-solid fa-arrow-trend-up"></i> ${t('vods_positives', 'Positives')}:</strong>
-                                        <span style="color: var(--text-secondary); display: block; margin-top: 2px;">${v.positives}</span>
-                                    </div>
-                                    <div>
-                                        <strong style="color: #fcd34d;"><i class="fa-solid fa-user-tie"></i> ${t('vods_coach_note', 'Coach Note')}:</strong>
-                                        <span style="color: var(--text-secondary); display: block; margin-top: 2px;">${v.coachNote}</span>
-                                    </div>
-                                    <div>
-                                        <strong style="color: #c4b5fd;"><i class="fa-solid fa-gamepad"></i> ${t('vods_player_note', 'Player Note')}:</strong>
-                                        <span style="color: var(--text-secondary); display: block; margin-top: 2px;">${v.playerNote}</span>
-                                    </div>
-                                </div>
-                            </details>
+                <!-- Advanced Filters -->
+                <div style="background: var(--bg-card); padding: 1.5rem; border-radius: 8px; margin-bottom: 2rem; border: 1px solid rgba(255,255,255,0.05);">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 15px;">
+                        <h3 style="color: white; font-size: 1.1rem; margin: 0;"><i class="fa-solid fa-filter" style="color: var(--accent-red); margin-right: 8px;"></i> Match Database Filters</h3>
+                        <div class="search-bar" style="position: relative;">
+                            <input type="text" id="vod-search" placeholder="Search opponent, map, focus..." style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); color: white; padding: 8px 12px 8px 35px; border-radius: 4px; outline: none; width: 250px;" oninput="window.renderVodList()">
+                            <i class="fa-solid fa-search" style="position: absolute; left: 12px; top: 10px; color: var(--text-secondary);"></i>
                         </div>
                     </div>
-                `).join('')}
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <select id="filter-map" onchange="window.renderVodList()" style="background: var(--bg-secondary); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 4px; outline: none; cursor: pointer;">
+                            <option value="all">${t('filter_all_maps', 'All Maps')}</option>
+                            <option value="Ascent">Ascent</option>
+                            <option value="Bind">Bind</option>
+                            <option value="Haven">Haven</option>
+                            <option value="Lotus">Lotus</option>
+                            <option value="Sunset">Sunset</option>
+                        </select>
+                        <select id="filter-result" onchange="window.renderVodList()" style="background: var(--bg-secondary); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 4px; outline: none; cursor: pointer;">
+                            <option value="all">${t('filter_all_results', 'All Results')}</option>
+                            <option value="Win">${t('filter_win', 'Win')}</option>
+                            <option value="Loss">${t('filter_loss', 'Loss')}</option>
+                        </select>
+                        <select id="filter-type" onchange="window.renderVodList()" style="background: var(--bg-secondary); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 4px; outline: none; cursor: pointer;">
+                            <option value="all">${t('filter_all_types', 'All Types')}</option>
+                            <option value="Official">${t('filter_official', 'Official')}</option>
+                            <option value="Scrim">${t('filter_scrim', 'Scrim')}</option>
+                        </select>
+                        <button onclick="window.openAddVodModal()" style="background: var(--accent-red); color: white; border: none; padding: 8px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; margin-left: auto; transition: 0.2s;" onmouseover="this.style.filter='brightness(1.2)'" onmouseout="this.style.filter='brightness(1)'"><i class="fa-solid fa-plus" style="margin-right: 5px;"></i> ${t('btn_add_vod', 'Add New VOD')}</button>
+                    </div>
+                </div>
+
+                <!-- Match List Container -->
+                <div id="vod-list-container" style="display: flex; flex-direction: column; gap: 15px;">
+                    <!-- Rendered via JS -->
+                </div>
             </div>
-        `
+            `;
+        }
     },
     coach: {
         title: "Coach Panel",
@@ -915,10 +993,7 @@ const appTranslations = {
         dash_insight_time: "Today at 10:45 AM",
         dash_insight_msg: "We need to improve mid control and the 1-3-1 default, certain reactions that we will review tomorrow. I also want to change the A post-plant.<br><br>I would like to start implementing trigger words for when we are at a numbers disadvantage.",
         scrim_kc_title: "vs KC — Today 20:00",
-        scrim_kc_desc: "Maps: Ascent, Bind · Focus: Mid control",
-        scrim_badge_scrim: "Scrim",
-        scrim_prac_title: "Ascent Exec Drills — Apr 15",
-        scrim_kc_desc: "Maps: Ascent, Bind · Focus: Mid control",
+        scrim_kc_desc: "Maps: Ascent, Bind · Focus: Defaults on CT and executes T side",
         scrim_badge_scrim: "Scrim",
         scrim_prac_title: "Ascent Exec Drills — Apr 15",
         scrim_prac_desc: "Maps: Ascent · Focus: A-site splits",
@@ -1081,10 +1156,7 @@ const appTranslations = {
         dash_insight_time: "今日 10:45 AM",
         dash_insight_msg: "ミッドのコントロールと1-3-1のデフォルト、明日確認する特定のリアクションを改善する必要がある。また、Aのポストプラントも変更したい。<br><br>人数不利の状況でのトリガーワードの実装を始めたいと思う。",
         scrim_kc_title: "vs KC — 今日 20:00",
-        scrim_kc_desc: "マップ: アセント, バインド · フォーカス: ミッドコントロール",
-        scrim_badge_scrim: "スクリム",
-        scrim_prac_title: "アセントエクスキュート練習 — 4月15日",
-        scrim_kc_desc: "マップ: アセント, バインド · フォーカス: ミッドコントロール",
+        scrim_kc_desc: "マップ: アセント, バインド · フォーカス: CTでのデフォルトとTサイドでのエクスキュート",
         scrim_badge_scrim: "スクリム",
         scrim_prac_title: "アセントエクスキュート練習 — 4月15日",
         scrim_prac_desc: "マップ: アセント · フォーカス: Aサイトスプリット",
@@ -1268,10 +1340,7 @@ const appTranslations = {
         dash_insight_time: "今天 10:45 AM",
         dash_insight_msg: "我们需要改善中路控制和1-3-1默认，以及我们明天会复盘的某些反应。我还想改变A区的守包（post-plant）。<br><br>我想开始实施在人数劣势时的触发词（trigger words）。",
         scrim_kc_title: "对阵 KC — 今天 20:00",
-        scrim_kc_desc: "地图: 亚平宁, 源工重镇 · 重点: 中路控制",
-        scrim_badge_scrim: "训练赛",
-        scrim_prac_title: "亚平宁执行演练 — 4月15日",
-        scrim_kc_desc: "地图: 亚平宁, 源工重镇 · 重点: 中路控制",
+        scrim_kc_desc: "地图: 亚平宁, 源工重镇 · 重点: CT默认防守与T侧执行",
         scrim_badge_scrim: "训练赛",
         scrim_prac_title: "亚平宁执行演练 — 4月15日",
         scrim_prac_desc: "地图: 亚平宁 · 重点: A区夹击",
@@ -1455,10 +1524,7 @@ const appTranslations = {
         dash_insight_time: "오늘 10:45 AM",
         dash_insight_msg: "미드 컨트롤과 1-3-1 기본 배치, 내일 리뷰할 특정 리액션들을 개선해야 함. 또한 A 포스트 플랜트도 변경하고 싶음.<br><br>수적 열세일 때 사용할 트리거 워드를 도입하기 시작했으면 함.",
         scrim_kc_title: "vs KC — 오늘 20:00",
-        scrim_kc_desc: "맵: 어센트, 바인드 · 포커스: 미드 컨트롤",
-        scrim_badge_scrim: "스크림",
-        scrim_prac_title: "어센트 실행 드릴 — 4월 15일",
-        scrim_kc_desc: "맵: 어센트, 바인드 · 포커스: 미드 컨트롤",
+        scrim_kc_desc: "맵: 어센트, 바인드 · 포커스: CT에서의 기본 배치 및 T 사이드에서의 실행",
         scrim_badge_scrim: "스크림",
         scrim_prac_title: "어센트 실행 드릴 — 4월 15일",
         scrim_prac_desc: "맵: 어센트 · 포커스: A 사이트 스플릿",
@@ -1807,6 +1873,326 @@ window.openGameplanModal = function() {
                             ${t('modal_coach_note_desc', "We will practice these setups extensively in tomorrow's server time before the Karmine Corp scrim. Please read and internalize your specific agent role for both comps. If you're unsure about your pathing in Comp B, DM me.")}
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+};
+
+window.renderVodList = function() {
+    const container = document.getElementById('vod-list-container');
+    if(!container) return;
+
+    const mapFilter = document.getElementById('filter-map')?.value || 'all';
+    const resultFilter = document.getElementById('filter-result')?.value || 'all';
+    const typeFilter = document.getElementById('filter-type')?.value || 'all';
+    const search = (document.getElementById('vod-search')?.value || '').toLowerCase();
+
+    let vods = getMockVods();
+    
+    vods = vods.filter(v => {
+        if(mapFilter !== 'all' && v.map !== mapFilter) return false;
+        if(resultFilter !== 'all' && !v.result.includes(resultFilter)) return false;
+        if(typeFilter !== 'all' && v.matchType !== typeFilter) return false;
+        if(search) {
+            const query = search;
+            if(!v.opponent.toLowerCase().includes(query) && 
+               !v.map.toLowerCase().includes(query) && 
+               !v.issue.toLowerCase().includes(query)) {
+                return false;
+            }
+        }
+        return true;
+    });
+
+    const getAgentIcon = (agent) => {
+        const agentFormatted = agent.replace('/', '').toLowerCase();
+        const agentUrls = {
+            jett: "https://media.valorant-api.com/agents/add6443a-41bd-e414-f6ad-e58d267f4e95/displayicon.png",
+            killjoy: "https://media.valorant-api.com/agents/1e58de9c-4950-5125-93e9-a0aee9f98746/displayicon.png",
+            raze: "https://media.valorant-api.com/agents/f94c3b30-42be-e959-889c-5aa313dba261/displayicon.png",
+            breach: "https://media.valorant-api.com/agents/5f8d3a7f-467b-97f3-062c-13acf203c006/displayicon.png",
+            fade: "https://media.valorant-api.com/agents/dade69b4-415a-8cb1-65ce-0b8ce569b536/displayicon.png",
+            viper: "https://media.valorant-api.com/agents/707eab51-4836-f488-046a-cda6bf494859/displayicon.png",
+            skye: "https://media.valorant-api.com/agents/6f2a04ca-43e0-be17-7f36-b3908627744d/displayicon.png",
+            brimstone: "https://media.valorant-api.com/agents/9f0d8ba9-4140-b941-57d3-a7ad57c6b417/displayicon.png",
+            reyna: "https://media.valorant-api.com/agents/a3bfb853-43b2-7238-a4f1-ad90e9e46bcc/displayicon.png"
+        };
+        const fallbackSrc = agentUrls[agentFormatted] || 'https://media.valorant-api.com/agents/displayicon.png';
+        return `<div title="${agent}" style="width: 28px; height: 28px; border-radius: 50%; background: #1e293b; border: 1px solid rgba(255,255,255,0.2); display: flex; justify-content: center; align-items: center; font-size: 0.65rem; font-weight: bold; color: white; margin-right: -8px; position: relative; box-shadow: -2px 0 5px rgba(0,0,0,0.3); overflow: hidden;">
+            <img src="../${agentFormatted}.png" style="width: 100%; height: 100%; object-fit: cover;" onerror="if(!this.dataset.retried) { this.dataset.retried = 'true'; this.src = '${fallbackSrc}'; } else { this.style.display='none'; this.nextElementSibling.style.display='flex'; }" alt="${agent}">
+            <span style="display: none; align-items: center; justify-content: center; width: 100%; height: 100%;">${agent.substring(0,2).toUpperCase()}</span>
+        </div>`;
+    };
+
+    if(vods.length === 0) {
+        container.innerHTML = `<div style="text-align: center; color: var(--text-secondary); padding: 3rem; background: var(--bg-card); border-radius: 8px;">No matches found matching filters.</div>`;
+        return;
+    }
+
+    container.innerHTML = vods.map(v => `
+        <div style="background: var(--bg-card); border: 1px solid rgba(255,255,255,0.05); border-radius: 8px; overflow: hidden; display: flex; cursor: pointer; transition: 0.2s;" onmouseover="this.style.borderColor='rgba(255, 70, 85, 0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.05)'" onclick="window.openVodReview(${v.id})">
+            
+            <div style="width: 200px; background: #111; position: relative; display: flex; justify-content: center; align-items: center; border-right: 1px solid rgba(255,255,255,0.05); flex-shrink: 0;">
+                <i class="fa-solid fa-play" style="font-size: 2.5rem; color: rgba(255,255,255,0.3);"></i>
+                <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.8); padding: 3px 6px; font-size: 0.7rem; border-radius: 4px; color: white;">Patch ${v.patch}</div>
+                <div style="position: absolute; top: 8px; left: 8px; background: ${v.matchType === 'Official' ? 'rgba(239, 68, 68, 0.8)' : 'rgba(59, 130, 246, 0.8)'}; padding: 3px 6px; font-size: 0.7rem; border-radius: 4px; color: white; font-weight: bold;">${v.matchType}</div>
+            </div>
+
+            <div style="padding: 1.2rem; flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                    <h4 style="color: white; font-size: 1.2rem; margin: 0;">vs ${v.opponent} <span style="color: var(--text-secondary); font-size: 0.9rem; font-weight: normal; margin-left: 5px;">on ${v.map}</span></h4>
+                    <span style="font-weight: bold; font-size: 1rem; color: ${v.result.includes('Win') ? 'var(--success)' : 'var(--danger)'};">${v.result}</span>
+                </div>
+                
+                <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px; display: flex; gap: 15px;">
+                    <span><i class="fa-regular fa-calendar"></i> ${v.date}</span>
+                    <span style="color: #cbd5e1;"><i class="fa-solid fa-crosshairs" style="color: var(--accent-red);"></i> Focus: ${v.issue}</span>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.75rem; color: var(--success); font-weight: bold;">${t('team_label', 'OUR TEAM:')}</span>
+                        <div style="display: flex; padding-right: 8px;">
+                            ${v.comps.team.map(agent => getAgentIcon(agent)).join('')}
+                        </div>
+                    </div>
+                    <div style="color: var(--text-secondary); font-size: 0.8rem; font-weight: bold; font-style: italic;">VS</div>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                        <span style="font-size: 0.75rem; color: var(--danger); font-weight: bold;">${t('enemy_label', 'ENEMY:')}</span>
+                        <div style="display: flex; padding-right: 8px;">
+                            ${v.comps.enemy.map(agent => getAgentIcon(agent)).join('')}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div style="width: 50px; display: flex; justify-content: center; align-items: center; border-left: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.1);">
+                <i class="fa-solid fa-chevron-right" style="color: var(--text-secondary);"></i>
+            </div>
+        </div>
+    `).join('');
+};
+
+window.openVodReview = function(id) {
+    const vod = getMockVods().find(v => v.id === id);
+    if(!vod) return;
+
+    const modalHTML = `
+        <div id="vod-review-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg-primary); z-index: 2500; display: flex; flex-direction: column; overflow-y: auto;">
+            
+            <!-- Header -->
+            <div style="padding: 1.5rem 3rem; background: var(--bg-secondary); border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 10;">
+                <div style="display: flex; align-items: center; gap: 20px;">
+                    <button onclick="document.getElementById('vod-review-modal').remove()" style="background: transparent; border: 1px solid rgba(255,255,255,0.2); color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; justify-content: center; align-items: center; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.1)'" onmouseout="this.style.background='transparent'"><i class="fa-solid fa-arrow-left"></i></button>
+                    <div>
+                        <h2 style="color: white; margin: 0; font-size: 1.5rem;">vs ${vod.opponent} <span style="color: var(--text-secondary); font-weight: normal;">(${vod.map})</span></h2>
+                        <div style="color: var(--text-secondary); font-size: 0.9rem; margin-top: 4px;">${vod.date} • Patch ${vod.patch} • ${vod.matchType}</div>
+                    </div>
+                </div>
+                <div style="display: flex; gap: 15px; align-items: center;">
+                    <div style="background: rgba(255,255,255,0.05); padding: 8px 15px; border-radius: 6px; color: ${vod.result.includes('Win') ? 'var(--success)' : 'var(--danger)'}; font-weight: bold;">${vod.result}</div>
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div style="display: flex; flex: 1; padding: 2rem 3rem; gap: 2rem; max-width: 1600px; margin: 0 auto; width: 100%; box-sizing: border-box; flex-wrap: wrap;">
+                
+                <!-- Left Column (Video + Notes) -->
+                <div style="flex: 2; display: flex; flex-direction: column; gap: 1.5rem; min-width: 300px;">
+                    
+                    <!-- Video Player -->
+                    <div style="width: 100%; aspect-ratio: 16/9; background: #000; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; position: relative;">
+                        <!-- Placeholder for Embedded Player -->
+                        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; flex-direction: column; align-items: center; color: var(--text-secondary);">
+                            <i class="fa-brands fa-youtube" style="font-size: 4rem; margin-bottom: 15px; color: rgba(255,255,255,0.2);"></i>
+                            <span style="font-size: 1.1rem;">VOD Player Embedded Here</span>
+                            <span style="font-size: 0.85rem; margin-top: 5px;">(Simulated Video Link)</span>
+                        </div>
+                    </div>
+
+                    <!-- Feedback Breakdown -->
+                    <div style="background: var(--bg-card); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem;">
+                        <h3 style="color: white; margin: 0 0 1.2rem 0; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;"><i class="fa-solid fa-clipboard-check" style="color: var(--accent-red); margin-right: 8px;"></i> Structured Feedback</h3>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                            <div style="background: rgba(16, 185, 129, 0.05); border-left: 3px solid var(--success); padding: 1rem; border-radius: 0 8px 8px 0;">
+                                <strong style="color: var(--success); display: block; margin-bottom: 6px;"><i class="fa-solid fa-plus"></i> Positives</strong>
+                                <span style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;">${vod.positives}</span>
+                            </div>
+                            <div style="background: rgba(250, 204, 21, 0.05); border-left: 3px solid #fcd34d; padding: 1rem; border-radius: 0 8px 8px 0;">
+                                <strong style="color: #fcd34d; display: block; margin-bottom: 6px;"><i class="fa-solid fa-user-tie"></i> Coach's Note</strong>
+                                <span style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;">${vod.coachNote}</span>
+                            </div>
+                            <div style="background: rgba(139, 92, 246, 0.05); border-left: 3px solid #c4b5fd; padding: 1rem; border-radius: 0 8px 8px 0;">
+                                <strong style="color: #c4b5fd; display: block; margin-bottom: 6px;"><i class="fa-solid fa-gamepad"></i> Player Insights</strong>
+                                <span style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.5;">${vod.playerNote}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column (Timeline & Comps) -->
+                <div style="flex: 1; display: flex; flex-direction: column; gap: 1.5rem; min-width: 320px;">
+                    
+                    <!-- Comps -->
+                    <div style="background: var(--bg-card); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem;">
+                        <h3 style="color: white; margin: 0 0 1rem 0; font-size: 1.1rem;">Team Compositions</h3>
+                        
+                        <div style="margin-bottom: 1rem;">
+                            <div style="color: var(--success); font-size: 0.8rem; font-weight: bold; margin-bottom: 8px;">OUR TEAM</div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                ${vod.comps.team.map(a => `<span style="background: rgba(16, 185, 129, 0.1); color: #6ee7b7; border: 1px solid rgba(16, 185, 129, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">${a}</span>`).join('')}
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <div style="color: var(--danger); font-size: 0.8rem; font-weight: bold; margin-bottom: 8px;">OPPONENT</div>
+                            <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+                                ${vod.comps.enemy.map(a => `<span style="background: rgba(239, 68, 68, 0.1); color: #fca5a5; border: 1px solid rgba(239, 68, 68, 0.3); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; font-weight: bold;">${a}</span>`).join('')}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline System -->
+                    <div style="background: var(--bg-card); border-radius: 12px; border: 1px solid rgba(255,255,255,0.05); padding: 1.5rem; flex: 1; display: flex; flex-direction: column; max-height: 500px;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                            <h3 style="color: white; margin: 0; font-size: 1.1rem;"><i class="fa-solid fa-list-ul" style="color: #60a5fa; margin-right: 8px;"></i> VOD Timeline</h3>
+                            <button style="background: transparent; color: #60a5fa; border: none; cursor: pointer; font-size: 0.85rem;"><i class="fa-solid fa-plus"></i> Add Note</button>
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 10px; overflow-y: auto; padding-right: 5px;">
+                            ${vod.timeline.map(t => `
+                                <div style="display: flex; gap: 12px; padding: 10px; border-radius: 6px; background: rgba(0,0,0,0.2); cursor: pointer; transition: 0.2s; border: 1px solid transparent;" onmouseover="this.style.borderColor='rgba(255,255,255,0.1)'; this.style.background='rgba(255,255,255,0.03)'" onmouseout="this.style.borderColor='transparent'; this.style.background='rgba(0,0,0,0.2)'">
+                                    <div style="background: ${t.type === 'info' ? 'rgba(255,255,255,0.15)' : 'var(--accent-red)'}; color: white; font-weight: bold; font-size: 0.8rem; padding: 4px 8px; border-radius: 4px; height: fit-content;">${t.time}</div>
+                                    <div>
+                                        <div style="color: white; font-size: 0.9rem; margin-bottom: 4px;">${t.note}</div>
+                                        <div style="font-size: 0.75rem; color: ${t.type === 'positive' ? 'var(--success)' : (t.type === 'negative' ? 'var(--danger)' : 'var(--text-secondary)')}; font-weight: bold; text-transform: uppercase;">
+                                            <i class="fa-solid ${t.type === 'positive' ? 'fa-arrow-trend-up' : (t.type === 'negative' ? 'fa-triangle-exclamation' : 'fa-circle-info')}"></i> ${t.type}
+                                        </div>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+};
+
+const addVodTranslations = {
+    en: {
+        add_vod_title: 'Import New VOD',
+        auto_sync_title: 'YouTube Auto-Sync Active',
+        auto_sync_desc: 'Connect your YouTube or Twitch channel to automatically import unlisted scrims when they are uploaded. This saves time and ensures the team has immediate access.',
+        label_video_url: 'Video URL (YouTube/Twitch)',
+        label_opponent: 'Opponent',
+        label_map: 'Map',
+        btn_cancel: 'Cancel',
+        btn_import: 'Import & Analyze',
+        alert_import: 'Simulated VOD Import! In production, this would sync with YouTube API.',
+        team_label: 'OUR TEAM:',
+        enemy_label: 'ENEMY:'
+    },
+    jp: {
+        add_vod_title: '新しいVODをインポート',
+        auto_sync_title: 'YouTube自動同期がアクティブ',
+        auto_sync_desc: 'YouTubeまたはTwitchチャンネルを接続して、非公開のスクリムがアップロードされたときに自動的にインポートします。これにより時間を節約し、チームがすぐにアクセスできるようになります。',
+        label_video_url: 'ビデオURL（YouTube/Twitch）',
+        label_opponent: '対戦相手',
+        label_map: 'マップ',
+        btn_cancel: 'キャンセル',
+        btn_import: 'インポートして分析',
+        alert_import: 'シミュレートされたVODインポート！本番環境ではYouTube APIと同期します。',
+        team_label: '味方チーム:',
+        enemy_label: '敵チーム:'
+    },
+    zh: {
+        add_vod_title: '导入新VOD',
+        auto_sync_title: 'YouTube自动同步已激活',
+        auto_sync_desc: '连接您的YouTube或Twitch频道，以便在上传未公开的训练赛时自动导入。这可节省时间并确保团队能立即访问。',
+        label_video_url: '视频URL（YouTube/Twitch）',
+        label_opponent: '对手',
+        label_map: '地图',
+        btn_cancel: '取消',
+        btn_import: '导入并分析',
+        alert_import: '模拟VOD导入！在生产环境中，这将与YouTube API同步。',
+        team_label: '我方队伍:',
+        enemy_label: '敌方队伍:'
+    },
+    ko: {
+        add_vod_title: '새 VOD 가져오기',
+        auto_sync_title: 'YouTube 자동 동기화 활성화됨',
+        auto_sync_desc: 'YouTube 또는 Twitch 채널을 연결하여 미등록 스크림이 업로드될 때 자동으로 가져옵니다. 이를 통해 시간을 절약하고 팀이 즉시 액세스할 수 있습니다.',
+        label_video_url: '비디오 URL(YouTube/Twitch)',
+        label_opponent: '상대',
+        label_map: '맵',
+        btn_cancel: '취소',
+        btn_import: '가져오기 및 분석',
+        alert_import: '시뮬레이션된 VOD 가져오기! 프로덕션에서는 YouTube API와 동기화됩니다.',
+        team_label: '우리 팀:',
+        enemy_label: '적 팀:'
+    }
+};
+
+if(typeof appTranslations !== 'undefined') {
+    Object.keys(addVodTranslations).forEach(lang => {
+        if(appTranslations[lang]) {
+            Object.assign(appTranslations[lang], addVodTranslations[lang]);
+        }
+    });
+}
+
+window.openAddVodModal = function() {
+    const modalHTML = `
+        <div id="add-vod-modal" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.85); z-index: 3000; display: flex; justify-content: center; align-items: center; backdrop-filter: blur(8px);">
+            <div style="background: var(--bg-card); width: 90%; max-width: 600px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.5); display: flex; flex-direction: column;">
+                
+                <div style="padding: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.2);">
+                    <div style="display: flex; align-items: center; gap: 15px;">
+                        <i class="fa-brands fa-youtube" style="color: var(--accent-red); font-size: 1.8rem;"></i>
+                        <h3 style="color: white; margin: 0; font-size: 1.2rem;">${t('add_vod_title', 'Import New VOD')}</h3>
+                    </div>
+                    <i class="fa-solid fa-xmark" style="color: var(--text-secondary); font-size: 1.5rem; cursor: pointer; transition: 0.2s;" onclick="document.getElementById('add-vod-modal').remove()" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-secondary)'"></i>
+                </div>
+                
+                <div style="padding: 2rem;">
+                    <div style="background: rgba(59, 130, 246, 0.1); border-left: 3px solid #3b82f6; padding: 1rem; border-radius: 4px; margin-bottom: 1.5rem; display: flex; gap: 15px; align-items: flex-start;">
+                        <i class="fa-solid fa-robot" style="color: #60a5fa; font-size: 1.5rem; margin-top: 3px;"></i>
+                        <div>
+                            <strong style="color: white; display: block; margin-bottom: 4px; font-size: 0.95rem;">${t('auto_sync_title', 'YouTube Auto-Sync Active')}</strong>
+                            <span style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.4; display: block;">${t('auto_sync_desc', 'Connect your YouTube or Twitch channel to automatically import unlisted scrims when they are uploaded. This saves time and ensures the team has immediate access.')}</span>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+                        <div>
+                            <label style="color: var(--text-secondary); font-size: 0.85rem; font-weight: bold; margin-bottom: 6px; display: block;">${t('label_video_url', 'Video URL (YouTube/Twitch)')}</label>
+                            <input type="text" placeholder="https://youtube.com/watch?v=..." style="width: 100%; padding: 10px 12px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; outline: none; font-family: 'Inter', sans-serif;">
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px;">
+                            <div style="flex: 1;">
+                                <label style="color: var(--text-secondary); font-size: 0.85rem; font-weight: bold; margin-bottom: 6px; display: block;">${t('label_opponent', 'Opponent')}</label>
+                                <input type="text" placeholder="e.g. Sentinels" style="width: 100%; padding: 10px 12px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; outline: none; font-family: 'Inter', sans-serif;">
+                            </div>
+                            <div style="flex: 1;">
+                                <label style="color: var(--text-secondary); font-size: 0.85rem; font-weight: bold; margin-bottom: 6px; display: block;">${t('label_map', 'Map')}</label>
+                                <select style="width: 100%; padding: 10px 12px; background: var(--bg-secondary); border: 1px solid rgba(255,255,255,0.1); border-radius: 6px; color: white; outline: none; font-family: 'Inter', sans-serif; cursor: pointer;">
+                                    <option>Ascent</option><option>Bind</option><option>Haven</option><option>Lotus</option><option>Sunset</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="padding: 1.5rem; border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: flex-end; gap: 10px; background: rgba(0,0,0,0.1);">
+                    <button onclick="document.getElementById('add-vod-modal').remove()" style="background: transparent; color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 15px; border-radius: 4px; cursor: pointer; transition: 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='transparent'">${t('btn_cancel', 'Cancel')}</button>
+                    <button onclick="alert('${t('alert_import', 'Simulated VOD Import! In production, this would sync with YouTube API.')}'); document.getElementById('add-vod-modal').remove();" style="background: var(--accent-red); color: white; border: none; padding: 8px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.2s;" onmouseover="this.style.filter='brightness(1.2)'" onmouseout="this.style.filter='brightness(1)'">${t('btn_import', 'Import & Analyze')}</button>
                 </div>
             </div>
         </div>
