@@ -69,7 +69,7 @@ const getMockVods = () => [
     },
     { 
       id: 2,
-      map: "Haven", opponent: "Team Heretics", result: t('vod_2_result', 'Loss 9-13'), date: "Oct 10, 2025", patch: "7.08",
+      map: "Haven", opponent: "Team Heretics", result: t('vod_2_result', 'Loss 10-14'), date: "Oct 10, 2025", patch: "7.08",
       issue: t('vod_2_issue', 'A Retake Coordination'),
       matchType: "Scrim",
       link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=310",
@@ -84,7 +84,7 @@ const getMockVods = () => [
     },
     { 
       id: 3,
-      map: "Lotus", opponent: "Karmine Corp", result: t('vod_3_result', 'Win 13-8'), date: "Oct 08, 2025", patch: "7.07",
+      map: "Lotus", opponent: "Karmine Corp", result: t('vod_3_result', 'Win 14-10'), date: "Oct 08, 2025", patch: "7.07",
       issue: t('vod_3_issue', 'Rubble Aggression'),
       matchType: "Scrim",
       link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=135",
@@ -115,7 +115,7 @@ const getMockVods = () => [
     },
     {
       id: 5,
-      map: "Bind", opponent: "Paper Rex", result: t('vod_5_result', 'Win 13-5'), date: "Oct 02, 2025", patch: "7.06",
+      map: "Bind", opponent: "Paper Rex", result: t('vod_5_result', 'Win 16-8'), date: "Oct 02, 2025", patch: "7.06",
       issue: t('vod_5_issue', 'Handling Aggression'),
       matchType: "Scrim",
       link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=50",
@@ -500,19 +500,21 @@ const viewsData = {
                     </div>
                 </div>
                 
-                <div style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; margin-bottom: 5px;">
-                    ${[t('day_mon','MON'), t('day_tue','TUE'), t('day_wed','WED'), t('day_thu','THU'), t('day_fri','FRI'), t('day_sat','SAT'), t('day_sun','SUN')].map(d => `<div style="text-align: center; color: var(--text-secondary); font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 5px;">${d}</div>`).join('')}
-                    ${getCalendarDays().map(d => `
-                        <div style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 8px; min-height: 85px; opacity: ${d.inactive ? '0.4' : '1'}; ${d.active ? 'border-color: rgba(239,68,68,0.5); box-shadow: 0 0 10px rgba(239,68,68,0.1); background: rgba(239,68,68,0.05);' : ''} transition: 0.2s; cursor: pointer;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='${d.active ? 'rgba(239,68,68,0.05)' : 'rgba(0,0,0,0.2)'}'">
-                            <div style="color: ${d.active ? 'white' : 'var(--text-secondary)'}; font-size: 0.9rem; margin-bottom: 8px; font-weight: ${d.active ? 'bold' : 'normal'}; display: flex; justify-content: space-between;">
-                                <span>${d.day}</span>
-                                ${d.active ? '<div style="width:6px; height:6px; background:var(--accent-red); border-radius:50%; margin-top:4px;"></div>' : ''}
+                <div style="overflow-x: auto; padding-bottom: 10px;">
+                    <div style="display: grid; grid-template-columns: repeat(7, minmax(60px, 1fr)); min-width: 500px; gap: 8px; margin-bottom: 5px;">
+                        ${[t('day_mon','MON'), t('day_tue','TUE'), t('day_wed','WED'), t('day_thu','THU'), t('day_fri','FRI'), t('day_sat','SAT'), t('day_sun','SUN')].map(d => `<div style="text-align: center; color: var(--text-secondary); font-size: 0.75rem; letter-spacing: 1px; margin-bottom: 5px;">${d}</div>`).join('')}
+                        ${getCalendarDays().map(d => `
+                            <div style="background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.05); border-radius: 6px; padding: 8px; min-height: 85px; opacity: ${d.inactive ? '0.4' : '1'}; ${d.active ? 'border-color: rgba(239,68,68,0.5); box-shadow: 0 0 10px rgba(239,68,68,0.1); background: rgba(239,68,68,0.05);' : ''} transition: 0.2s; cursor: pointer;" onmouseover="this.style.background='rgba(255,255,255,0.05)'" onmouseout="this.style.background='${d.active ? 'rgba(239,68,68,0.05)' : 'rgba(0,0,0,0.2)'}'">
+                                <div style="color: ${d.active ? 'white' : 'var(--text-secondary)'}; font-size: 0.9rem; margin-bottom: 8px; font-weight: ${d.active ? 'bold' : 'normal'}; display: flex; justify-content: space-between;">
+                                    <span>${d.day}</span>
+                                    ${d.active ? '<div style="width:6px; height:6px; background:var(--accent-red); border-radius:50%; margin-top:4px;"></div>' : ''}
+                                </div>
+                                <div style="display: flex; flex-direction: column; gap: 4px;">
+                                    ${d.tags.map(t => `<div style="${t.type === 'scrim' ? 'background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239,68,68,0.3);' : (t.type === 'practice' ? 'background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3);' : 'background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3);')} font-size: 0.7rem; padding: 3px 6px; border-radius: 4px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="${t.icon}" style="margin-right: 4px; font-size: 0.65rem;"></i>${t.text}</div>`).join('')}
+                                </div>
                             </div>
-                            <div style="display: flex; flex-direction: column; gap: 4px;">
-                                ${d.tags.map(t => `<div style="${t.type === 'scrim' ? 'background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239,68,68,0.3);' : (t.type === 'practice' ? 'background: rgba(59, 130, 246, 0.2); color: #60a5fa; border: 1px solid rgba(59,130,246,0.3);' : 'background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139,92,246,0.3);')} font-size: 0.7rem; padding: 3px 6px; border-radius: 4px; font-weight: bold; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="${t.icon}" style="margin-right: 4px; font-size: 0.65rem;"></i>${t.text}</div>`).join('')}
-                            </div>
-                        </div>
-                    `).join('')}
+                        `).join('')}
+                    </div>
                 </div>
             </div>
 
@@ -1125,12 +1127,12 @@ const appTranslations = {
         vod_1_pos: "Aメインでの素晴らしいダブルピーク。vo0kashuのKJセットアップがBを効果的に遅延させた。",
         vod_1_coach: "jannyxDはマーケットのスモークから飛び出す前にフラッシュを待つ必要がある。",
         vod_1_player: "wolverine: ラウンド5のスモークが遅れたので修正する。",
-        vod_2_result: "敗北 9-13",
+        vod_2_result: "敗北 10-14",
         vod_2_issue: "Aリテイクの連携",
         vod_2_pos: "エコラウンドは良かった。Yowamuのブリーチフラッシュがスペースを作った。",
         vod_2_coach: "ロビーを簡単に明け渡しすぎているため、Aリテイクが失敗している。",
         vod_2_player: "musashi: 早期情報の代わりにリテイク用にドローンを温存する。",
-        vod_3_result: "勝利 13-8",
+        vod_3_result: "勝利 14-10",
         vod_3_issue: "ラブルのアグレッション",
         vod_3_pos: "完璧な初期のラブルコントロール。トレードが的確だった。",
         vod_3_coach: "Aラブルへのプレッシャーを継続するが、スポーンまで深追いしないこと。",
@@ -1309,12 +1311,12 @@ const appTranslations = {
         vod_1_pos: "A大道的双拉非常棒。vo0kashu的KJ道具有效地拖延了B区。",
         vod_1_coach: "jannyxD需要等闪光弹爆了再从市场的烟雾中跳出来。",
         vod_1_player: "wolverine: 我在第5回合的烟雾给晚了，会改进的。",
-        vod_2_result: "失败 9-13",
+        vod_2_result: "失败 10-14",
         vod_2_issue: "A区回防协调",
         vod_2_pos: "经济局打得不错。Yowamu的布奇闪光拉扯出了空间。",
         vod_2_coach: "A区回防失败是因为我们太轻易放弃了大厅的控制权。",
         vod_2_player: "musashi: 我会把无人机留到回防时用，而不是早期拿信息。",
-        vod_3_result: "胜利 13-8",
+        vod_3_result: "胜利 14-10",
         vod_3_issue: "碎石区压迫",
         vod_3_pos: "完美的早期碎石区控制。补枪非常到位。",
         vod_3_coach: "继续给A区碎石施压，但不要过度深入他们的出生点。",
@@ -1493,12 +1495,12 @@ const appTranslations = {
         vod_1_pos: "A 메인에서 훌륭한 더블 픽. vo0kashu의 KJ 셋업이 B를 효과적으로 지연시킴.",
         vod_1_coach: "jannyxD는 마켓 연막에서 뛰어나오기 전에 플래시를 기다려야 함.",
         vod_1_player: "wolverine: 5라운드 연막이 늦었음, 수정하겠음.",
-        vod_2_result: "패배 9-13",
+        vod_2_result: "패배 10-14",
         vod_2_issue: "A 리테이크 조정",
         vod_2_pos: "에코 라운드가 좋았음. Yowamu의 브리치 플래시가 공간을 확보함.",
         vod_2_coach: "우리가 로비를 너무 쉽게 포기하기 때문에 A-리테이크가 실패함.",
         vod_2_player: "musashi: 초기 정보 대신 리테이크를 위해 드론을 아껴두겠음.",
-        vod_3_result: "승리 13-8",
+        vod_3_result: "승리 14-10",
         vod_3_issue: "러블 공격성",
         vod_3_pos: "완벽한 초기 러블 컨트롤. 트레이드가 정확했음.",
         vod_3_coach: "A 러블에 계속 압박을 가하되, 상대 스폰까지 너무 깊게 들어가지 말 것.",
@@ -1697,7 +1699,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Interactive Notification Toast System ---
     const notificationHTML = `
-        <div id="toast-notification-media" style="position: fixed; bottom: -300px; right: 20px; background: rgba(15, 25, 35, 0.95); border-left: 4px solid #8b5cf6; padding: 1.2rem; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; gap: 15px; align-items: flex-start; width: 350px; transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);">
+        <div id="toast-notification-media" style="position: fixed; bottom: -300px; right: 5%; background: rgba(15, 25, 35, 0.95); border-left: 4px solid #8b5cf6; padding: 1.2rem; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; gap: 15px; align-items: flex-start; width: 350px; max-width: 90vw; transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);">
             <div style="background: rgba(139, 92, 246, 0.2); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
                 <i class="fa-solid fa-camera-retro" style="color: #c4b5fd; font-size: 1.2rem;"></i>
             </div>
@@ -1713,7 +1715,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <i class="fa-solid fa-xmark" id="toast-close-media" style="color: var(--text-secondary); cursor: pointer; position: absolute; top: 10px; right: 10px; transition: 0.2s;" onmouseover="this.style.color='white'" onmouseout="this.style.color='var(--text-secondary)'"></i>
         </div>
 
-        <div id="toast-notification" style="position: fixed; bottom: -300px; right: 20px; background: rgba(15, 25, 35, 0.95); border-left: 4px solid var(--accent-red); padding: 1.2rem; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; gap: 15px; align-items: flex-start; width: 350px; transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);">
+        <div id="toast-notification" style="position: fixed; bottom: -300px; right: 5%; background: rgba(15, 25, 35, 0.95); border-left: 4px solid var(--accent-red); padding: 1.2rem; border-radius: 6px; box-shadow: 0 10px 25px rgba(0,0,0,0.5); display: flex; gap: 15px; align-items: flex-start; width: 350px; max-width: 90vw; transition: bottom 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); z-index: 1000; backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.05);">
             <div style="background: rgba(255, 70, 85, 0.2); width: 40px; height: 40px; border-radius: 50%; display: flex; justify-content: center; align-items: center; flex-shrink: 0;">
                 <i class="fa-solid fa-bell" style="color: var(--accent-red); font-size: 1.2rem;"></i>
             </div>
