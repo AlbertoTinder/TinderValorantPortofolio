@@ -180,6 +180,23 @@
             border-color: rgba(255, 70, 85, 0.5);
         }
 
+        .filter-select {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #ece8e1;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            outline: none;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-select:hover {
+            border-color: #ff4655;
+        }
+
         /* Unified Layout Section */
         .section-container {
             background: #161d24;
@@ -417,6 +434,17 @@
             </div>
             
             <div class="match-type-selectors">
+                <div style="display: flex; gap: 0.5rem; align-items: center; margin-right: 1rem;">
+                    <select id="stats-tier-filter" class="filter-select" onchange="updateTierFilter()">
+                        <option value="all">All Matches</option>
+                        <option value="Tier 1">Tier 1</option>
+                        <option value="Tier 2 High">Tier 2 High</option>
+                        <option value="Tier 2 Mid">Tier 2 Mid</option>
+                        <option value="Tier 2 Low">Tier 2 Low</option>
+                    </select>
+                    <select id="stats-team-filter" class="filter-select" onchange="renderSlots()" style="display: none;">
+                    </select>
+                </div>
                 <div class="type-tag active" onclick="setMatchType('pracc', this)" data-i18n="type_pracc">Practice (Pracc)</div>
                 <div class="type-tag" onclick="setMatchType('official', this)" data-i18n="type_off">Officials</div>
             </div>
@@ -578,6 +606,23 @@
             'Player W': { roleKey: 'role_controller', allowedAgents: agentCategories.controller }
         };
 
+        const filterTeamData = {
+            'Tier 1': [
+                { region: 'EMEA', teams: ['FNATIC', 'Team Heretics', 'Karmine Corp', 'NAVI', 'Team Liquid', 'BBL Esports'] },
+                { region: 'Americas', teams: ['LOUD', 'Sentinels', 'NRG', 'Leviatán', 'Cloud9'] },
+                { region: 'APAC', teams: ['Paper Rex', 'DRX', 'Gen.G', 'T1', 'ZETA DIVISION'] }
+            ],
+            'Tier 2 High': [
+                { region: 'Tier 2 High', teams: ['Apeks', 'M80', 'Oxygen Esports', 'Mandatory'] }
+            ],
+            'Tier 2 Mid': [
+                { region: 'Tier 2 Mid', teams: ['Rebels', 'Joblife', 'Northeption', 'Liquid Academy'] }
+            ],
+            'Tier 2 Low': [
+                { region: 'Tier 2 Low', teams: ['KPI Gaming', 'UCAM Esports', 'ZETA DIVISION Academy', 'SAW'] }
+            ]
+        };
+
         let currentPlayer = 'Player X';
 
         function updatePlayer() {
@@ -628,23 +673,79 @@
             for (let i = 0; i < str.length; i++) hash = str.charCodeAt(i) + ((hash << 5) - hash);
             hash = Math.abs(hash);
 
+            // Fetch filters
+            const tierEl = document.getElementById('stats-tier-filter');
+            const teamEl = document.getElementById('stats-team-filter');
+            const currentTier = tierEl ? tierEl.value : 'all';
+            const currentTeam = teamEl ? teamEl.value : 'all';
+
             // Base stats by role
             let acsBase = type === 'pracc' ? 220 : 200;
             if (agentCategories.duelist.includes(agent)) acsBase += 30;
             if (agentCategories.controller.includes(agent)) acsBase -= 10;
             
+            // Adjust stats based on Tier (Opponent Strength)
+            // Weightings requested: Tier 1 = 1.0, Tier 2 High = 0.8, Tier 2 Mid = 0.6, Tier 2 Low = 0.4
+            // Stats get *inflated* when facing lower tier opponents, so we simulate higher stats for lower tiers.
+            let opponentModifier = 1.0;
+            let sampleMultiplier = 1.0;
+            
+            if (currentTeam !== 'all') {
+                const teamHash = currentTeam.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+                hash += teamHash; // Ensure stats visually change per team
+                opponentModifier = 0.85 + ((teamHash % 15) * 0.01);
+                sampleMultiplier = 0.4;
+            } else if (currentTier === 'Tier 1') {
+                opponentModifier = 0.95; // Harder matches
+                sampleMultiplier = 0.4;
+            } else if (currentTier === 'Tier 2 High') {
+                opponentModifier = 1.05;
+                sampleMultiplier = 0.3;
+            } else if (currentTier === 'Tier 2 Mid') {
+                opponentModifier = 1.15;
+                sampleMultiplier = 0.2;
+            } else if (currentTier === 'Tier 2 Low') {
+                opponentModifier = 1.30;
+                sampleMultiplier = 0.1;
+            }
+
             // Map affinity logic (randomized but consistent per agent/map combo)
             const mapAffinity = (hash % 40) - 20; 
             
-            const acs = acsBase + mapAffinity + (hash % 20);
-            const kdr = (1.0 + (mapAffinity * 0.01) + (hash % 30) * 0.01).toFixed(2);
-            const kpr = (0.7 + (mapAffinity * 0.005) + (hash % 25) * 0.01).toFixed(2);
-            const matches = 11;
+            const acs = (acsBase + mapAffinity + (hash % 20)) * opponentModifier;
+            const kdr = ((1.0 + (mapAffinity * 0.01) + (hash % 30) * 0.01) * opponentModifier).toFixed(2);
+            const kpr = ((0.7 + (mapAffinity * 0.005) + (hash % 25) * 0.01) * opponentModifier).toFixed(2);
+            const matches = Math.max(1, Math.floor(11 * sampleMultiplier + (hash % 5)));
 
-            const winRate = 45 + (hash % 20);
+            const winRate = Math.min(100, Math.max(0, Math.floor((45 + (hash % 20)) * opponentModifier)));
             const survivalRate = 25 + (hash % 15);
 
             return { acs: Math.round(acs), kdr, kpr, matches, winRate, survivalRate };
+        }
+
+        function updateTierFilter() {
+            const tierEl = document.getElementById('stats-tier-filter');
+            const teamEl = document.getElementById('stats-team-filter');
+            const tier = tierEl.value;
+
+            if (tier !== 'all') {
+                teamEl.style.display = 'inline-block';
+                let html = `<option value="all">All ${tier}</option>`;
+                if (filterTeamData[tier]) {
+                    filterTeamData[tier].forEach(group => {
+                        html += `<optgroup label="${group.region}">`;
+                        group.teams.forEach(team => {
+                            html += `<option value="team_${team}">${team}</option>`;
+                        });
+                        html += `</optgroup>`;
+                    });
+                }
+                teamEl.innerHTML = html;
+            } else {
+                teamEl.style.display = 'none';
+                teamEl.value = 'all';
+            }
+            renderSlots();
         }
 
         function renderSlots() {

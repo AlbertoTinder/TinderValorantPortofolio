@@ -53,6 +53,7 @@ const getMockVods = () => [
       map: "Ascent", opponent: "FNATIC", result: t('vod_1_result', 'Win 13-10'), date: "Oct 12, 2025", patch: "7.08",
       issue: t('vod_1_issue', 'Mid Control & Trading'), 
       matchType: "Official",
+      tier: "Tier 1",
       link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=205",
       comps: { team: ["Jett", "KAY/O", "Sova", "Omen", "Killjoy"], enemy: ["Jett", "Sova", "KAY/O", "Omen", "Killjoy"] },
       timeline: [
@@ -72,6 +73,7 @@ const getMockVods = () => [
       map: "Haven", opponent: "Team Heretics", result: t('vod_2_result', 'Loss 10-14'), date: "Oct 10, 2025", patch: "7.08",
       issue: t('vod_2_issue', 'A Retake Coordination'),
       matchType: "Scrim",
+      tier: "Tier 1",
       link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=310",
       comps: { team: ["Jett", "Breach", "Sova", "Omen", "Killjoy"], enemy: ["Neon", "Breach", "Sova", "Omen", "Cypher"] },
       timeline: [
@@ -87,6 +89,7 @@ const getMockVods = () => [
       map: "Lotus", opponent: "Karmine Corp", result: t('vod_3_result', 'Win 14-10'), date: "Oct 08, 2025", patch: "7.07",
       issue: t('vod_3_issue', 'Rubble Aggression'),
       matchType: "Scrim",
+      tier: "Tier 1",
       link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=135",
       comps: { team: ["Raze", "Sova", "Viper", "Omen", "Killjoy"], enemy: ["Raze", "Sova", "Viper", "Omen", "Killjoy"] },
       timeline: [
@@ -102,6 +105,7 @@ const getMockVods = () => [
       map: "Sunset", opponent: "LOUD", result: t('vod_4_result', 'Loss 11-13'), date: "Oct 05, 2025", patch: "7.06",
       issue: t('vod_4_issue', 'Mid Round Adjustments'),
       matchType: "Official",
+      tier: "Tier 1",
       link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=420",
       comps: { team: ["Raze", "Breach", "Sova", "Omen", "Cypher"], enemy: ["Raze", "KAY/O", "Sova", "Omen", "Cypher"] },
       timeline: [
@@ -118,6 +122,7 @@ const getMockVods = () => [
       map: "Bind", opponent: "Paper Rex", result: t('vod_5_result', 'Win 16-8'), date: "Oct 02, 2025", patch: "7.06",
       issue: t('vod_5_issue', 'Handling Aggression'),
       matchType: "Scrim",
+      tier: "Tier 1",
       link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=50",
       comps: { team: ["Raze", "Skye", "Brimstone", "Viper", "Cypher"], enemy: ["Reyna", "Raze", "Skye", "Brimstone", "Sova"] },
       timeline: [
@@ -128,8 +133,143 @@ const getMockVods = () => [
       positives: t('vod_5_pos', "Outstanding discipline against a chaotic playstyle. Maintained structure and punished their over-extensions beautifully."),
       coachNote: t('vod_5_coach', "Perfectly executed the anti-aggression gameplan. Keep this level of patience and crossfire setups."),
       playerNote: t('vod_5_player', "jannyxD: Felt very easy to entry when they were constantly giving us map control for free.")
+    },
+    {
+      id: 6,
+      map: "Ascent", opponent: "BBL Esports", result: 'Win 13-8', date: "Sep 28, 2025", patch: "7.06",
+      issue: 'B Execute',
+      matchType: "Scrim",
+      tier: "Tier 1",
+      link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=50",
+      comps: { team: ["Jett", "KAY/O", "Sova", "Omen", "Killjoy"], enemy: ["Jett", "KAY/O", "Sova", "Omen", "Killjoy"] },
+      timeline: [
+        { time: "05:12", note: 'Fast B execute worked well', type: "positive" },
+      ],
+      positives: "Great teamplay and fast executions.",
+      coachNote: "Need to work on anti-eco rounds.",
+      playerNote: "Felt good about my aim today."
+    },
+    {
+      id: 7,
+      map: "Lotus", opponent: "Apeks", result: 'Loss 11-13', date: "Sep 20, 2025", patch: "7.05",
+      issue: 'Rubble Control',
+      matchType: "Scrim",
+      tier: "Tier 2 High",
+      link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=150",
+      comps: { team: ["Raze", "Fade", "Viper", "Omen", "Killjoy"], enemy: ["Raze", "Fade", "Viper", "Omen", "Cypher"] },
+      timeline: [
+        { time: "08:15", note: 'Lost early Rubble control', type: "negative" }
+      ],
+      positives: "Retakes on C site were coordinated.",
+      coachNote: "We need a faster flash setup for A main.",
+      playerNote: "Apeks plays very structured defaults."
+    },
+    {
+      id: 8,
+      map: "Split", opponent: "Rebels", result: 'Win 13-6', date: "Sep 15, 2025", patch: "7.04",
+      issue: 'Mid Control',
+      matchType: "Scrim",
+      tier: "Tier 2 Mid",
+      link: "https://www.youtube.com/embed/dQw4w9WgXcQ?start=450",
+      comps: { team: ["Raze", "Skye", "Breach", "Omen", "Cypher"], enemy: ["Jett", "Skye", "Breach", "Omen", "Cypher"] },
+      timeline: [
+        { time: "03:10", note: 'Great double flash setup for Mid', type: "positive" }
+      ],
+      positives: "Dominated mid control every round.",
+      coachNote: "Good confidence. Keep the communication clear.",
+      playerNote: "Felt easy to read their rotations."
     }
 ];
+
+const filterTeamData = {
+    'Tier 1': [
+        { region: 'EMEA', teams: ['FNATIC', 'Team Heretics', 'Karmine Corp', 'NAVI', 'Team Liquid', 'BBL Esports'] },
+        { region: 'Americas', teams: ['LOUD', 'Sentinels', 'NRG', 'Leviatán', 'Cloud9'] },
+        { region: 'APAC', teams: ['Paper Rex', 'DRX', 'Gen.G', 'T1', 'ZETA DIVISION'] }
+    ],
+    'Tier 2 High': [
+        { region: 'Tier 2 High', teams: ['Apeks', 'M80', 'Oxygen Esports', 'Mandatory'] }
+    ],
+    'Tier 2 Mid': [
+        { region: 'Tier 2 Mid', teams: ['Rebels', 'Joblife', 'Northeption', 'Liquid Academy'] }
+    ],
+    'Tier 2 Low': [
+        { region: 'Tier 2 Low', teams: ['KPI Gaming', 'UCAM Esports', 'ZETA DIVISION Academy', 'SAW'] }
+    ]
+};
+
+window.updateDashboardTier = function() {
+    const tier = document.getElementById('dashboard-tier-filter').value;
+    const teamEl = document.getElementById('dashboard-team-filter');
+    if (tier !== 'all') {
+        teamEl.style.display = 'inline-block';
+        let html = `<option value="all">All ${tier}</option>`;
+        if (filterTeamData[tier]) {
+            filterTeamData[tier].forEach(group => {
+                html += `<optgroup label="${group.region}">`;
+                group.teams.forEach(team => {
+                    html += `<option value="team_${team}">${team}</option>`;
+                });
+                html += `</optgroup>`;
+            });
+        }
+        teamEl.innerHTML = html;
+    } else {
+        teamEl.style.display = 'none';
+        teamEl.value = 'all';
+    }
+    
+    // Simulate updating the overall winrate based on the selected tier
+    const winrates = {
+        'all': '62.5%',
+        'Tier 1': '52.0%',
+        'Tier 2 High': '64.5%',
+        'Tier 2 Mid': '71.2%',
+        'Tier 2 Low': '88.0%'
+    };
+    const ow = document.getElementById('dash-winrate');
+    if(ow) ow.innerText = winrates[tier] || '62.5%';
+    
+    window.updateDashboardTeam();
+};
+
+window.updateDashboardTeam = function() {
+    // Simulated behavior for subfilter change
+    const ow = document.getElementById('dash-winrate');
+    const att = document.getElementById('dash-attack');
+    const def = document.getElementById('dash-defense');
+    const acs = document.getElementById('dash-acs');
+    
+    if(ow && att && def && acs) {
+        const val = document.getElementById('dashboard-team-filter').value;
+        if (val === 'all') {
+            ow.innerText = '52.0%';
+            att.innerText = '48.1%';
+            def.innerText = '50.3%';
+            acs.innerText = '210';
+            return;
+        }
+        
+        // Randomly adjust winrates based on team hash for mock interaction
+        const hash = val.split('').reduce((a, b) => a + b.charCodeAt(0), 0);
+        
+        const owBase = 52.0;
+        const owDiff = (hash % 14) - 7; 
+        ow.innerText = (owBase + owDiff).toFixed(1) + '%';
+        
+        const attBase = 48.1;
+        const attDiff = (hash % 10) - 5;
+        att.innerText = (attBase + attDiff).toFixed(1) + '%';
+        
+        const defBase = 50.3;
+        const defDiff = (hash % 12) - 6;
+        def.innerText = (defBase + defDiff).toFixed(1) + '%';
+        
+        const acsBase = 210;
+        const acsDiff = (hash % 40) - 20;
+        acs.innerText = Math.round(acsBase + acsDiff);
+    }
+};
 
 const getCalendarDays = () => [
     { day: 31, inactive: true, tags: [] },
@@ -257,13 +397,26 @@ const viewsData = {
                 </div>
             </div>
             
+            <div style="display: flex; gap: 10px; margin-bottom: 20px; align-items: center; flex-wrap: wrap;">
+                <span style="color: var(--text-secondary); font-size: 0.9rem; font-weight: bold; text-transform: uppercase;">Team Filter:</span>
+                <select id="dashboard-tier-filter" onchange="window.updateDashboardTier()" style="background: var(--bg-secondary); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 4px; outline: none; cursor: pointer;">
+                    <option value="all">All Matches</option>
+                    <option value="Tier 1">Tier 1</option>
+                    <option value="Tier 2 High">Tier 2 High</option>
+                    <option value="Tier 2 Mid">Tier 2 Mid</option>
+                    <option value="Tier 2 Low">Tier 2 Low</option>
+                </select>
+                <select id="dashboard-team-filter" onchange="window.updateDashboardTeam()" style="display: none; background: var(--bg-secondary); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 4px; outline: none; cursor: pointer;">
+                </select>
+            </div>
+
             <div class="dashboard-grid">
                 <div class="stat-card">
                     <div class="stat-card-header">
                         <span>${t('stat_winrate', 'Overall Winrate')}</span>
                         <i class="fa-solid fa-trophy" style="color: var(--accent-red)"></i>
                     </div>
-                    <div class="stat-value">${teamStats.overallWinrate}%</div>
+                    <div class="stat-value" id="dash-winrate">${teamStats.overallWinrate}%</div>
                     <div class="stat-trend trend-up">
                         <i class="fa-solid fa-arrow-trend-up"></i>
                         <span>+4.2% from last week</span>
@@ -275,7 +428,7 @@ const viewsData = {
                         <span>${t('stat_attack', 'Attack Round Win %')}</span>
                         <i class="fa-solid fa-khanda" style="color: #8b97a3"></i>
                     </div>
-                    <div class="stat-value">${teamStats.attackWinrate}%</div>
+                    <div class="stat-value" id="dash-attack">${teamStats.attackWinrate}%</div>
                     <div class="stat-trend trend-down">
                         <i class="fa-solid fa-arrow-trend-down"></i>
                         <span>-1.5% from last week</span>
@@ -287,7 +440,7 @@ const viewsData = {
                         <span>${t('stat_defense', 'Defense Round Win %')}</span>
                         <i class="fa-solid fa-shield-halved" style="color: #8b97a3"></i>
                     </div>
-                    <div class="stat-value">${teamStats.defenseWinrate}%</div>
+                    <div class="stat-value" id="dash-defense">${teamStats.defenseWinrate}%</div>
                     <div class="stat-trend trend-up">
                         <i class="fa-solid fa-arrow-trend-up"></i>
                         <span>+2.1% from last week</span>
@@ -299,7 +452,7 @@ const viewsData = {
                         <span>${t('stat_acs', 'Team Avg ACS')}</span>
                         <i class="fa-solid fa-crosshairs" style="color: #8b97a3"></i>
                     </div>
-                    <div class="stat-value">${teamStats.acsAvg}</div>
+                    <div class="stat-value" id="dash-acs">${teamStats.acsAvg}</div>
                     <div class="stat-trend trend-up">
                         <i class="fa-solid fa-arrow-trend-up"></i>
                         <span>Solid Firepower</span>
@@ -821,6 +974,16 @@ const viewsData = {
                         </div>
                     </div>
                     <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <select id="filter-tier" onchange="window.renderVodList()" style="background: var(--bg-secondary); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 4px; outline: none; cursor: pointer;">
+                            <option value="all">All Tiers</option>
+                            <option value="Tier 1">Tier 1</option>
+                            <option value="Tier 2 High">Tier 2 High</option>
+                            <option value="Tier 2 Mid">Tier 2 Mid</option>
+                            <option value="Tier 2 Low">Tier 2 Low</option>
+                        </select>
+                        <select id="filter-team" onchange="window.renderVodList()" style="display: none; background: var(--bg-secondary); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 4px; outline: none; cursor: pointer;">
+                            <option value="all">All Tier 1</option>
+                        </select>
                         <select id="filter-map" onchange="window.renderVodList()" style="background: var(--bg-secondary); color: white; border: 1px solid rgba(255,255,255,0.2); padding: 8px 12px; border-radius: 4px; outline: none; cursor: pointer;">
                             <option value="all">${t('filter_all_maps', 'All Maps')}</option>
                             <option value="Ascent">Ascent</option>
@@ -1889,7 +2052,35 @@ window.renderVodList = function() {
     const mapFilter = document.getElementById('filter-map')?.value || 'all';
     const resultFilter = document.getElementById('filter-result')?.value || 'all';
     const typeFilter = document.getElementById('filter-type')?.value || 'all';
+    const tierFilter = document.getElementById('filter-tier')?.value || 'all';
     const search = (document.getElementById('vod-search')?.value || '').toLowerCase();
+
+    // Populate team subfilter if a Tier is selected
+    const teamFilterSelect = document.getElementById('filter-team');
+    if (teamFilterSelect) {
+        if (tierFilter !== 'all') {
+            teamFilterSelect.style.display = 'inline-block';
+            if (teamFilterSelect.getAttribute('data-populated-for') !== tierFilter) {
+                let html = `<option value="all">All ${tierFilter}</option>`;
+                if (typeof filterTeamData !== 'undefined' && filterTeamData[tierFilter]) {
+                    filterTeamData[tierFilter].forEach(group => {
+                        html += `<optgroup label="${group.region}">`;
+                        group.teams.forEach(team => {
+                            html += `<option value="team_${team}">${team}</option>`;
+                        });
+                        html += `</optgroup>`;
+                    });
+                }
+                teamFilterSelect.innerHTML = html;
+                teamFilterSelect.setAttribute('data-populated-for', tierFilter);
+            }
+        } else {
+            teamFilterSelect.style.display = 'none';
+            teamFilterSelect.value = 'all'; // reset
+            teamFilterSelect.removeAttribute('data-populated-for');
+        }
+    }
+    const teamFilter = teamFilterSelect?.value || 'all';
 
     let vods = getMockVods();
     
@@ -1897,6 +2088,14 @@ window.renderVodList = function() {
         if(mapFilter !== 'all' && v.map !== mapFilter) return false;
         if(resultFilter !== 'all' && !v.result.includes(resultFilter)) return false;
         if(typeFilter !== 'all' && v.matchType !== typeFilter) return false;
+        if(tierFilter !== 'all' && v.tier !== tierFilter) return false;
+        
+        if (tierFilter !== 'all' && teamFilter !== 'all') {
+            if (teamFilter.startsWith('team_')) {
+                if (v.opponent !== teamFilter.replace('team_', '')) return false;
+            }
+        }
+
         if(search) {
             const query = search;
             if(!v.opponent.toLowerCase().includes(query) && 
@@ -1948,9 +2147,10 @@ window.renderVodList = function() {
                     <span style="font-weight: bold; font-size: 1rem; color: ${v.result.includes('Win') ? 'var(--success)' : 'var(--danger)'};">${v.result}</span>
                 </div>
                 
-                <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px; display: flex; gap: 15px;">
+                <div style="color: var(--text-secondary); font-size: 0.85rem; margin-bottom: 12px; display: flex; gap: 15px; flex-wrap: wrap;">
                     <span><i class="fa-regular fa-calendar"></i> ${v.date}</span>
                     <span style="color: #cbd5e1;"><i class="fa-solid fa-crosshairs" style="color: var(--accent-red);"></i> Focus: ${v.issue}</span>
+                    ${v.tier ? `<span style="background: rgba(139, 92, 246, 0.2); color: #c4b5fd; padding: 2px 8px; border-radius: 4px; font-weight: bold; font-size: 0.75rem;"><i class="fa-solid fa-layer-group"></i> ${v.tier}</span>` : ''}
                 </div>
 
                 <div style="display: flex; align-items: center; gap: 15px;">

@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-STRAT Engine | KRÜ vs 100T</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="valorant_anti_strat.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="brand">
+                <i class="fa-solid fa-crosshairs"></i>
+                <div>
+                    <h1>V-STRAT</h1>
+                    <span>ANTI-STRATEGY ENGINE</span>
+                </div>
+            </div>
+
+            <div class="match-context">
+                <div class="team-vs">
+                    <span class="team kru">KRÜ</span>
+                    <span class="vs">VS</span>
+                    <span class="team hundred-t">100T</span>
+                </div>
+                <div class="match-meta">VCT 2026 AMERICAS - W4</div>
+            </div>
+
+            <nav class="nav-menu">
+                <a href="#executive" class="nav-item active" data-target="executive">
+                    <i class="fa-solid fa-bolt"></i> Executive Summary
+                </a>
+                <a href="#team-analysis" class="nav-item" data-target="team-analysis">
+                    <i class="fa-solid fa-chart-network"></i> Team Analysis
+                </a>
+                <a href="#player-profiling" class="nav-item" data-target="player-profiling">
+                    <i class="fa-solid fa-user-astronaut"></i> Player Profiling
+                </a>
+                <a href="#anti-strat" class="nav-item" data-target="anti-strat">
+                    <i class="fa-solid fa-shield-halved"></i> Anti-Strat Plan
+                </a>
+                <a href="#predictive" class="nav-item" data-target="predictive">
+                    <i class="fa-solid fa-crystal-ball"></i> Predictive Insights
+                </a>
+                <a href="#vod-engine" class="nav-item" data-target="vod-engine">
+                    <i class="fa-solid fa-video"></i> VOD Analysis Engine
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="coach-profile">
+                    <img src="perfil.jpg" alt="Coach">
+                    <div>
+                        <strong>Coach Portal</strong>
+                        <span>Pro Access Level</span>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Header & Filters -->
+            <header class="topbar">
+                <div class="page-title">
+                    <h2 id="current-section-title">Executive Summary</h2>
+                    <p>Tactical Breakdown & Exploit Identification</p>
+                </div>
+                
+                <div class="global-filters">
+                    <div class="filter-group">
+                        <label>Map Target</label>
+                        <select id="map-select">
+                            <option value="bind">Bind (Map 1 - 100T Pick)</option>
+                            <option value="haven">Haven (Map 2 - KRÜ Pick)</option>
+                            <option value="split" selected>Split (Map 3 - Decider)</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Side Analysis</label>
+                        <div class="toggle-switch">
+                            <button class="toggle-btn active" data-side="attack">ATK</button>
+                            <button class="toggle-btn" data-side="defense">DEF</button>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Content Sections -->
+            <div class="sections-container">
+                
+                <!-- SECTION 1: EXECUTIVE SUMMARY -->
+                <section id="executive" class="content-section active">
+                    <div class="summary-grid">
+                        <div class="card glass-panel playstyle-class">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-radar"></i> Enemy Playstyle Classification</h3>
+                                <span class="badge kr-badge">KRÜ Esports</span>
+                            </div>
+                            <div class="class-content">
+                                <h2 class="gradient-text">Aggressive Pacing & Conditional Defaults</h2>
+                                <p>KRÜ relies heavily on early-round skirmishes to establish map control. They shift into a fast-execute gear if initial contact is favorable, but struggle with mid-round recalibration if their primary initiator is neutralized.</p>
+                                <div class="stat-row">
+                                    <div class="mini-stat">
+                                        <span class="value">68%</span>
+                                        <span class="label">Pacing: Fast</span>
+                                    </div>
+                                    <div class="mini-stat">
+                                        <span class="value">A / Mid</span>
+                                        <span class="label">Site Bias</span>
+                                    </div>
+                                    <div class="mini-stat">
+                                        <span class="value">High</span>
+                                        <span class="label">Trade Efficiency</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card glass-panel weaknesses">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-triangle-exclamation"></i> Key Weaknesses</h3>
+                            </div>
+                            <ul class="weakness-list">
+                                <li>
+                                    <span class="w-icon"><i class="fa-solid fa-clock"></i></span>
+                                    <div class="w-text">
+                                        <strong>Late-Round Hesitation</strong>
+                                        <p>Win rate drops to 34% when the round goes past 1:00 without a plant.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="w-icon"><i class="fa-solid fa-money-bill-wave"></i></span>
+                                    <div class="w-text">
+                                        <strong>Predictable Anti-Ecos</strong>
+                                        <p>They 5-man group A-main on Split in 80% of anti-eco rounds. Highly vulnerable to early judge pushes.</p>
+                                    </div>
+                                </li>
+                                <li>
+                                    <span class="w-icon"><i class="fa-solid fa-user-slash"></i></span>
+                                    <div class="w-text">
+                                        <strong>Over-reliance on 'mwzera'</strong>
+                                        <p>If mwzera is first blooded, their attack round win conversion falls from 58% to just 21%.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="card glass-panel patterns-overview full-width">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-microscope"></i> Main Exploitable Patterns</h3>
+                            </div>
+                            <div class="pattern-cards">
+                                <div class="pattern-card">
+                                    <div class="p-header">
+                                        <span class="p-freq">71%</span>
+                                        <h4>The "Saadhak Fake"</h4>
+                                    </div>
+                                    <p>Saadhak throws dual smokes B on Split, but the team executes A. Condition: Full Buy rounds, Attack side.</p>
+                                    <div class="exploit-bar">
+                                        <div class="bar-fill" style="width: 85%;"></div>
+                                        <span>Exploitability: 85/100</span>
+                                    </div>
+                                </div>
+                                <div class="pattern-card">
+                                    <div class="p-header">
+                                        <span class="p-freq">63%</span>
+                                        <h4>B-Main Aggression on Loss</h4>
+                                    </div>
+                                    <p>After losing 2 consecutive rounds, Less will push B-main aggressively on Defense looking for first blood.</p>
+                                    <div class="exploit-bar">
+                                        <div class="bar-fill" style="width: 92%;"></div>
+                                        <span>Exploitability: 92/100</span>
+                                    </div>
+                                </div>
+                                <div class="pattern-card">
+                                    <div class="p-header">
+                                        <span class="p-freq">88%</span>
+                                        <h4>Mid Control Give-up</h4>
+                                    </div>
+                                    <p>On eco rounds, they completely vacate Mid control, placing all 5 players on sites.</p>
+                                    <div class="exploit-bar">
+                                        <div class="bar-fill" style="width: 78%;"></div>
+                                        <span>Exploitability: 78/100</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 2: TEAM ANALYSIS -->
+                <section id="team-analysis" class="content-section">
+                    <div class="team-grid">
+                        <div class="card glass-panel chart-card">
+                            <h3><i class="fa-solid fa-chart-pie"></i> Strategy Distribution</h3>
+                            <div class="chart-container">
+                                <canvas id="strategyChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="card glass-panel chart-card">
+                            <h3><i class="fa-solid fa-chart-bar"></i> Site Tendencies (Attack)</h3>
+                            <div class="chart-container">
+                                <canvas id="siteTendencyChart"></canvas>
+                            </div>
+                        </div>
+                        <div class="card glass-panel full-width default-breakdown">
+                            <h3><i class="fa-solid fa-sitemap"></i> Default Structure Breakdown</h3>
+                            <div class="default-content">
+                                <div class="default-visual">
+                                    <div class="map-overlay-container small-map">
+                                        <img src="split.jpg" alt="Split Map" class="base-map">
+                                        <!-- Nodes representing players in a default -->
+                                        <div class="player-node kr-node" style="top: 75%; left: 30%;"><span>JETT</span></div>
+                                        <div class="player-node kr-node" style="top: 80%; left: 45%;"><span>OMEN</span></div>
+                                        <div class="player-node kr-node" style="top: 70%; left: 55%;"><span>SKYE</span></div>
+                                        <div class="player-node kr-node" style="top: 60%; left: 70%;"><span>KJ</span></div>
+                                        <div class="player-node kr-node" style="top: 65%; left: 85%;"><span>VIPER</span></div>
+                                        <div class="zone-highlight" style="top: 65%; left: 35%; width: 30%; height: 20%;"></div>
+                                    </div>
+                                </div>
+                                <div class="default-text">
+                                    <h4>Primary Attack Default (3-1-1)</h4>
+                                    <p>KRÜ utilizes a standard 3-1-1 spread on Split. They heavily stack A-lobby with their Duelist, Controller, and Initiator to contest early A-main control.</p>
+                                    <ul>
+                                        <li><strong>Killjoy</strong> holds B-lobby passively, watching for fast flanks.</li>
+                                        <li><strong>Viper</strong> lurks Mid/Sewers, applying pressure with toxic screen.</li>
+                                        <li>If A-main control is lost, they immediately rotate through spawn to burst B.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 3: PLAYER ANALYSIS -->
+                <section id="player-profiling" class="content-section">
+                    <div class="player-selector">
+                        <div class="p-select kr-select active" data-player="mwzera">
+                            <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+                            <span>mwzera (Duelist)</span>
+                        </div>
+                        <div class="p-select kr-select" data-player="less">
+                            <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+                            <span>Less (Sentinel)</span>
+                        </div>
+                        <div class="p-select kr-select" data-player="saadhak">
+                            <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+                            <span>saadhak (Controller)</span>
+                        </div>
+                        <div class="p-select kr-select" data-player="silentzz">
+                            <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+                            <span>silentzz (Init)</span>
+                        </div>
+                        <div class="p-select kr-select" data-player="dantedeu5">
+                            <div class="avatar-placeholder"><i class="fa-solid fa-user"></i></div>
+                            <span>Dantedeu5 (Flex)</span>
+                        </div>
+                    </div>
+
+                    <div class="player-profile-grid">
+                        <div class="card glass-panel profile-stats">
+                            <div class="p-hero">
+                                <h2 class="p-name">mwzera</h2>
+                                <span class="p-role">Primary Duelist</span>
+                            </div>
+                            <div class="p-metrics">
+                                <div class="metric">
+                                    <span class="m-val">28%</span>
+                                    <span class="m-label">First Contact Freq</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="m-val">65%</span>
+                                    <span class="m-label">Entry Success</span>
+                                </div>
+                                <div class="metric">
+                                    <span class="m-val">12%</span>
+                                    <span class="m-label">Lurk Frequency</span>
+                                </div>
+                            </div>
+                            <div class="p-habits">
+                                <h3><i class="fa-solid fa-magnifying-glass"></i> Exploitable Habits</h3>
+                                <ul>
+                                    <li><strong>"Mania":</strong> Double updrafts A-Ramps on Split at exactly 1:35 if given no resistance.</li>
+                                    <li><strong>Weakness:</strong> Frequently overheats after getting a first blood. Easily refragged by double-swinging.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="card glass-panel heatmap-card">
+                            <h3><i class="fa-solid fa-fire"></i> Defensive Position Heatmap</h3>
+                            <div class="heatmap-container">
+                                <img src="split.jpg" alt="Split Heatmap" class="base-map">
+                                <!-- Heatmap blobs -->
+                                <div class="heat-blob high" style="top: 25%; left: 35%;"></div>
+                                <div class="heat-blob medium" style="top: 35%; left: 50%;"></div>
+                                <div class="heat-blob low" style="top: 20%; left: 75%;"></div>
+                            </div>
+                            <div class="heatmap-legend">
+                                <span><span class="dot high"></span> High Freq (A-Ramps)</span>
+                                <span><span class="dot medium"></span> Med Freq (Mid Vents)</span>
+                                <span><span class="dot low"></span> Low Freq (B-Tower)</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 4: ANTI-STRAT PLAN -->
+                <section id="anti-strat" class="content-section">
+                    <div class="anti-strat-grid">
+                        <div class="card glass-panel full-width">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-crosshairs"></i> Tactical Countermeasures (100T Gameplan)</h3>
+                                <button class="btn-export"><i class="fa-solid fa-download"></i> Export PDF</button>
+                            </div>
+                            
+                            <div class="counter-list">
+                                <div class="counter-item">
+                                    <div class="c-indicator">1</div>
+                                    <div class="c-content">
+                                        <h4>Punish the A-Main 5-Man Anti-Eco</h4>
+                                        <p><strong>Observation:</strong> KRÜ groups A-main 80% of anti-ecos.</p>
+                                        <p class="c-action"><strong>Counter:</strong> Asuna (Raze) saves nade and Boombot specifically for A-lobby. Bang (Omen) plays close with a Judge. Concede B completely on ecos.</p>
+                                    </div>
+                                </div>
+
+                                <div class="counter-item">
+                                    <div class="c-indicator">2</div>
+                                    <div class="c-content">
+                                        <h4>Isolate the "Saadhak Fake"</h4>
+                                        <p><strong>Observation:</strong> Saadhak throws dual B smokes while the team goes A.</p>
+                                        <p class="c-action"><strong>Counter:</strong> When B smokes deploy without preceding flash/drone utility, Cryocells (Jett) must immediately push B-main to confirm the fake. If clear, instant 4-man rotate to A.</p>
+                                    </div>
+                                </div>
+
+                                <div class="counter-item">
+                                    <div class="c-indicator">3</div>
+                                    <div class="c-content">
+                                        <h4>Baiting the Less Push</h4>
+                                        <p><strong>Observation:</strong> Less pushes B-main aggressively after losing 2 rounds.</p>
+                                        <p class="c-action"><strong>Counter:</strong> On round 3 of a losing streak for KRÜ, set a 2-man trap outside B-garage. Give no early sound cues. Let him push into a crossfire.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 5: PREDICTIVE INSIGHTS -->
+                <section id="predictive" class="content-section">
+                    <div class="card glass-panel predictive-card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-crystal-ball"></i> Scenario Predictions</h3>
+                        </div>
+                        <div class="scenario-grid">
+                            <div class="scenario-box">
+                                <div class="s-condition">If KRÜ loses Pistol Round...</div>
+                                <div class="s-prediction">
+                                    <span class="prob">92% Probability</span>
+                                    <p>They will force buy 5 Sheriffs and rush Mid on Split. They rarely play passive force buys.</p>
+                                </div>
+                            </div>
+                            <div class="scenario-box">
+                                <div class="s-condition">If 100T reaches Match Point...</div>
+                                <div class="s-prediction">
+                                    <span class="prob">75% Probability</span>
+                                    <p>KRÜ reverts to their "Comfort Execute" - A fast split through A-main and Ramps with all ultimates committed.</p>
+                                </div>
+                            </div>
+                            <div class="scenario-box">
+                                <div class="s-condition">Economy Advantage (Opponent on Eco)...</div>
+                                <div class="s-prediction">
+                                    <span class="prob">85% Probability</span>
+                                    <p>They play extremely slow, grouped up, clearing angles one by one to avoid giving away a gun to a lurker.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION 6: VOD ANALYSIS ENGINE -->
+                <section id="vod-engine" class="content-section">
+                    <div class="vod-input-area">
+                        <input type="text" id="vod-url" placeholder="Paste VOD Link (YouTube, VLR, MP4) or enter Timestamp...">
+                        <button class="btn-analyze" id="btn-analyze-vod">
+                            <i class="fa-solid fa-microchip"></i> Analyze Video
+                        </button>
+                    </div>
+
+                    <div class="vod-grid">
+                        <div class="card glass-panel">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-video"></i> VOD Visual Tracking Engine</h3>
+                                <span class="badge kr-badge">Live Extract</span>
+                            </div>
+                            <div class="video-tracker-mockup">
+                                <img src="split.jpg" alt="Map Overlay" class="base-map" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+                                <div class="video-overlay"></div>
+                                <div class="tracking-box" style="top: 30%; left: 40%; width: 50px; height: 50px; transition: all 1s ease;" id="vod-tracker-box"></div>
+                            </div>
+                        </div>
+
+                        <div class="card glass-panel vod-insights">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-list-check"></i> Extracted VOD Insights</h3>
+                            </div>
+                            <ul id="vod-insight-list">
+                                <li>
+                                    <span class="insight-time">04:12 - Auto-Detection</span>
+                                    <p><strong>Timing Punish:</strong> KRÜ rotates B→A en 4.2 segundos promedio después del primer contacto en Mid.</p>
+                                </li>
+                                <li>
+                                    <span class="insight-time">15:45 - Positional Tracking</span>
+                                    <p><strong>Habit:</strong> Player 'Less' consistently holds the same off-angle (B-Pillar) en el 78% de las rondas defensivas.</p>
+                                </li>
+                                <li>
+                                    <span class="insight-time">22:10 - Utility Analysis</span>
+                                    <p><strong>Utility Setup:</strong> El equipo ejecuta A-Site dentro de los primeros 35 segundos en el 61% de las rondas de ataque.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card glass-panel full-width">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-timeline"></i> Advanced Feature: Round Reconstruction</h3>
+                        </div>
+                        <div class="timeline-reconstruction">
+                            <div class="phase-node">
+                                <div class="phase-dot"></div>
+                                <h5>Phase 1: Default</h5>
+                                <p>0:00 - 0:25. 3-1-1 Map control. High utility usage in A-Main.</p>
+                            </div>
+                            <div class="phase-node">
+                                <div class="phase-dot"></div>
+                                <h5>Phase 2: First Contact</h5>
+                                <p>0:25 - 0:40. Duelist takes peek. Usually results in trade.</p>
+                            </div>
+                            <div class="phase-node">
+                                <div class="phase-dot"></div>
+                                <h5>Phase 3: Mid-round</h5>
+                                <p>0:40 - 1:05. Silence. Rotation paths mapped (Mid to B).</p>
+                            </div>
+                            <div class="phase-node">
+                                <div class="phase-dot"></div>
+                                <h5>Phase 4: Execute</h5>
+                                <p>1:05 - 1:20. Fast burst into site using remaining flashes.</p>
+                            </div>
+                            <div class="phase-node">
+                                <div class="phase-dot"></div>
+                                <h5>Phase 5: Post-Plant</h5>
+                                <p>1:20+. Defensive hold. Lurker cuts off spawn rotation.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+        </main>
+    </div>
+
+    <script src="valorant_anti_strat.js"></script>
+</body>
+</html>
